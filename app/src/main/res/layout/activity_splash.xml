@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SplashActivity">
+
+    <ImageView
+        android:id="@+id/iv_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/photowall_bg"
+        android:scaleType="fitXY"/>
+
+    <ProgressBar
+        android:id="@+id/pb_splash"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:progress="0"
+        android:max="100"
+        android:layout_gravity="right"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_enter_main_page"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="进入首页"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/bg_splash_button"/>
+
+</FrameLayout>

@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">羊城通</string>
+    <string name="main_tab_one">首页</string>
+    <string name="main_tab_two">推荐</string>
+    <string name="main_tab_three">我</string>
+
+    <string name="exit_remind">再按一次退出</string>
+
+    <string name="text_account">账号</string>
+    <string name="text_password">密码</string>
+    <string name="hint_account">手机号/邮箱</string>
+    <string name="hint_password">8-16位</string>
+    <string name="login">登录</string>
+    <string name="logout">退出当前账号</string>
+    <string name="register_now">马上注册</string>
+    <string name="register">注册</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="account_invalid">账号不合法</string>
+    <string name="account_not_exist">账号不存在</string>
+    <string name="account_can_not_empty">账号不能为空</string>
+    <string name="password_invalid">密码不正确</string>
+    <string name="password_bits_limit">密码位数为6-12位</string>
+    <string name="password_can_not_empty">密码不能为空</string>
+    <string name="please_input_account">请输入账号</string>
+    <string name="submit">提交</string>
+    <string name="get_verigycode">获取验证码</string>
+    <string name="please_input_verifycode">请输入验证码</string>
+
+    <string name="user_name">用户名</string>
+    <string name="phone_number">手机号</string>
+    <string name="email">邮箱</string>
+    <string name="country">国籍</string>
+    <string name="sex">性别</string>
+    <string name="password">密码</string>
+    <string name="age">年龄</string>
+    <string name="college">大学</string>
+    <string name="major">专业</string>
+    <string name="hometown">家乡</string>
+
+    <string name="hotel">旅馆</string>
+    <string name="eat">美食</string>
+    <string name="play">玩乐</string>
+    <string name="traffic">交通</string>
+    <string name="stratery">攻略</string>
+    <string name="map">地图</string>
+    <string name="get_partner">结伴</string>
+    <string name="get_guide">导游</string>
+
+    <string name="spot_detail">景点详情</string>
+    <string name="spot_list">景点</string>
+    <string name="hotel_detail">旅馆详情</string>
+    <string name="hotel_list">旅馆</string>
+    <string name="tasty_detail">美食详情</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

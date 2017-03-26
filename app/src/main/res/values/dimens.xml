@@ -1,0 +1,22 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="activity_action_bar_height">48dp</dimen>
+
+    <dimen name="bottom_tab_height">65dp</dimen>
+
+    <dimen name="login_normal_text_size">18sp</dimen>
+    <dimen name="login_large_text_size">20sp</dimen>
+
+    <dimen name="mainpage_viewpager_height">150dp</dimen>
+    <dimen name="mainpage_rv_height">150dp</dimen>
+
+    <dimen name="searchbar_text_size">15sp</dimen>
+
+    <dimen name="lv_item_img_size">100dp</dimen>
+    <dimen name="lv_item_title_size">20sp</dimen>
+    <dimen name="lv_item_desc_size">14sp</dimen>
+
+</resources>

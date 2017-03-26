@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_search_action_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#55BEBEBE"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:id="@+id/iv_navigate_icon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="5dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_arrow_left"/>
+
+    <EditText
+        android:id="@+id/et_search_places"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="25dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/iv_navigate_icon"
+        android:hint="请输入广州景点名"
+        android:textColor="@color/searchbar_text"
+        android:textSize="@dimen/searchbar_text_size"
+        android:singleLine="true"
+        android:background="@drawable/bg_search_action_bar"
+        android:textCursorDrawable="@null"
+        />
+
+    <ImageButton
+        android:id="@+id/ibtn_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/location"
+        android:background="@null"
+        android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"/>
+
+</RelativeLayout>

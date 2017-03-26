@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lhc.android.gz_guide">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/gz"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.ForgetPasswordActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.SpotDetailActivity" />
+        <activity android:name=".activity.AboutHotelActivity" />
+        <activity android:name=".activity.AboutEatActivity" />
+        <activity android:name=".activity.AboutTrafficActivity" />
+        <activity android:name=".activity.AboutMapActivity" />
+        <activity android:name=".activity.AboutSpotActivity" />
+        <activity android:name=".activity.AboutStrageryActivity" />
+        <activity android:name=".activity.AboutLocalGuiderActivity" />
+        <activity android:name=".activity.AboutLocalPartnerActivity" />
+        <activity android:name=".activity.HotelDetailActivity" />
+        <activity android:name=".activity.TastyDetailActivity"></activity>
+    </application>
+
+</manifest>

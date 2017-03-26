@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iv_tasty_icon"
+        android:layout_width="@dimen/lv_item_img_size"
+        android:layout_height="@dimen/lv_item_img_size"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/tasty_noddle"
+        android:clickable="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_tasty_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_tasty_icon"
+        android:text="广州卤味粉"
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/lv_item_title_size"
+        android:textColor="@color/lv_item_title"/>
+
+    <TextView
+        android:id="@+id/tv_tasty_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_tasty_name"
+        android:layout_alignLeft="@id/tv_tasty_name"
+        android:layout_marginTop="10dp"
+        android:maxLength="150"
+        android:text="极具广州特色，味道极佳"
+        />
+
+    <TextView
+        android:id="@+id/tv_tasty_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_tasty_name"
+        android:layout_below="@id/tv_tasty_desc"
+        android:text="avg 20元/份"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_tasty_recommend_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_tasty_name"
+        android:layout_below="@id/tv_tasty_price"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorAccent"
+        android:text="推荐指数"/>
+
+    <RatingBar
+        android:id="@+id/rb_tasty_recommend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_tasty_recommend_rating"
+        android:layout_alignParentRight="true"
+        style="?android:attr/ratingBarStyleSmall"
+        android:numStars="5"
+        android:rating="4.2"/>
+
+
+
+
+</RelativeLayout>

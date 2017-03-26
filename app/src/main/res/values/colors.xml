@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="searchbar_text">#5B5B5B</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="gray_divider">#E0E0E0</color>
+    <color name="button_bg">#46a3ff</color>
+    <color name="button_bg_green">#79FF79</color>
+
+    <color name="lv_item_title">#000000</color>
+    <color name="lv_item_desc">#000000</color>
+</resources>

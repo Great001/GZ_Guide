@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
+
+    <ImageView
+        android:id="@+id/iv_spot_icon"
+        android:layout_width="@dimen/lv_item_img_size"
+        android:layout_height="@dimen/lv_item_img_size"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:layout_alignParentRight="true"
+        android:padding="5dp"
+        android:src="@drawable/gz"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/tv_spot_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="广州塔"
+        android:textColor="@color/lv_item_title"
+        android:textSize="@dimen/lv_item_title_size"
+        android:singleLine="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_spot_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_spot_name"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="@dimen/lv_item_img_size"
+        android:text="广州塔最高塔，广州新地标"
+        android:maxLength="150"/>
+
+    <TextView
+        android:id="@+id/tv_spot_ticket_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="120元/人"
+        android:layout_below="@id/tv_spot_desc"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView android:id="@+id/tv_spot_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_spot_ticket_price"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="@dimen/lv_item_img_size"
+        android:text="广州市海珠区"
+        android:singleLine="true"
+        android:ellipsize="middle"/>
+
+    <TextView
+        android:id="@+id/tv_spot_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="流行指数"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@id/tv_spot_address"
+        android:layout_marginTop="10dp"/>
+
+    <RatingBar
+        android:id="@+id/rb_spot_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_toRightOf="@id/tv_spot_rating"
+        android:layout_alignTop="@id/tv_spot_rating"
+        android:layout_marginLeft="30dp"
+        android:numStars="5"
+        android:rating="3.0"/>
+
+
+
+
+</RelativeLayout>
