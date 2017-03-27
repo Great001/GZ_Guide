@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioGroup;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.fragment.MainPageFragment;
 import com.lhc.android.gz_guide.fragment.ProfileFragment;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements SearchActionBar.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        SDKInitializer.initialize(getApplicationContext());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_main);

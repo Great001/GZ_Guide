@@ -26,5 +26,21 @@ public class DimensionUtil {
         return px / density;
     }
 
+    public static int getScreenWidth(Context context){
+        WindowManager  wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics metrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(metrics);
+        return metrics.widthPixels;
+
+    }
+
+    public static int getScreentHeight(Context context){
+        WindowManager  wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics metrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(metrics);
+        return metrics.heightPixels;
+    }
+
+
 
 }

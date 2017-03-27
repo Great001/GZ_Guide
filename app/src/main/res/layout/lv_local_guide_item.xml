@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/iv_local_guide_avatar"
+        android:layout_width="@dimen/lv_item_img_size"
+        android:layout_height="@dimen/lv_item_img_size"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/avatar_default"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/tv_local_guide_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="张三的同学李四的哥哥"
+        android:textSize="@dimen/lv_item_title_size"
+        android:textColor="@color/lv_item_title"
+        android:maxLength="10"
+        android:layout_toRightOf="@id/iv_local_guide_avatar"
+        android:layout_marginLeft="15dp"/>
+
+    <ImageView
+        android:id="@+id/iv_local_guide_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_local_guide_name"
+        android:layout_alignTop="@id/tv_local_guide_name"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/icn_sex_male"
+        />
+
+    <TextView
+        android:id="@+id/tv_local_guide_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_local_guide_name"
+        android:layout_alignLeft="@id/tv_local_guide_name"
+        android:text="职业：公务员"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_local_guide_range"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_local_guide_job"
+        android:layout_toRightOf="@id/tv_local_guide_job"
+        android:layout_marginLeft="20dp"
+        android:text="等级：4级"/>
+
+    <TextView
+        android:id="@+id/tv_local_guide_tel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_local_guide_job"
+        android:layout_alignLeft="@id/tv_local_guide_name"
+        android:text="tel：1560006739"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_local_guide_briefInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_local_guide_tel"
+        android:layout_alignLeft="@id/tv_local_guide_name"
+        android:layout_marginTop="10dp"
+        android:maxLength="100"
+        android:text="我是一个在荔湾区工作的公务员，非常愿意为传播广州的文化介绍个各位"/>
+</RelativeLayout>

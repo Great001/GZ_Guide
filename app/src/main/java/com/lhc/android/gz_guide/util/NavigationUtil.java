@@ -1,9 +1,10 @@
 package com.lhc.android.gz_guide.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.poi.PoiResult;
 import com.lhc.android.gz_guide.activity.AboutEatActivity;
 import com.lhc.android.gz_guide.activity.AboutHotelActivity;
 import com.lhc.android.gz_guide.activity.AboutLocalGuiderActivity;
@@ -12,12 +13,18 @@ import com.lhc.android.gz_guide.activity.AboutMapActivity;
 import com.lhc.android.gz_guide.activity.AboutSpotActivity;
 import com.lhc.android.gz_guide.activity.AboutStrageryActivity;
 import com.lhc.android.gz_guide.activity.AboutTrafficActivity;
+import com.lhc.android.gz_guide.activity.BMapActivity;
 import com.lhc.android.gz_guide.activity.ForgetPasswordActivity;
 import com.lhc.android.gz_guide.activity.HotelDetailActivity;
+import com.lhc.android.gz_guide.activity.LocalGuideDetailActivity;
+import com.lhc.android.gz_guide.activity.LocateResultActivity;
 import com.lhc.android.gz_guide.activity.LoginActivity;
 import com.lhc.android.gz_guide.activity.MainActivity;
+import com.lhc.android.gz_guide.activity.PersonalDetailActivity;
 import com.lhc.android.gz_guide.activity.RegisterActivity;
+import com.lhc.android.gz_guide.activity.SearchResultActivity;
 import com.lhc.android.gz_guide.activity.SpotDetailActivity;
+import com.lhc.android.gz_guide.activity.StrageryDetailActivity;
 import com.lhc.android.gz_guide.activity.TastyDetailActivity;
 
 /**
@@ -69,7 +76,7 @@ public class NavigationUtil {
     }
 
     public static void navigateToAboutMapActivity(Context context){
-        Intent intent = new Intent(context, AboutMapActivity.class);
+        Intent intent = new Intent(context, BMapActivity.class);
         context.startActivity(intent);
     }
 
@@ -103,6 +110,44 @@ public class NavigationUtil {
         Intent intent = new Intent(context, TastyDetailActivity.class);
         context.startActivity(intent);
     }
+
+    public static void navigateToStrageryDetailActivity(Context context){
+        Intent intent = new Intent(context, StrageryDetailActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void navigateToLocalGuideDetailActivity(Context context){
+        Intent intent = new Intent(context, LocalGuideDetailActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void navigateToPersonalDetailActivity(Context context){
+        Intent intent = new Intent(context, PersonalDetailActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void navigateToSearchResultActivity(Context context, PoiResult result){
+        Intent intent = new Intent(context, SearchResultActivity.class);
+        intent.putExtra(SearchResultActivity.POI_RESULT,result);
+        context.startActivity(intent);
+    }
+
+    public static void navigateToBmapActivity(Context context, LatLng locatioin,String address){
+        Intent intent = new Intent(context, BMapActivity.class);
+        intent.putExtra(BMapActivity.LOCATION,locatioin);
+        intent.putExtra(BMapActivity.ADDRESS,address);
+        context.startActivity(intent);
+    }
+
+    public static void navigateToLocationResultActivity(Context context){
+        Intent intent = new Intent(context, LocateResultActivity.class);
+        context.startActivity(intent);
+    }
+
+
+
+
+
 
 
 

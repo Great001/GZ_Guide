@@ -15,11 +15,13 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
+import com.baidu.mapapi.model.LatLng;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.activity.MainActivity;
 import com.lhc.android.gz_guide.adapter.OptionsGvAdapter;
 import com.lhc.android.gz_guide.adapter.PicsPagerAdapter;
 import com.lhc.android.gz_guide.adapter.RecommendGoodsAdapter;
+import com.lhc.android.gz_guide.model.Location;
 import com.lhc.android.gz_guide.model.RecommendGood;
 import com.lhc.android.gz_guide.util.DimensionUtil;
 import com.lhc.android.gz_guide.util.NavigationUtil;
@@ -195,7 +197,9 @@ public class MainPageFragment extends Fragment {
                         NavigationUtil.navigateToAboutStrageryActivity(context);
                         break;
                     case 5:
-                        NavigationUtil.navigateToAboutMapActivity(context);
+                        LatLng location = Location.newInstance(getActivity().getApplicationContext()).getLocation();
+                        String address = Location.newInstance(getActivity().getApplicationContext()).getLocalAddress();
+                        NavigationUtil.navigateToBmapActivity(context,location,address );
                         break;
                     case 6:
                         NavigationUtil.navigateToAboutLocalGuiderActivity(context);

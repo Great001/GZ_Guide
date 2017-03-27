@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/iv_local_partner_icon"
+        android:layout_width="@dimen/lv_item_img_size"
+        android:layout_height="@dimen/lv_item_img_size"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/avatar_default"/>
+
+    <TextView
+        android:id="@+id/tv_local_partner_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_local_partner_icon"
+        android:layout_marginLeft="15dp"
+        android:text="张三"
+        android:textColor="@color/lv_item_title"
+        android:textSize="@dimen/lv_item_title_size"/>
+
+
+    <ImageView
+        android:id="@+id/iv_local_partner_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_local_partner_name"
+        android:layout_alignTop="@id/tv_local_partner_name"
+        android:src="@drawable/icn_sex_male"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:id="@+id/tv_local_partner_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_local_partner_name"
+        android:layout_alignLeft="@id/tv_local_partner_name"
+        android:text="职业：销售"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_local_partner_tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_local_partner_name"
+        android:layout_below="@id/tv_local_partner_job"
+        android:layout_marginTop="10dp"
+        android:text="tel:32898434"
+        />
+
+    <TextView
+        android:id="@+id/tv_local_partner_requirement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="250"
+        android:layout_alignLeft="@id/tv_local_partner_name"
+        android:layout_below="@id/tv_local_partner_tel"
+        android:layout_marginTop="10dp"
+        android:text="善良，友好，乐于助人，同样热爱广府"/>
+
+
+</RelativeLayout>

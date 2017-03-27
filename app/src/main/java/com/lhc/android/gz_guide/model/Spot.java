@@ -1,5 +1,7 @@
 package com.lhc.android.gz_guide.model;
 
+import com.baidu.mapapi.model.LatLng;
+
 /**
  * Created by Administrator on 2017/3/26.
  */
@@ -13,6 +15,7 @@ public class Spot {
     private String imgUrl;
     private float rating;
     private String type;
+    private LatLng location;
 
     public Spot(){}
 
@@ -90,5 +93,13 @@ public class Spot {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public LatLng getLocation() {
+        return location;
+    }
+
+    public void setLocation(LatLng location) {
+        this.location = location;
     }
 }

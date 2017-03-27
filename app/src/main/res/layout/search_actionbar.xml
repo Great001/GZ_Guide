@@ -8,27 +8,39 @@
     android:focusableInTouchMode="true">
 
     <ImageView
-        android:id="@+id/iv_navigate_icon"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:id="@+id/iv_search"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:padding="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/icon_arrow_left"/>
+        android:src="@drawable/icon_search"/>
 
     <EditText
         android:id="@+id/et_search_places"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginRight="40dp"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/iv_navigate_icon"
-        android:hint="请输入广州景点名"
+        android:layout_toRightOf="@id/iv_search"
         android:textColor="@color/searchbar_text"
         android:textSize="@dimen/searchbar_text_size"
         android:singleLine="true"
+        android:hint="请输入目的地"
         android:background="@drawable/bg_search_action_bar"
         android:textCursorDrawable="@null"
+        />
+
+    <ImageView
+        android:id="@+id/iv_searchbar_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/remove_search_pressed"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@id/et_search_places"
+        android:layout_marginRight="5dp"
         />
 
     <ImageButton
@@ -39,6 +51,7 @@
         android:src="@drawable/location"
         android:background="@null"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:scaleType="centerCrop"/>
 
 </RelativeLayout>

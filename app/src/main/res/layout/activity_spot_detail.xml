@@ -57,6 +57,13 @@
                 android:layout_height="2px"
                 android:background="@color/gray_divider"/>
 
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/mv_spot"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:clickable="true">
+            </com.baidu.mapapi.map.MapView>
+
             <TextView
                 android:id="@+id/tv_spot_according"
                 android:layout_width="match_parent"
