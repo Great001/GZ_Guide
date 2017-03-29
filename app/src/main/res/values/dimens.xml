@@ -22,4 +22,12 @@
     <dimen name="map_mark_text_size">16sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="avatar_icon_size">90dp</dimen>
+    <dimen name="profile_user_name">20sp</dimen>
+    <dimen name="user_profile_item_height">40dp</dimen>
+    <dimen name="user_info_background_height">200dp</dimen>
+    <dimen name="user_info_avatar_size">90dp</dimen>
+
+    <dimen name="user_info_item_divider_height">20dp</dimen>
+
 </resources>

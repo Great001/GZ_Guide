@@ -15,7 +15,7 @@ import com.lhc.android.gz_guide.adapter.AddrSearchResultAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResultActivity extends AppCompatActivity {
+public class SearchResultActivity extends BaseActivity {
 
     public static final String POI_RESULT = "poi_result";
     private ListView listView;
@@ -29,12 +29,7 @@ public class SearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setTitle(R.string.search_result);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
+
         listView = (ListView) findViewById(R.id.lv_addr_search_result);
         adapter = new AddrSearchResultAdapter(this);
         poiResult = getIntent().getParcelableExtra(POI_RESULT);
@@ -46,5 +41,10 @@ public class SearchResultActivity extends AppCompatActivity {
             adapter.setPoiInfos(poiInfos);
         }
         listView.setAdapter(adapter);
+    }
+
+    @Override
+    public int getTitleRes() {
+        return R.string.search_result;
     }
 }

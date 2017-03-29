@@ -1,7 +1,5 @@
 package com.lhc.android.gz_guide.activity;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,7 +13,7 @@ import com.lhc.android.gz_guide.util.NavigationUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutLocalGuiderActivity extends AppCompatActivity {
+public class AboutLocalGuiderActivity extends BaseActivity {
 
     private ListView listView;
     private List<LocalGuide> localGuides = new ArrayList<>();
@@ -25,16 +23,10 @@ public class AboutLocalGuiderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_local_guider);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setTitle(R.string.get_guide);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
 
         listView = (ListView) findViewById(R.id.lv_local_guides);
         initData();
-        adapter = new LocalGuiderAdapter(this,localGuides);
+        adapter = new LocalGuiderAdapter(this, localGuides);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -44,7 +36,12 @@ public class AboutLocalGuiderActivity extends AppCompatActivity {
         });
     }
 
-    public void initData(){
+    @Override
+    public int getTitleRes() {
+        return R.string.get_guide;
+    }
+
+    public void initData() {
         LocalGuide guide1 = new LocalGuide();
         guide1.setName("张三");
         guide1.setJob("程序员");
@@ -63,7 +60,7 @@ public class AboutLocalGuiderActivity extends AppCompatActivity {
         guide2.setBriefInfo("广州土生土长，熟悉老广州，非常愿意传播老广州文化");
         guide2.setThumpResId(R.drawable.person_136);
 
-        for(int i = 0;i < 5;i++){
+        for (int i = 0; i < 5; i++) {
             localGuides.add(guide1);
             localGuides.add(guide2);
         }

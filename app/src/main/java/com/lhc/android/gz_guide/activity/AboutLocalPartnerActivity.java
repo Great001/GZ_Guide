@@ -1,9 +1,7 @@
 package com.lhc.android.gz_guide.activity;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ListViewCompat;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -16,7 +14,7 @@ import com.lhc.android.gz_guide.util.NavigationUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutLocalPartnerActivity extends AppCompatActivity {
+public class AboutLocalPartnerActivity extends BaseActivity {
 
     private ListView listView;
     private LocalPartnersAdapter adapter;
@@ -27,15 +25,10 @@ public class AboutLocalPartnerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_local_partner);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!= null){
-            actionBar.setTitle(R.string.get_partner);
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+
         listView = (ListView) findViewById(R.id.lv_local_partners);
         initData();
-        adapter =  new LocalPartnersAdapter(this,partners);
+        adapter = new LocalPartnersAdapter(this, partners);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -45,7 +38,12 @@ public class AboutLocalPartnerActivity extends AppCompatActivity {
         });
     }
 
-    public void initData(){
+    @Override
+    public int getTitleRes() {
+        return R.string.get_partner;
+    }
+
+    public void initData() {
         LocalPartner partner1 = new LocalPartner();
         partner1.setName("张三");
         partner1.setSex(0);
@@ -62,7 +60,7 @@ public class AboutLocalPartnerActivity extends AppCompatActivity {
         partner2.setRequirment("正直，热爱广府文化");
         partner2.setAvatarResId(R.drawable.person_111);
 
-        for(int i = 0;i< 5;i++){
+        for (int i = 0; i < 5; i++) {
             partners.add(partner1);
             partners.add(partner2);
         }

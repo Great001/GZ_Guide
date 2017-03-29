@@ -1,8 +1,7 @@
 package com.lhc.android.gz_guide.activity;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -15,7 +14,7 @@ import com.lhc.android.gz_guide.util.NavigationUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutStrageryActivity extends AppCompatActivity {
+public class AboutStrageryActivity extends BaseActivity {
 
     private ListView listView;
     private StrageriesAdapter adapter;
@@ -25,15 +24,10 @@ public class AboutStrageryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_stragery);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setTitle(R.string.stratery);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
+
         listView = (ListView) findViewById(R.id.lv_stragery);
         initData();
-        adapter = new StrageriesAdapter(this,strageryList);
+        adapter = new StrageriesAdapter(this, strageryList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -43,7 +37,12 @@ public class AboutStrageryActivity extends AppCompatActivity {
         });
     }
 
-    public void initData(){
+    @Override
+    public int getTitleRes() {
+        return R.string.stratery;
+    }
+
+    public void initData() {
 
         Stragery stragery1 = new Stragery();
         stragery1.setTitle("广州老城一日游");
@@ -66,7 +65,7 @@ public class AboutStrageryActivity extends AppCompatActivity {
         stragery3.setCommentCount(870);
         stragery3.setImgResId(R.drawable.gz_msj);
 
-        for(int i = 0;i < 5;i++){
+        for (int i = 0; i < 5; i++) {
             strageryList.add(stragery1);
             strageryList.add(stragery2);
             strageryList.add(stragery3);

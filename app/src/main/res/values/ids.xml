@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources  xmlns:android="http://schemas.android.com/tools">
+    <item name="btn_save_user_info" type="id">1293</item>
+</resources>

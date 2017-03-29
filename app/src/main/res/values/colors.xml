@@ -8,6 +8,7 @@
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="red">#ff0000</color>
     <color name="gray_divider">#E0E0E0</color>
     <color name="button_bg">#46a3ff</color>
     <color name="button_bg_green">#79FF79</color>

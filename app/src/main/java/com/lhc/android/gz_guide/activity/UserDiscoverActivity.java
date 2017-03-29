@@ -4,16 +4,18 @@ import android.os.Bundle;
 
 import com.lhc.android.gz_guide.R;
 
-public class AboutTrafficActivity extends BaseActivity {
+/**
+ * Created by Administrator on 2017/3/28.
+ */
+public class UserDiscoverActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_traffic);
     }
 
     @Override
     public int getTitleRes() {
-        return R.string.traffic;
+        return R.string.user_discover;
     }
 }

@@ -1,13 +1,181 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.lhc.android.gz_guide.fragment.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/rl_personal_info"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="我" />
+        android:layout_height="@dimen/user_info_background_height">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/iv_user_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_bg"/>
+
+        <com.lhc.android.gz_guide.view.CircleImageView
+            android:id="@+id/iv_user_avatar"
+            android:layout_width="@dimen/avatar_icon_size"
+            android:layout_height="@dimen/avatar_icon_size"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/header_big_default"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_user_avatar"
+            android:layout_marginLeft="20dp"
+            android:layout_alignTop="@id/iv_user_avatar"
+            android:text="张三"
+            android:textSize="@dimen/profile_user_name"
+            android:textColor="@color/white"
+            />
+
+        <ImageView
+            android:id="@+id/iv_user_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icn_sex_male"
+            android:layout_toRightOf="@id/tv_user_name"
+            android:layout_alignTop="@id/iv_user_avatar"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_user_job"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_user_name"
+            android:layout_below="@id/tv_user_name"
+            android:layout_marginTop="10dp"
+            android:text="职业：程序员"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/tv_user_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_user_job"
+            android:layout_alignTop="@id/tv_user_job"
+            android:layout_marginLeft="20dp"
+            android:text="等级：7级"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_user_signature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_user_name"
+            android:layout_below="@id/tv_user_job"
+            android:layout_marginTop="10dp"
+            android:text="海阔凭鱼跃，天高任鸟飞"
+            android:textColor="@color/white"
+            android:singleLine="true"
+            android:ellipsize="end"
+            />
+
+        <TextView
+            android:id="@+id/tv_login_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:text="登录/注册"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_tv_stroke"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/gray_divider"/>
+
+    <TextView
+        android:id="@+id/tv_user_friends"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_profile_item_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="我的朋友"
+        android:drawableRight="@drawable/icon_arrow_right_gray"
+        android:drawableLeft="@drawable/my_friend"
+        android:drawablePadding="15dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/gray_divider"/>
+
+    <TextView
+        android:id="@+id/tv_user_discover"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_profile_item_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="我的发现"
+        android:drawableLeft="@drawable/my_discover"
+        android:drawableRight="@drawable/icon_arrow_right_gray"
+        android:drawablePadding="15dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/gray_divider"/>
+
+    <TextView
+        android:id="@+id/tv_user_stragery"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_profile_item_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="我的攻略"
+        android:drawableLeft="@drawable/my_stragery"
+        android:drawableRight="@drawable/icon_arrow_right_gray"
+        android:drawablePadding="15dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/gray_divider"/>
+
+    <TextView
+        android:id="@+id/tv_user_setting"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_profile_item_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="设置"
+        android:drawableLeft="@drawable/my_settings"
+        android:drawableRight="@drawable/icon_arrow_right_gray"
+        android:drawablePadding="15dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/gray_divider"/>
+
+    <Button
+        android:id="@+id/btn_user_log_out"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_profile_item_height"
+        android:gravity="center"
+        android:background="@color/red"
+        android:textColor="@color/white"
+        android:text="退出登录"/>
+</LinearLayout>

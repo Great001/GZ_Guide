@@ -1,6 +1,5 @@
 package com.lhc.android.gz_guide.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +13,7 @@ import com.lhc.android.gz_guide.util.NavigationUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutSpotActivity extends AppCompatActivity {
+public class AboutSpotActivity extends BaseActivity {
 
     private ListView listView;
     private List<Spot> spotList = new ArrayList<>();
@@ -26,17 +25,22 @@ public class AboutSpotActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_spot);
         listView = (ListView) findViewById(R.id.lv_spots);
         initData();
-        adapter = new SpotsAdapter(this,spotList);
+        adapter = new SpotsAdapter(this, spotList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NavigationUtil.navigateToSpotDetailActivity(AboutSpotActivity.this,position);
+                NavigationUtil.navigateToSpotDetailActivity(AboutSpotActivity.this, position);
             }
         });
     }
 
-    public void initData(){
+    @Override
+    public int getTitleRes() {
+        return R.string.spot_detail;
+    }
+
+    public void initData() {
         Spot spot1 = new Spot();
         spot1.setName("广州塔");
         spot1.setDesc("一塔倾城，新广州、新地标");
@@ -54,7 +58,7 @@ public class AboutSpotActivity extends AppCompatActivity {
         spot2.setRating(Float.valueOf("3.9"));
         spot2.setImgResId(R.drawable.gz_xg);
 
-        for(int i = 0;i<6;i++){
+        for (int i = 0; i < 6; i++) {
             spotList.add(spot1);
             spotList.add(spot2);
         }

@@ -24,7 +24,7 @@ import com.lhc.android.gz_guide.util.DimensionUtil;
 import com.lhc.android.gz_guide.util.GeoCodeUtil;
 import com.lhc.android.gz_guide.util.NavigationUtil;
 
-public class SpotDetailActivity extends AppCompatActivity implements ViewSwitcher.ViewFactory, GestureDetector.OnGestureListener {
+public class SpotDetailActivity extends BaseActivity implements ViewSwitcher.ViewFactory, GestureDetector.OnGestureListener {
 
     public static final String SPOT_ID = "spotId";
 
@@ -45,18 +45,15 @@ public class SpotDetailActivity extends AppCompatActivity implements ViewSwitche
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spot_detail);
-
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setTitle(R.string.spot_detail);
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
         initView();
         switchHeight = DimensionUtil.dp2px(this,180);
-
         GeoCodeUtil.init(address);
 
+    }
+
+    @Override
+    public int getTitleRes() {
+        return R.string.spot_detail;
     }
 
     public void initView() {

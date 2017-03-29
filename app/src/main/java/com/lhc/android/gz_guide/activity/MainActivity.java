@@ -12,7 +12,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioGroup;
 
-import com.baidu.mapapi.SDKInitializer;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.fragment.MainPageFragment;
 import com.lhc.android.gz_guide.fragment.ProfileFragment;
@@ -20,7 +19,7 @@ import com.lhc.android.gz_guide.fragment.RecommendFragment;
 import com.lhc.android.gz_guide.util.ToastUtil;
 import com.lhc.android.gz_guide.view.SearchActionBar;
 
-public class MainActivity extends AppCompatActivity implements SearchActionBar.OnArrowLeftClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private SearchActionBar searchActionBar;
@@ -32,24 +31,22 @@ public class MainActivity extends AppCompatActivity implements SearchActionBar.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        SDKInitializer.initialize(getApplicationContext());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_main);
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-           actionBar.hide();
+        if (actionBar != null) {
+            actionBar.hide();
         }
         mFm = getSupportFragmentManager();
         exitTime = 0;
         initView();
     }
 
-    public void initView(){
+    public void initView() {
         viewPager = (ViewPager) findViewById(R.id.vp_tabs);
         rgBottomTabs = (RadioGroup) findViewById(R.id.rg_tabs);
         searchActionBar = (SearchActionBar) findViewById(R.id.search_actionbar);
-        searchActionBar.setOnArrowLeftClickListener(this);
 
         viewPager.setAdapter(new pagerAdapter(mFm));
         viewPager.setCurrentItem(0);
@@ -64,16 +61,18 @@ public class MainActivity extends AppCompatActivity implements SearchActionBar.O
             public void onPageSelected(int position) {
 
                 int checkId = R.id.rbtn_tab_one;
-                switch (position){
+                switch (position) {
                     case 0:
-                        checkId = R.id.rbtn_tab_one;break;
+                        checkId = R.id.rbtn_tab_one;
+                        break;
                     case 1:
-                        checkId = R.id.rbtn_tab_two;break;
+                        checkId = R.id.rbtn_tab_two;
+                        break;
                     case 2:
-                        checkId = R.id.rbtn_tab_three;break;
+                        checkId = R.id.rbtn_tab_three;
+                        break;
                     default:
                         break;
-
                 }
                 rgBottomTabs.check(checkId);
             }
@@ -87,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements SearchActionBar.O
         rgBottomTabs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.rbtn_tab_one:
                         viewPager.setCurrentItem(0);
                         showActionBar();
@@ -111,17 +110,17 @@ public class MainActivity extends AppCompatActivity implements SearchActionBar.O
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int  id = item.getItemId();
-        if(id == android.R.id.home){
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    static class pagerAdapter extends FragmentPagerAdapter{
+    static class pagerAdapter extends FragmentPagerAdapter {
 
-        pagerAdapter(FragmentManager fm){
+        pagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -129,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements SearchActionBar.O
         public Fragment getItem(int position) {
 
             Fragment fragment = null;
-            switch (position){
+            switch (position) {
                 case 0:
                     fragment = new MainPageFragment();
                     break;
@@ -154,39 +153,33 @@ public class MainActivity extends AppCompatActivity implements SearchActionBar.O
 
     @Override
     public void onBackPressed() {
-        if(!canPopBack()){
-            if(System.currentTimeMillis() - exitTime > 2000){
-                ToastUtil.show(this,R.string.exit_remind);
+        if (!canPopBack()) {
+            if (System.currentTimeMillis() - exitTime > 2000) {
+                ToastUtil.show(this, R.string.exit_remind);
                 exitTime = System.currentTimeMillis();
-            }else{
+            } else {
                 System.exit(0);
             }
         }
     }
 
-    
-    public boolean canPopBack(){
+
+    public boolean canPopBack() {
         int count = mFm.getBackStackEntryCount();
-        if(count > 1){
+        if (count > 1) {
             mFm.popBackStack();
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
 
-    @Override
-    public void onArrowLeftClick() {
-        onBackPressed();
-    }
-
-
-    public void showActionBar(){
+    public void showActionBar() {
         searchActionBar.show();
     }
 
-    public void hideActionBar(){
+    public void hideActionBar() {
         searchActionBar.hide();
     }
 

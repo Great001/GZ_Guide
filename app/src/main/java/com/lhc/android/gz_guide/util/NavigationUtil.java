@@ -9,11 +9,11 @@ import com.lhc.android.gz_guide.activity.AboutEatActivity;
 import com.lhc.android.gz_guide.activity.AboutHotelActivity;
 import com.lhc.android.gz_guide.activity.AboutLocalGuiderActivity;
 import com.lhc.android.gz_guide.activity.AboutLocalPartnerActivity;
-import com.lhc.android.gz_guide.activity.AboutMapActivity;
 import com.lhc.android.gz_guide.activity.AboutSpotActivity;
 import com.lhc.android.gz_guide.activity.AboutStrageryActivity;
 import com.lhc.android.gz_guide.activity.AboutTrafficActivity;
 import com.lhc.android.gz_guide.activity.BMapActivity;
+import com.lhc.android.gz_guide.activity.EditUserInfoActivity;
 import com.lhc.android.gz_guide.activity.ForgetPasswordActivity;
 import com.lhc.android.gz_guide.activity.HotelDetailActivity;
 import com.lhc.android.gz_guide.activity.LocalGuideDetailActivity;
@@ -26,6 +26,11 @@ import com.lhc.android.gz_guide.activity.SearchResultActivity;
 import com.lhc.android.gz_guide.activity.SpotDetailActivity;
 import com.lhc.android.gz_guide.activity.StrageryDetailActivity;
 import com.lhc.android.gz_guide.activity.TastyDetailActivity;
+import com.lhc.android.gz_guide.activity.UserDiscoverActivity;
+import com.lhc.android.gz_guide.activity.UserFriendActivity;
+import com.lhc.android.gz_guide.activity.UserInfoActivity;
+import com.lhc.android.gz_guide.activity.UserSettingActivity;
+import com.lhc.android.gz_guide.activity.UserStrageryActivity;
 
 /**
  * Created by Administrator on 2017/3/20.
@@ -144,6 +149,38 @@ public class NavigationUtil {
         context.startActivity(intent);
     }
 
+
+    public static void navigateToUserFriendActivity(Context context){
+        Intent intent = new Intent(context, UserFriendActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void navigateToUserStrageryActivity(Context context){
+        Intent intent = new Intent (context, UserStrageryActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void navigateToUserDiscoverActivity(Context context){
+        Intent intent = new Intent(context, UserDiscoverActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void navigateToUserSettingActivity(Context context){
+        Intent intent = new Intent(context, UserSettingActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void navagateToUserInfoActivity(Context context){
+        Intent intent = new Intent(context, UserInfoActivity.class);
+        context.startActivity(intent);
+    }
+
+
+    public static void navigateToEditUserInfoActivity(Context context,String editItem){
+        Intent intent = new Intent(context, EditUserInfoActivity.class);
+        intent.putExtra(EditUserInfoActivity.EDIT_ITEM,editItem);
+        context.startActivity(intent);
+    }
 
 
 

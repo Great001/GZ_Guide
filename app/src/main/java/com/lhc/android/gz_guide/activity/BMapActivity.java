@@ -1,8 +1,7 @@
 package com.lhc.android.gz_guide.activity;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,10 +19,9 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.lhc.android.gz_guide.R;
-import com.lhc.android.gz_guide.util.ToastUtil;
 import com.lhc.android.gz_guide.view.FloatingButton;
 
-public class BMapActivity extends AppCompatActivity implements FloatingButton.OnButtonClickListener,View.OnClickListener {
+public class BMapActivity extends BaseActivity implements FloatingButton.OnButtonClickListener, View.OnClickListener {
 
     public static final String LOCATION = "location";
     public static final String ADDRESS = "address";
@@ -33,7 +31,7 @@ public class BMapActivity extends AppCompatActivity implements FloatingButton.On
     private LinearLayout llNavigation;
     private EditText mEtStartPlace;
     private EditText mEtEndPlace;
-    private Button mBtnWalk,mBtnBus,mBtnDrive;
+    private Button mBtnWalk, mBtnBus, mBtnDrive;
 
     private MapView mapView;
     private BaiduMap baiduMap;
@@ -48,18 +46,18 @@ public class BMapActivity extends AppCompatActivity implements FloatingButton.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bmap);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!= null){
-            actionBar.setTitle(R.string.baidu_map);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
+
         location = getIntent().getParcelableExtra(LOCATION);
         address = getIntent().getStringExtra(ADDRESS);
         initView();
     }
 
-    public void initView(){
+    @Override
+    public int getTitleRes() {
+        return R.string.baidu_map;
+    }
+
+    public void initView() {
         floatingButton = (FloatingButton) findViewById(R.id.fbtn_open_navigation);
         llNavigation = (LinearLayout) findViewById(R.id.ll_navigation);
         mEtStartPlace = (EditText) findViewById(R.id.et_start_place);
@@ -97,16 +95,16 @@ public class BMapActivity extends AppCompatActivity implements FloatingButton.On
 
     @Override
     public void onButtonClick() {
-        if(llNavigation.getVisibility() == View.VISIBLE){
+        if (llNavigation.getVisibility() == View.VISIBLE) {
             llNavigation.setVisibility(View.GONE);
-        }else {
+        } else {
             llNavigation.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_bus:
                 break;
             case R.id.btn_walk:
@@ -114,10 +112,10 @@ public class BMapActivity extends AppCompatActivity implements FloatingButton.On
             case R.id.btn_drive:
                 break;
             case R.id.tv_traffic:
-                if(isTraffic) {
+                if (isTraffic) {
                     isTraffic = false;
                     baiduMap.setTrafficEnabled(isTraffic);
-                }else{
+                } else {
                     isTraffic = true;
                     baiduMap.setTrafficEnabled(isTraffic);
                 }

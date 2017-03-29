@@ -1,8 +1,6 @@
 package com.lhc.android.gz_guide.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -15,7 +13,7 @@ import com.lhc.android.gz_guide.util.NavigationUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutEatActivity extends AppCompatActivity {
+public class AboutEatActivity extends BaseActivity {
 
     private ListView listView;
     private TastyFoodAdapter adapter;
@@ -25,13 +23,6 @@ public class AboutEatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_eat);
-
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(R.string.eat);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
 
         listView = (ListView) findViewById(R.id.lv_tasty_food);
         initData();
@@ -45,6 +36,12 @@ public class AboutEatActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public int getTitleRes() {
+        return R.string.eat;
     }
 
     public void initData() {

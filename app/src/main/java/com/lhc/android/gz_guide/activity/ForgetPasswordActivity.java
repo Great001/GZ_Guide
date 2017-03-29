@@ -1,6 +1,5 @@
 package com.lhc.android.gz_guide.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,7 @@ import com.lhc.android.gz_guide.util.ValidChecker;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ForgetPasswordActivity extends AppCompatActivity implements View.OnClickListener {
+public class ForgetPasswordActivity extends BaseActivity implements View.OnClickListener {
 
     private EditText mEtAccount;
     private EditText mEtVerifyCode;
@@ -28,7 +27,12 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
         initView();
     }
 
-    public void initView(){
+    @Override
+    public int getTitleRes() {
+        return R.string.forget_password;
+    }
+
+    public void initView() {
         mEtAccount = (EditText) findViewById(R.id.et_input_account);
         mEtVerifyCode = (EditText) findViewById(R.id.et_input_verifycode);
         mBtnGetCode = (Button) findViewById(R.id.btn_get_verifycode);
@@ -41,7 +45,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
+        switch (id) {
             case R.id.btn_get_verifycode:
                 onGetCodeClick();
                 break;
@@ -54,49 +58,48 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
 
     }
 
-    public void onGetCodeClick(){
+    public void onGetCodeClick() {
         String account = mEtAccount.getText().toString().trim();
-        if(accountCheck(account)){
+        if (accountCheck(account)) {
             //根据账号请求验证码
 
         }
 
     }
 
-    public void onSubmitCodeClick(){
+    public void onSubmitCodeClick() {
         String verifyCode = mEtVerifyCode.getText().toString().trim();
         //提交验证码
     }
 
-    public boolean accountCheck(String account){
+    public boolean accountCheck(String account) {
         int checkAccountResult = ValidChecker.checkAccount(account);
-        if(account.isEmpty()){
-            ToastUtil.show(this,R.string.account_can_not_empty);
+        if (account.isEmpty()) {
+            ToastUtil.show(this, R.string.account_can_not_empty);
             return false;
         }
-        if(checkAccountResult != ValidChecker.VALID){
-            ToastUtil.show(this,R.string.account_invalid);
+        if (checkAccountResult != ValidChecker.VALID) {
+            ToastUtil.show(this, R.string.account_invalid);
             return false;
         }
         return true;
     }
 
-    public void waitForCode(){
+    public void waitForCode() {
         final int remainTime = 60;
         final Timer timer = new Timer();
         mBtnGetCode.setClickable(false);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                mBtnGetCode.setText(String.format("还剩%d秒",remainTime));
-                if(remainTime == 0){
+                mBtnGetCode.setText(String.format("还剩%d秒", remainTime));
+                if (remainTime == 0) {
                     timer.cancel();
                     mBtnGetCode.setClickable(true);
                 }
             }
-        },1000);
+        }, 1000);
     }
-
 
 
 }
