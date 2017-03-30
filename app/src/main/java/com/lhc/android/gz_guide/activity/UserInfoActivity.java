@@ -5,27 +5,29 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.lhc.android.gz_guide.R;
-import com.lhc.android.gz_guide.fragment.ImageDialogFragment;
-import com.lhc.android.gz_guide.fragment.ProfileFragment;
+import com.lhc.android.gz_guide.model.UserModel;
 import com.lhc.android.gz_guide.util.ImageCropUtil;
 import com.lhc.android.gz_guide.util.NavigationUtil;
 import com.lhc.android.gz_guide.view.CircleImageView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 
 /**
  * Created by Administrator on 2017/3/28.
  */
-public class UserInfoActivity extends BaseActivity implements View.OnClickListener{
+public class UserInfoActivity extends BaseActivity implements View.OnClickListener {
 
     private CircleImageView ivAvatar;
     private ImageView ivBg;
@@ -35,6 +37,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     private TextView tvJob;
     private TextView tvTel;
     private TextView tvWechat;
+    private TextView tvEmail;
     private TextView tvAddr;
 
     private TextView tvRange;
@@ -48,16 +51,21 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         initView();
-        loadUserInfo();
+//        loadUserInfo();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadUserInfo();
+    }
 
     @Override
     public int getTitleRes() {
         return R.string.user_personal_info;
     }
 
-    public void initView(){
+    public void initView() {
         ivAvatar = (CircleImageView) findViewById(R.id.iv_user_info_avatar);
         ivBg = (ImageView) findViewById(R.id.iv_user_info_background);
 
@@ -69,6 +77,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
         tvTel = (TextView) findViewById(R.id.tv_user_info_tel);
         tvWechat = (TextView) findViewById(R.id.tv_user_info_wechat);
+        tvEmail = (TextView) findViewById(R.id.tv_user_info_email);
         tvRange = (TextView) findViewById(R.id.tv_user_info_range);
         tvIntergral = (TextView) findViewById(R.id.tv_user_info_intergral);
 
@@ -81,50 +90,75 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         tvSex.setOnClickListener(this);
         tvTel.setOnClickListener(this);
         tvWechat.setOnClickListener(this);
+        tvEmail.setOnClickListener(this);
     }
 
 
-    public void  loadUserInfo(){
+    public void loadUserInfo() {
         avatar = ImageCropUtil.getAvatarFile();
         background = ImageCropUtil.getBackgroundFile();
         onRefreshAvatar();
         onRefresBackground();
+
+        JSONObject jsonObject = UserModel.getLocalUserProfile(this);
+
+        try {
+            tvName.setText(jsonObject.getString("username"));
+            tvSex.setText(jsonObject.getString("sex"));
+            tvAge.setText(jsonObject.getString("age"));
+            tvTel.setText(jsonObject.getString("mobilePhoneNumber"));
+            tvWechat.setText(jsonObject.getString("wechat"));
+            tvAddr.setText(jsonObject.getString("address"));
+            tvRange.setText(jsonObject.getString("range"));
+            tvIntergral.setText(jsonObject.getString("intergral"));
+            tvJob.setText(jsonObject.getString("job"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_user_info_avatar:
-                ImageCropUtil.selectImage(this,Uri.fromFile(avatar),ImageCropUtil.SELECT_A_PICTURE_FOR_AVATAR);
+                ImageCropUtil.selectImage(this, Uri.fromFile(avatar), ImageCropUtil.SELECT_A_PICTURE_FOR_AVATAR);
                 break;
             case R.id.iv_user_info_background:
-                ImageCropUtil.selectImage(this,Uri.fromFile(background),ImageCropUtil.SELECT_A_PICTURE_FOR_BACKGROUND);
+                ImageCropUtil.selectImage(this, Uri.fromFile(background), ImageCropUtil.SELECT_A_PICTURE_FOR_BACKGROUND);
                 break;
             case R.id.tv_user_info_name:
-                NavigationUtil.navigateToEditUserInfoActivity(this,"name");
+                NavigationUtil.navigateToEditUserInfoActivity(this, "username");
                 break;
             case R.id.tv_user_info_sex:
                 onSexClick();
                 break;
             case R.id.tv_user_info_addr:
-                NavigationUtil.navigateToEditUserInfoActivity(this,"address");
+                NavigationUtil.navigateToEditUserInfoActivity(this, "address");
                 break;
             case R.id.tv_user_info_age:
-                NavigationUtil.navigateToEditUserInfoActivity(this,"age");
+                NavigationUtil.navigateToEditUserInfoActivity(this, "age");
                 break;
             case R.id.tv_user_info_tel:
-                NavigationUtil.navigateToEditUserInfoActivity(this,"tel");
+                NavigationUtil.navigateToEditUserInfoActivity(this, "mobilePhoneNumber");
+                break;
+            case R.id.tv_user_info_email:
+                NavigationUtil.navigateToEditUserInfoActivity(this,"email");
                 break;
             case R.id.tv_user_info_job:
-                NavigationUtil.navigateToEditUserInfoActivity(this,"job");
+                NavigationUtil.navigateToEditUserInfoActivity(this, "job");
                 break;
             case R.id.tv_user_info_wechat:
-                NavigationUtil.navigateToEditUserInfoActivity(this,"wechat");
+                NavigationUtil.navigateToEditUserInfoActivity(this, "wechat");
                 break;
             default:
                 break;
         }
     }
+
+
 
 
     @Override
@@ -136,10 +170,10 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     ImageCropUtil.cropImageUri(this, ImageCropUtil.getUri(this, data), 90, 90, ImageCropUtil.REFRESH_AVATAR);
                     break;
                 case ImageCropUtil.REFRESH_AVATAR:
-                   onRefreshAvatar();
+                    onRefreshAvatar();
                     break;
                 case ImageCropUtil.SELECT_A_PICTURE_FOR_BACKGROUND:
-                    ImageCropUtil.cropImageUri(this, ImageCropUtil.getUri(this,data), 350, 180, ImageCropUtil.REFRESH_BACKGROUND);
+                    ImageCropUtil.cropImageUri(this, ImageCropUtil.getUri(this, data), 350, 180, ImageCropUtil.REFRESH_BACKGROUND);
                     break;
                 case ImageCropUtil.REFRESH_BACKGROUND:
                     onRefresBackground();
@@ -151,13 +185,11 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
 
-
-
     public void onRefreshAvatar() {
         final Bitmap bitmap = avatar != null ? ImageCropUtil.decodeUriAsBitmap(this, Uri.fromFile(avatar)) : null;
-        if(bitmap != null) {
+        if (bitmap != null) {
             ivAvatar.setImageBitmap(bitmap);
-        }else{
+        } else {
             ivAvatar.setImageResource(R.drawable.header_big_default);
         }
     }
@@ -165,32 +197,37 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
     public void onRefresBackground() {
         final Bitmap bitmap = background != null ? ImageCropUtil.decodeUriAsBitmap(this, Uri.fromFile(background)) : null;
-        if(bitmap != null) {
+        if (bitmap != null) {
             ivBg.setImageBitmap(bitmap);
-        }else{
+        } else {
             ivBg.setImageResource(R.drawable.home_bg);
         }
     }
 
 
-    public void onSexClick(){
-        String [] items = {"男性","女性","中性"};
+    public void onSexClick() {
+        final String[] items = {"男", "女", "中"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which){
-                    case 0:
-                        tvSex.setText("男");
-                        break;
-                    case 1:
-                        tvSex.setText("女");
-                        break;
-                    case 2:
-                        tvSex.setText("中性");
-                        default:
-                            break;
+            public void onClick(DialogInterface dialog, final int which) {
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("sex",items[which]);
+                }catch (JSONException e){
+                    e.printStackTrace();
                 }
+                UserModel.update(UserInfoActivity.this, jsonObject, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        tvSex.setText(items[which]);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                });
                 dialog.cancel();
             }
         });

@@ -1,7 +1,9 @@
 package com.lhc.android.gz_guide.fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,14 +17,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lhc.android.gz_guide.R;
+import com.lhc.android.gz_guide.activity.MainActivity;
+import com.lhc.android.gz_guide.model.UserModel;
 import com.lhc.android.gz_guide.util.ImageCropUtil;
 import com.lhc.android.gz_guide.util.NavigationUtil;
 import com.lhc.android.gz_guide.util.ToastUtil;
 import com.lhc.android.gz_guide.view.CircleImageView;
 
+import org.json.JSONObject;
+
 import java.io.File;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+public class UserProfileFragment extends Fragment implements View.OnClickListener {
+
+    public static final String IS_USER_LOGIN = "is_user_login";
 
     private TextView tvMyFriend;
     private TextView tvMyDiscover;
@@ -57,7 +65,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         initView(view);
-//        loadUserInfo();
+//        loadUserInfo();  //不适合在此处调用
         return view;
     }
 
@@ -66,6 +74,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         loadUserInfo();//加载用户信息,放在此处的目的是及时更新
+        if(UserModel.getLoginState(getContext())){
+            onUserLogin();
+        }
     }
 
     public void initView(View view) {
@@ -123,7 +134,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 onAvatarClick();
                 break;
             case R.id.rl_personal_info:
-                NavigationUtil.navagateToUserInfoActivity(getContext());
+                if(UserModel.getLoginState(getContext())) {
+                    NavigationUtil.navagateToUserInfoActivity(getContext());
+                }
                 break;
             default:
                 break;
@@ -164,21 +177,31 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         tvUserRange.setVisibility(View.GONE);
         tvUserJob.setVisibility(View.GONE);
         tvUserSignature.setVisibility(View.GONE);
-        ivUserAvatar.setImageResource(R.drawable.avatar_default);
+        ivUserSex.setVisibility(View.GONE);
         ivUserAvatar.setClickable(false);
         tvLogin.setVisibility(View.VISIBLE);
-        ivUserSex.setVisibility(View.GONE);
+        ((MainActivity)getActivity()).setLoginState(false);
+        UserModel.setLoginState(getContext(),false);
     }
 
     public void onUserLogin() {
-        tvUserName.setText("张三");
         tvUserRange.setVisibility(View.VISIBLE);
         tvUserJob.setVisibility(View.VISIBLE);
         tvUserSignature.setVisibility(View.VISIBLE);
-        ivUserAvatar.setImageResource(R.drawable.header_boy);
         ivUserAvatar.setClickable(true);
         tvLogin.setVisibility(View.GONE);
         ivUserSex.setVisibility(View.VISIBLE);
+
+        SharedPreferences sp = getActivity().getSharedPreferences(UserModel.SP_USER_PROFILE, Context.MODE_PRIVATE);
+        tvUserName.setText(sp.getString("username","张三"));
+        tvUserRange.setText(sp.getString("range","0"));
+        tvUserJob.setText(sp.getString("job","程序员"));
+        tvUserSignature.setText(sp.getString("signature","海阔凭鱼跃，天高任鸟飞"));
+
+        if(sp.getString("sex","男").equals("女")){
+            ivUserSex.setImageResource(R.drawable.icn_sex_female);
+        }
+
     }
 
     public void onAvatarClick() {

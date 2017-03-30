@@ -7,10 +7,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.lhc.android.gz_guide.R;
+import com.lhc.android.gz_guide.model.UserModel;
 import com.lhc.android.gz_guide.util.NavigationUtil;
 import com.lhc.android.gz_guide.util.ToastUtil;
 import com.lhc.android.gz_guide.util.ValidChecker;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
@@ -33,8 +39,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     public void initView() {
-        mEtAccount = (EditText) findViewById(R.id.et_input_account);
-        mEtPassword = (EditText) findViewById(R.id.et_input_password);
+        mEtAccount = (EditText) findViewById(R.id.et_login_input_account);
+        mEtPassword = (EditText) findViewById(R.id.et_login_input_password);
         mBtnLogin = (Button) findViewById(R.id.btn_submit_login);
         mTvForgetPsw = (TextView) findViewById(R.id.tv_register_now);
         mTvRegister = (TextView) findViewById(R.id.tv_forget_password);
@@ -64,9 +70,32 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     public void onLoginClick() {
         String account = mEtAccount.getText().toString().trim();
-        String password = mEtPassword.getText().toString().trim();
+        final String password = mEtPassword.getText().toString().trim();
         if (loginCheck(account, password)) {
             //登录
+            UserModel.login(this, account, password, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject jsonObject) {
+                    ToastUtil.show(LoginActivity.this, "登录成功");
+                    //记住密码和用户信息
+                    try {
+                        jsonObject.put("password",password);
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                    UserModel.saveUserProfile(LoginActivity.this.getApplicationContext(),jsonObject);
+//                    NavigationUtil.navigateToMainActivity(LoginActivity.this);
+                    UserModel.setLoginState(LoginActivity.this,true);
+                    LoginActivity.this.finish();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    ToastUtil.show(LoginActivity.this, "登录失败，请检测账号和密码");
+                    volleyError.printStackTrace();
+                }
+            });
+
         }
     }
 
@@ -89,16 +118,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             ToastUtil.show(this, R.string.password_can_not_empty);
             return false;
         }
-        if (checkAccountResult != ValidChecker.VALID) {
+        if (checkAccountResult == ValidChecker.INVALID_ACCOUNT) {
             ToastUtil.show(this, R.string.account_invalid);
             return false;
         }
         if (!ValidChecker.checkPassword(password)) {
-            ToastUtil.show(this, R.string.password_invalid);
+            ToastUtil.show(this, R.string.password_format_invalid);
             return false;
         }
         return true;
     }
-
-
 }

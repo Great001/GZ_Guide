@@ -25,9 +25,9 @@ public class SplashActivity extends Activity {
         public void run() {
             int progress = progressBar.getProgress() + 10;
             progressBar.setProgress(progress);
-            if(progress < 100) {
+            if (progress < 100) {
                 handler.postDelayed(this, 300);
-            }else{
+            } else {
                 progressBar.setProgress(0);
             }
         }
@@ -40,11 +40,12 @@ public class SplashActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
         initView();
+        loadConfig();
         handler = new Handler();
 //        handler.postDelayed(runnable,300);
     }
 
-    public void initView(){
+    public void initView() {
         ivPic = (ImageView) findViewById(R.id.iv_splash);
         progressBar = (ProgressBar) findViewById(R.id.pb_splash);
         btnEnter = (Button) findViewById(R.id.btn_enter_main_page);
@@ -56,6 +57,12 @@ public class SplashActivity extends Activity {
                 NavigationUtil.navigateToMainActivity(SplashActivity.this);
             }
         });
+
+    }
+
+
+    //加载app的一些配置
+    public void loadConfig() {
 
     }
 

@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.LoginActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.ForgetPasswordActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.SpotDetailActivity" />
@@ -61,7 +61,7 @@
         <activity android:name=".activity.UserFriendActivity" />
         <activity android:name=".activity.UserSettingActivity" />
         <activity android:name=".activity.UserStrageryActivity" />
-        <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.UserInfoActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.EditUserInfoActivity"></activity>
     </application>
 

@@ -224,6 +224,34 @@
             android:layout_height="2px"
             android:background="@color/gray_divider" />
 
+
+        <LinearLayout
+            android:id="@+id/ll_user_info_email"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/user_profile_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="邮件" />
+
+            <TextView
+                android:id="@+id/tv_user_info_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="abc@123.com" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/gray_divider" />
+
         <LinearLayout
             android:id="@+id/ll_user_info_wechat"
             android:layout_width="match_parent"

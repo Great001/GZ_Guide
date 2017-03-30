@@ -7,26 +7,28 @@ import java.util.regex.Pattern;
  */
 public class ValidChecker {
 
-    public final static int VALID = 0;
-    public final static int PHONE_NUMBER_INVALID = 1;
-    public final static int EMAIL_INVALID = 2;
+    public final static int INVALID_ACCOUNT = 0;
+    public final static int PHONE_NUMBER = 1;
+    public final static int EMAIL = 2;
+    public final static int USERNAME = 3;
 
     public static int  checkAccount(String account){
-        int checkResult = -1;
-        if(!checkPhoneNumber(account)){
-            checkResult = PHONE_NUMBER_INVALID;
-        }else if(!checkEmail(account)){
-            checkResult = EMAIL_INVALID;
-        }else{
-            checkResult = VALID;
+        if(checkPhoneNumber(account)){
+            return PHONE_NUMBER;
         }
-        return checkResult;
+        if(checkEmail(account)){
+            return EMAIL;
+        }
+//        if(checkUserName(account)){
+           return USERNAME;
+//        }
+//        return INVALID_ACCOUNT;
     }
 
 
     public static boolean checkPassword(String password){
         int len = password.length();
-        if(len<8 || len>16){
+        if(len<6 || len>16){
             return false;
         }else {
             return true;
@@ -45,6 +47,12 @@ public class ValidChecker {
         return pattern.matcher(email).matches();
     }
 
+
+    public static  boolean checkUserName(String userName){
+        String nameRegex = "^[a-zA-z]([a-z0-9A-z]*_?)*$";
+        Pattern pattern = Pattern.compile(nameRegex);
+        return pattern.matcher(userName).matches();
+    }
 
 
 }

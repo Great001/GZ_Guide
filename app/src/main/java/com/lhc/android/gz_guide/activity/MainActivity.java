@@ -1,5 +1,6 @@
 package com.lhc.android.gz_guide.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,12 +13,18 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioGroup;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.fragment.MainPageFragment;
-import com.lhc.android.gz_guide.fragment.ProfileFragment;
+import com.lhc.android.gz_guide.fragment.UserProfileFragment;
 import com.lhc.android.gz_guide.fragment.RecommendFragment;
+import com.lhc.android.gz_guide.model.UserModel;
+import com.lhc.android.gz_guide.util.NavigationUtil;
 import com.lhc.android.gz_guide.util.ToastUtil;
 import com.lhc.android.gz_guide.view.SearchActionBar;
+
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentManager mFm;
     private long exitTime;
+
+    private boolean isUserLogin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         mFm = getSupportFragmentManager();
         exitTime = 0;
         initView();
+        autoLogin();
     }
 
     public void initView() {
@@ -136,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new RecommendFragment();
                     break;
                 case 2:
-                    fragment = new ProfileFragment();
+                    fragment = new UserProfileFragment();
                     break;
                 default:
                     break;
@@ -183,4 +193,44 @@ public class MainActivity extends AppCompatActivity {
         searchActionBar.hide();
     }
 
+
+    //实现自动登录
+    public void autoLogin() {
+        SharedPreferences sp = getSharedPreferences(UserModel.SP_USER_PROFILE, MODE_PRIVATE);
+        String account = sp.getString("username", "null");
+        final String password = sp.getString("password", "null");
+
+        if (account.equals("null") || password.equals("null")) {
+            NavigationUtil.navigateToLoginActivity(this);
+            return;
+        }
+
+        UserModel.login(this, account, password, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                ToastUtil.show(MainActivity.this,"登录成功");
+                UserModel.setLoginState(MainActivity.this,true);
+                UserModel.saveUserProfile(MainActivity.this,jsonObject);
+                isUserLogin = true;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        });
+    }
+
+    public boolean getLoginState(){
+        return isUserLogin;
+    }
+
+    public void setLoginState(boolean loginState){
+        isUserLogin = loginState;
+    }
+
+
 }
+
+
+

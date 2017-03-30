@@ -5,10 +5,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.lhc.android.gz_guide.R;
+import com.lhc.android.gz_guide.model.UserModel;
 import com.lhc.android.gz_guide.util.ToastUtil;
 import com.lhc.android.gz_guide.util.ValidChecker;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileNotFoundException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,13 +40,14 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
     }
 
     public void initView() {
-        mEtAccount = (EditText) findViewById(R.id.et_input_account);
+        mEtAccount = (EditText) findViewById(R.id.et_input_email);
         mEtVerifyCode = (EditText) findViewById(R.id.et_input_verifycode);
         mBtnGetCode = (Button) findViewById(R.id.btn_get_verifycode);
         mBtnSubmitCode = (Button) findViewById(R.id.btn_submit_verifycode);
 
         mBtnGetCode.setOnClickListener(this);
         mBtnSubmitCode.setOnClickListener(this);
+
     }
 
     @Override
@@ -59,11 +67,28 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
     }
 
     public void onGetCodeClick() {
-        String account = mEtAccount.getText().toString().trim();
-        if (accountCheck(account)) {
-            //根据账号请求验证码
-
+        String email = mEtAccount.getText().toString().trim();
+//        if (accountCheck(account)) {
+//        }
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("email",email);
+        }catch (JSONException e){
+            e.printStackTrace();
         }
+        UserModel.resetPassword(ForgetPasswordActivity.this, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                ToastUtil.show(ForgetPasswordActivity.this,"请及时接受邮件进行密码重置");
+                ForgetPasswordActivity.this.finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        });
+
 
     }
 
@@ -78,7 +103,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
             ToastUtil.show(this, R.string.account_can_not_empty);
             return false;
         }
-        if (checkAccountResult != ValidChecker.VALID) {
+        if (checkAccountResult == ValidChecker.INVALID_ACCOUNT) {
             ToastUtil.show(this, R.string.account_invalid);
             return false;
         }

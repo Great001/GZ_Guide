@@ -1,13 +1,31 @@
 package com.lhc.android.gz_guide.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.lhc.android.gz_guide.R;
+import com.lhc.android.gz_guide.ReftHttpClient;
+import com.lhc.android.gz_guide.model.UserModel;
+import com.lhc.android.gz_guide.util.NavigationUtil;
 import com.lhc.android.gz_guide.util.ToastUtil;
 import com.lhc.android.gz_guide.util.ValidChecker;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -22,9 +40,9 @@ public class RegisterActivity extends BaseActivity {
         initView();
     }
 
-    public void initView(){
-        mEtAccount = (EditText) findViewById(R.id.et_input_account);
-        mEtPassword = (EditText) findViewById(R.id.et_input_password);
+    public void initView() {
+        mEtAccount = (EditText) findViewById(R.id.et_input_user_name);
+        mEtPassword = (EditText) findViewById(R.id.et_input_user_password);
         mBtnRegister = (Button) findViewById(R.id.btn_register);
 
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
@@ -35,35 +53,58 @@ public class RegisterActivity extends BaseActivity {
         });
     }
 
-    public void onRegister(){
-        String account= mEtAccount.getText().toString().trim();
+    public void onRegister() {
+        String account = mEtAccount.getText().toString().trim();
         String password = mEtPassword.getText().toString().trim();
-        if(onRegisterCheck(account,password)){
-            //注册
+        if (onRegisterCheck(account, password)) {
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("username", account);
+                jsonObject.put("password", password);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            UserModel.register(this, jsonObject, new Response.Listener() {
+                @Override
+                public void onResponse(Object o) {
+                    ToastUtil.show(RegisterActivity.this, "注册成功");
+                    RegisterActivity.this.finish();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    ToastUtil.show(RegisterActivity.this, "注册失败");
+                    Log.e("login", volleyError.networkResponse.toString());
+                }
+            });
         }
-
-
     }
 
-    public boolean onRegisterCheck(String account,String password){
+
+    public boolean onRegisterCheck(String account, String password) {
         int checkAccountResult = ValidChecker.checkAccount(account);
 
-        if(account.isEmpty()){
-            ToastUtil.show(this,R.string.account_can_not_empty);
+        if (account.isEmpty()) {
+            ToastUtil.show(this, R.string.account_can_not_empty);
             return false;
         }
-        if(password.isEmpty()){
-            ToastUtil.show(this,R.string.password_can_not_empty);
+        if (password.isEmpty()) {
+            ToastUtil.show(this, R.string.password_can_not_empty);
             return false;
         }
-        if(checkAccountResult != ValidChecker.VALID){
-            ToastUtil.show(this,R.string.account_invalid);
+        if(!ValidChecker.checkPassword(password)){
+            ToastUtil.show(this,R.string.password_format_invalid);
+            return false;
+        }
+        if (checkAccountResult == ValidChecker.INVALID_ACCOUNT) {
+            ToastUtil.show(this, R.string.account_invalid);
             return false;
         }
         return true;
     }
 
-    public void onRegisterSucc(){
+    public void onRegisterSucc() {
         finish();
     }
 
