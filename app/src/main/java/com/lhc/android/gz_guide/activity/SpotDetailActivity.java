@@ -1,7 +1,5 @@
 package com.lhc.android.gz_guide.activity;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -17,8 +15,6 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.util.DimensionUtil;
 import com.lhc.android.gz_guide.util.GeoCodeUtil;
@@ -95,11 +91,12 @@ public class SpotDetailActivity extends BaseActivity implements ViewSwitcher.Vie
 
 
 
+    //实现ViewSwitch.Factory
     @Override
     public View makeView() {
         ImageView imageView = new ImageView(this);
         imageView.setImageResource(images[currentImage]);
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setLayoutParams(new ImageSwitcher.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         return imageView;
     }

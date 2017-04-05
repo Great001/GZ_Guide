@@ -54,6 +54,7 @@ public class EditUserInfoActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //将用户的更改提交到后台
     public void doSave() {
         editItemValue = editText.getText().toString().trim();
         JSONObject jsonObject = new JSONObject();
@@ -65,7 +66,9 @@ public class EditUserInfoActivity extends BaseActivity {
         UserModel.update(this, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                onSaveSuccess();
+                ToastUtil.show(EditUserInfoActivity.this, "保存成功");
+                UserModel.updateUserProperty(EditUserInfoActivity.this, editItemKey, editItemValue);
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override

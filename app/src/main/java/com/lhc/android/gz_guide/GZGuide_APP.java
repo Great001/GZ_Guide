@@ -12,7 +12,9 @@ public class GZGuide_APP extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //初始化百度地图SDK,使用全局的ApplicationContext
         SDKInitializer.initialize(getApplicationContext());
+        //创建Location单例类的实例，实现定位，获取定位结果
         Location.newInstance(getApplicationContext());
     }
 }

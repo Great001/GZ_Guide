@@ -113,6 +113,7 @@ public class SearchActionBar extends LinearLayout implements View.OnClickListene
     }
 
 
+    //关键字检索
     public void onAddrSearchClick() {
         String addr = mEtSearchPlace.getText().toString().trim();
         if (!addr.isEmpty()) {

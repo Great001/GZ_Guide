@@ -25,6 +25,7 @@ public class LocateResultActivity extends BaseActivity {
         setContentView(R.layout.activity_locate_result);
 
         listView = (ListView) findViewById(R.id.lv_location);
+        //获取定位结果列表
         poiList = Location.newInstance(getApplicationContext()).getPoiList();
         adapter = new LocationAdapter(this, poiList);
         listView.setAdapter(adapter);

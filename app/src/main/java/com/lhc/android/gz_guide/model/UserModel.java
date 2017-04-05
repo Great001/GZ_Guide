@@ -22,9 +22,6 @@ public class UserModel {
     public static final String USER_RESET_PASSWORD ="https://api.bmob.cn/1/requestEmailVerify";
 
 
-    public static  boolean isUserLogin;
-
-
     public static void register(Context context, JSONObject jsonUser, Response.Listener listener, Response.ErrorListener errorListener) {
         ReftHttpClient.getInstance(context).post(USER_URL, jsonUser, listener, errorListener);
     }

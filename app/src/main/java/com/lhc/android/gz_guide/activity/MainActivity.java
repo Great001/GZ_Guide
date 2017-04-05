@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         mFm = getSupportFragmentManager();
         exitTime = 0;
         initView();
-        autoLogin();
+        autoLogin();   //自动登录
     }
 
     public void initView() {
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         rgBottomTabs = (RadioGroup) findViewById(R.id.rg_tabs);
         searchActionBar = (SearchActionBar) findViewById(R.id.search_actionbar);
 
-        viewPager.setAdapter(new pagerAdapter(mFm));
+        viewPager.setAdapter(new FragmentAdapter(mFm));
         viewPager.setCurrentItem(0);
         showActionBar();
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -128,9 +128,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    static class pagerAdapter extends FragmentPagerAdapter {
+    static class FragmentAdapter extends FragmentPagerAdapter {
 
-        pagerAdapter(FragmentManager fm) {
+        FragmentAdapter(FragmentManager fm) {
             super(fm);
         }
 

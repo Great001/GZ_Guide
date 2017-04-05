@@ -97,9 +97,10 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     public void loadUserInfo() {
         avatar = ImageCropUtil.getAvatarFile();
         background = ImageCropUtil.getBackgroundFile();
-        onRefreshAvatar();
-        onRefresBackground();
+        onRefreshAvatar();  //更新用户头像
+        onRefresBackground();   //更新用户背景强
 
+        //加载用户的个人资料信息
         JSONObject jsonObject = UserModel.getLocalUserProfile(this);
 
         try {

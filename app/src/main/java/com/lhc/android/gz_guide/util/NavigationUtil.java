@@ -31,7 +31,6 @@ import com.lhc.android.gz_guide.activity.UserFriendActivity;
 import com.lhc.android.gz_guide.activity.UserInfoActivity;
 import com.lhc.android.gz_guide.activity.UserSettingActivity;
 import com.lhc.android.gz_guide.activity.UserStrageryActivity;
-import com.lhc.android.gz_guide.fragment.UserProfileFragment;
 
 /**
  * Created by Administrator on 2017/3/20.
