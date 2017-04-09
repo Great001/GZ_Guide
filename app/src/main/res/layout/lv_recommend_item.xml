@@ -32,14 +32,15 @@
             android:textSize="@dimen/lv_item_title_size" />
 
 
-        <TextView
+        <com.lhc.android.gz_guide.view.ShareAppendixTextView
             android:id="@+id/tv_recommend_goods_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_recommend_goods_title"
             android:layout_marginRight="110dp"
             android:maxLength="200"
-            android:text="广州塔真是一个好地方啊，好闪好水好风光，哈哈哈哈哈哈" />
+            android:text="广州塔真是一个好地方啊，好闪好水好风光，哈哈哈哈哈哈"
+            android:ellipsize="end"/>
 
         <RatingBar
             android:id="@+id/rb_recommend_goods"

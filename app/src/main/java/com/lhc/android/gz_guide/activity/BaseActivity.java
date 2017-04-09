@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.lhc.android.gz_guide.AppActivityManager;
+
 /**
  * Created by Administrator on 2017/3/28.
  */
@@ -20,6 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
+        AppActivityManager.getInstance().push(this);
     }
 
     public abstract int getTitleRes();

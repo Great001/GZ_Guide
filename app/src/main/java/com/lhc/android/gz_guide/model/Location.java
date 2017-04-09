@@ -59,7 +59,7 @@ public class Location {
     private void initLocation(){
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-//        option.setCoorType("bd0911");
+        option.setCoorType("bd09ll");
         option.setScanSpan(10000);
         option.setIsNeedAddress(true);
         option.setIsNeedLocationDescribe(true);

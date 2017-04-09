@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lhc.android.gz_guide.activity.GeneralSettingActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/gray_divider" />
+
+    <LinearLayout
+        android:id="@+id/ll_language_setting"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_item_height"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_change_language"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+
+            android:text="@string/language" />
+
+        <TextView
+            android:id="@+id/tv_language_selected"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right|center_vertical"
+            android:text="@string/language_follow_system"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/gray_divider" />
+
+    <TextView
+        android:id="@+id/tv_font_size_setting"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_item_height"
+        android:text="@string/font_size"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/gray_divider" />
+
+    <TextView
+        android:id="@+id/tv_flow_setting"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_item_height"
+        android:text="@string/flow"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/gray_divider" />
+
+    <TextView
+        android:id="@+id/tv_cache_clear"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_item_height"
+        android:text="@string/clear_cache"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/gray_divider" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_divider" />
+</LinearLayout>

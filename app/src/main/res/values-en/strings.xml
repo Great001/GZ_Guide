@@ -1,0 +1,119 @@
+<resources>
+    <string name="app_name">GZ_Guide</string>
+    <string name="enter_main_page">enter main page</string>
+    <string name="main_tab_one">home</string>
+    <string name="main_tab_two">recommend</string>
+    <string name="main_tab_three">me</string>
+
+    <string name="exit_remind">click one more to exit</string>
+
+    <string name="text_account">username</string>
+    <string name="text_password">password</string>
+    <string name="hint_account">username/phone/email</string>
+    <string name="hint_password">six to sixteen</string>
+    <string name="login">sign in</string>
+    <string name="sign_out">sign out</string>
+    <string name="logout">sign out current account</string>
+    <string name="register_now">register now</string>
+    <string name="register">register</string>
+    <string name="forget_password">forget password</string>
+    <string name="account_invalid">account not valid</string>
+    <string name="account_not_exist">account is empty</string>
+    <string name="account_can_not_empty">account can not empty</string>
+    <string name="password_format_invalid">password format not valid</string>
+    <string name="password_bits_limit">password bits needs 6-16</string>
+    <string name="password_can_not_empty">password can not empty</string>
+    <string name="please_input_account">please input password</string>
+    <string name="submit">submit</string>
+    <string name="save">save</string>
+    <string name="get_verigycode">get idenfying code</string>
+    <string name="please_input_verifycode">please input identifying code</string>
+    <string name="please_input_verigyemail">please input identifying email</string>
+    <string name="please_input_keyword">input keyword</string>
+
+    <string name="nick_name">nickname</string>
+    <string name="user_name">username</string>
+    <string name="phone_number">phone</string>
+    <string name="email">email</string>
+    <string name="wechat">wechat</string>
+    <string name="country">country</string>
+    <string name="sex">sex</string>
+    <string name="password">password</string>
+    <string name="age">age</string>
+    <string name="college">college</string>
+    <string name="major">major</string>
+    <string name="hometown">hometown</string>
+    <string name="job">job</string>
+    <string name="range">range</string>
+    <string name="intergral">intergral</string>
+    <string name="address">address</string>
+
+    <string name="hotel">hotel</string>
+    <string name="eat">tasty</string>
+    <string name="play">fun</string>
+    <string name="traffic">traffic</string>
+    <string name="stratery">stratery</string>
+    <string name="map">map</string>
+    <string name="get_partner">partner</string>
+    <string name="get_guide">guide</string>
+
+    <string name="spot_detail">spot detail</string>
+    <string name="spot_list">spot</string>
+    <string name="hotel_detail">hotel detail</string>
+    <string name="hotel_list">hotel</string>
+    <string name="tasty_detail">tasty detail</string>
+    <string name="stragery_detail">stargery detail</string>
+    <string name="local_guide_detail">guide detail</string>
+    <string name="personal_detail">personal detail</string>
+
+    <string name="baidu_map">BD Map</string>
+    <string name="search_result">search result</string>
+    <string name="locate_result">locate result</string>
+
+    <string name="user_stargery">my stragery</string>
+    <string name="user_discover">my discover</string>
+    <string name="user_setting">my settings</string>
+    <string name="user_friend">my friends</string>
+
+    <string name="my_friend">my friends</string>
+    <string name="my_stargety">my stargeries</string>
+    <string name="my_discover">my discoveries</string>
+
+    <string name="user_detail_info">user detail</string>
+    <string name="user_personal_info">personal detail</string>
+    <string name="edit_user_info">edit</string>
+
+    <string name="detail_page">detail page</string>
+
+    <string name="general">General</string>
+    <string name="general_setting">General Setting</string>
+    <string name="language">Language</string>
+    <string name="selected_language_zh">Chinese</string>
+    <string name="selected_language_en">English</string>
+    <string name="language_follow_system">follow system</string>
+    <string name="font_size">Font Size</string>
+    <string name="flow">Flow</string>
+    <string name="clear_cache">Cache Clear</string>
+
+    <string name="privicy_setting">Privicy Setting</string>
+    <string name="privicy">Privicy</string>
+    <string name="show_personal_info">Show Personal Info</string>
+
+    <string name="security_setting">Security Setting</string>
+    <string name="security">Security</string>
+    <string name="bind_phone">Bind Phone</string>
+    <string name="bind_email">Bind Email</string>
+    <string name="change_password">Change Password</string>
+
+    <string name="about_app">About App</string>
+    <string name="user_report">User Report</string>
+
+    <string name="font_size_not_need_change">font size is best suited,not need to change</string>
+    <string name="cache_clear_finish">cache has cleared</string>
+    <string name="current_flow">current flow is 120M</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
+</resources>

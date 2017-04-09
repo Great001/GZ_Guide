@@ -3,7 +3,7 @@
     android:id="@+id/ll_search_action_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#55BEBEBE"
+    android:background="@color/search_action_bar_bg_color"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -28,7 +28,7 @@
         android:textColor="@color/searchbar_text"
         android:textSize="@dimen/searchbar_text_size"
         android:singleLine="true"
-        android:hint="请输入目的地"
+        android:hint="@string/please_input_keyword"
         android:background="@drawable/bg_search_action_bar"
         android:textCursorDrawable="@null"
         />

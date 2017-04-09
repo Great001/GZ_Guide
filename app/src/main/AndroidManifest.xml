@@ -22,7 +22,7 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="SPB9ugsMj5GIUuvfWthbB1YLIqH1M7jo" />
-        //key:开发者申请的Key
+
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,8 +30,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.LoginActivity" android:launchMode="singleTask"/>
+        <activity
+            android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".activity.ForgetPasswordActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.SpotDetailActivity" />
@@ -61,8 +64,16 @@
         <activity android:name=".activity.UserFriendActivity" />
         <activity android:name=".activity.UserSettingActivity" />
         <activity android:name=".activity.UserStrageryActivity" />
-        <activity android:name=".activity.UserInfoActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activity.EditUserInfoActivity"></activity>
+        <activity
+            android:name=".activity.UserInfoActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.EditUserInfoActivity" />
+        <activity android:name=".activity.WebViewActivity" />
+        <activity android:name=".activity.GeneralSettingActivity" />
+        <activity android:name=".activity.PrivicySettingActivity" />
+        <activity android:name=".activity.UserReportActivity" />
+        <activity android:name=".activity.SecureSettingActivity" />
+        <activity android:name=".activity.AboutAppActivity"></activity>
     </application>
 
 </manifest>

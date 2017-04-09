@@ -1,12 +1,12 @@
 package com.lhc.android.gz_guide.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -18,7 +18,20 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.RouteLine;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.route.BikingRouteResult;
+import com.baidu.mapapi.search.route.DrivingRouteResult;
+import com.baidu.mapapi.search.route.IndoorRouteResult;
+import com.baidu.mapapi.search.route.MassTransitRouteResult;
+import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
+import com.baidu.mapapi.search.route.PlanNode;
+import com.baidu.mapapi.search.route.RoutePlanSearch;
+import com.baidu.mapapi.search.route.TransitRouteResult;
+import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
+import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.lhc.android.gz_guide.R;
+import com.lhc.android.gz_guide.overlayutil.WalkingRouteOverlay;
 import com.lhc.android.gz_guide.view.FloatingButton;
 
 public class BMapActivity extends BaseActivity implements FloatingButton.OnButtonClickListener, View.OnClickListener {
@@ -35,12 +48,14 @@ public class BMapActivity extends BaseActivity implements FloatingButton.OnButto
 
     private MapView mapView;
     private BaiduMap baiduMap;
+    private RoutePlanSearch mSearch;
     private LatLng location;
     private String address;
 
     private boolean isTraffic = false;
     private String startPlace;
     private String endPlace;
+    private RouteLine route;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +65,7 @@ public class BMapActivity extends BaseActivity implements FloatingButton.OnButto
         location = getIntent().getParcelableExtra(LOCATION);
         address = getIntent().getStringExtra(ADDRESS);
         initView();
+        initRouteSearch();
     }
 
     @Override
@@ -93,6 +109,61 @@ public class BMapActivity extends BaseActivity implements FloatingButton.OnButto
 
     }
 
+    public void initRouteSearch(){
+        mSearch = RoutePlanSearch.newInstance();
+        mSearch.setOnGetRoutePlanResultListener(new OnGetRoutePlanResultListener() {
+            @Override
+            public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
+
+                if (walkingRouteResult == null || walkingRouteResult.error != SearchResult.ERRORNO.NO_ERROR) {
+                    Toast.makeText(BMapActivity.this, "抱歉，未找到结果", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                if (walkingRouteResult.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
+                    // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
+                    walkingRouteResult.getSuggestAddrInfo();
+                    return;
+                }
+                if (walkingRouteResult.error == SearchResult.ERRORNO.NO_ERROR) {
+                    route = walkingRouteResult.getRouteLines().get(0);
+                    WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(baiduMap);
+                    baiduMap.setOnMarkerClickListener(overlay);
+//                    routeOverlay = overlay;
+                    overlay.setData(walkingRouteResult.getRouteLines().get(0));
+                    overlay.addToMap();
+                    overlay.zoomToSpan();
+                }
+            }
+
+
+            @Override
+            public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
+
+            }
+
+            @Override
+            public void onGetMassTransitRouteResult(MassTransitRouteResult massTransitRouteResult) {
+
+            }
+
+            @Override
+            public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
+
+            }
+
+            @Override
+            public void onGetIndoorRouteResult(IndoorRouteResult indoorRouteResult) {
+
+            }
+
+            @Override
+            public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
+
+            }
+        });
+    }
+
+
     @Override
     public void onButtonClick() {
         if (llNavigation.getVisibility() == View.VISIBLE) {
@@ -108,6 +179,7 @@ public class BMapActivity extends BaseActivity implements FloatingButton.OnButto
             case R.id.btn_bus:
                 break;
             case R.id.btn_walk:
+                showWalkRoute();
                 break;
             case R.id.btn_drive:
                 break;
@@ -124,4 +196,35 @@ public class BMapActivity extends BaseActivity implements FloatingButton.OnButto
                 break;
         }
     }
+
+    public void showWalkRoute(){
+        startPlace = mEtStartPlace.getText().toString().trim();
+        endPlace = mEtEndPlace.getText().toString().trim();
+        PlanNode startNode = PlanNode.withCityNameAndPlaceName("广州",startPlace);
+        PlanNode endNode = PlanNode.withCityNameAndPlaceName("广州",endPlace);
+        mSearch.walkingSearch(new WalkingRoutePlanOption().from(startNode).to(endNode));
+    }
+
+    class MyWalkingRouteOverlay extends WalkingRouteOverlay {
+        public MyWalkingRouteOverlay(BaiduMap map) {
+            super(map);
+        }
+
+        @Override
+        public BitmapDescriptor getStartMarker() {
+//            if (useDefaultIcon) {
+            return BitmapDescriptorFactory.fromResource(R.drawable.icon_st);
+//            }
+
+        }
+
+        @Override
+        public BitmapDescriptor getTerminalMarker() {
+//            if (useDefaultIcon) {
+            return BitmapDescriptorFactory.fromResource(R.drawable.icon_en);
+//            }
+//            return null;
+        }
+    }
+
 }

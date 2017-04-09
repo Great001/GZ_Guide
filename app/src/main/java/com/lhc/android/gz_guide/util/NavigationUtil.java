@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.poi.PoiResult;
+import com.lhc.android.gz_guide.activity.AboutAppActivity;
 import com.lhc.android.gz_guide.activity.AboutEatActivity;
 import com.lhc.android.gz_guide.activity.AboutHotelActivity;
 import com.lhc.android.gz_guide.activity.AboutLocalGuiderActivity;
@@ -15,22 +16,27 @@ import com.lhc.android.gz_guide.activity.AboutTrafficActivity;
 import com.lhc.android.gz_guide.activity.BMapActivity;
 import com.lhc.android.gz_guide.activity.EditUserInfoActivity;
 import com.lhc.android.gz_guide.activity.ForgetPasswordActivity;
+import com.lhc.android.gz_guide.activity.GeneralSettingActivity;
 import com.lhc.android.gz_guide.activity.HotelDetailActivity;
 import com.lhc.android.gz_guide.activity.LocalGuideDetailActivity;
 import com.lhc.android.gz_guide.activity.LocateResultActivity;
 import com.lhc.android.gz_guide.activity.LoginActivity;
 import com.lhc.android.gz_guide.activity.MainActivity;
 import com.lhc.android.gz_guide.activity.PersonalDetailActivity;
+import com.lhc.android.gz_guide.activity.PrivicySettingActivity;
 import com.lhc.android.gz_guide.activity.RegisterActivity;
 import com.lhc.android.gz_guide.activity.SearchResultActivity;
+import com.lhc.android.gz_guide.activity.SecureSettingActivity;
 import com.lhc.android.gz_guide.activity.SpotDetailActivity;
 import com.lhc.android.gz_guide.activity.StrageryDetailActivity;
 import com.lhc.android.gz_guide.activity.TastyDetailActivity;
 import com.lhc.android.gz_guide.activity.UserDiscoverActivity;
 import com.lhc.android.gz_guide.activity.UserFriendActivity;
 import com.lhc.android.gz_guide.activity.UserInfoActivity;
+import com.lhc.android.gz_guide.activity.UserReportActivity;
 import com.lhc.android.gz_guide.activity.UserSettingActivity;
 import com.lhc.android.gz_guide.activity.UserStrageryActivity;
+import com.lhc.android.gz_guide.activity.WebViewActivity;
 
 /**
  * Created by Administrator on 2017/3/20.
@@ -183,9 +189,34 @@ public class NavigationUtil {
     }
 
 
+    public static void navigateToWebViewActivity(Context context,String link){
+        Intent intent = new Intent(context, WebViewActivity.class);
+        intent.putExtra(WebViewActivity.CONTENT_LINK,link);
+        context.startActivity(intent);
+    }
 
+    public static void navigateToGenaralSetttingActivity(Context context){
+        Intent intent = new Intent(context, GeneralSettingActivity.class);
+        context.startActivity(intent);
+    }
 
+    public static void navigateToPrivicySettingActivity(Context context){
+        Intent intent = new Intent(context, PrivicySettingActivity.class);
+        context.startActivity(intent);
+    }
 
+    public static void navigateToSecureSettingActivity(Context context){
+        Intent intent = new Intent(context, SecureSettingActivity.class);
+        context.startActivity(intent);
+    }
 
+    public static void navigateToAboutAppActivity(Context  context){
+        Intent intent = new Intent(context, AboutAppActivity.class);
+        context.startActivity(intent);
+    }
 
+    public static void navigateToUserReportActivity(Context context){
+        Intent intent = new Intent(context, UserReportActivity.class);
+        context.startActivity(intent);
+    }
 }

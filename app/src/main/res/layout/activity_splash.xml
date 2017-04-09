@@ -25,7 +25,7 @@
         android:id="@+id/btn_enter_main_page"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="进入首页"
+        android:text="@string/enter_main_page"
         android:textColor="@android:color/white"
         android:gravity="center"
         android:layout_gravity="bottom|center_horizontal"

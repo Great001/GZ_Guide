@@ -15,4 +15,6 @@
 
     <color name="lv_item_title">#000000</color>
     <color name="lv_item_desc">#000000</color>
+
+    <color name="search_action_bar_bg_color">#55BEBEBE</color>
 </resources>

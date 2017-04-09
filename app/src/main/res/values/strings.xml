@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">羊城通</string>
+    <string name="enter_main_page">进入首页</string>
     <string name="main_tab_one">首页</string>
     <string name="main_tab_two">推荐</string>
     <string name="main_tab_three">我</string>
@@ -11,6 +12,7 @@
     <string name="hint_account">用户名/手机号/邮箱</string>
     <string name="hint_password">6-16位</string>
     <string name="login">登录</string>
+    <string name="sign_out">退出登录</string>
     <string name="logout">退出当前账号</string>
     <string name="register_now">马上注册</string>
     <string name="register">注册</string>
@@ -23,13 +25,18 @@
     <string name="password_can_not_empty">密码不能为空</string>
     <string name="please_input_account">请输入账号</string>
     <string name="submit">提交</string>
+    <string name="save">保存</string>
     <string name="get_verigycode">获取验证码</string>
     <string name="please_input_verifycode">请输入验证码</string>
     <string name="please_input_verigyemail">请输入验证邮箱</string>
 
+    <string name="please_input_keyword">请输入关键字</string>
+
+    <string name="nick_name">昵称</string>
     <string name="user_name">用户名</string>
     <string name="phone_number">手机号</string>
     <string name="email">邮箱</string>
+    <string name="wechat">微信</string>
     <string name="country">国籍</string>
     <string name="sex">性别</string>
     <string name="password">密码</string>
@@ -37,6 +44,10 @@
     <string name="college">大学</string>
     <string name="major">专业</string>
     <string name="hometown">家乡</string>
+    <string name="job">职业</string>
+    <string name="range">等级</string>
+    <string name="intergral">积分</string>
+    <string name="address">地址</string>
 
     <string name="hotel">旅馆</string>
     <string name="eat">美食</string>
@@ -65,10 +76,42 @@
     <string name="user_setting">设置</string>
     <string name="user_friend">朋友</string>
 
+    <string name="my_friend">我的朋友</string>
+    <string name="my_stargety">我的攻略</string>
+    <string name="my_discover">我的发现</string>
+
     <string name="user_detail_info">用户详情</string>
     <string name="user_personal_info">个人详情</string>
     <string name="edit_user_info">编辑</string>
 
+    <string name="detail_page">详情页</string>
+
+    <string name="general">通用</string>
+    <string name="general_setting">通用设置</string>
+    <string name="language">语言</string>
+    <string name="selected_language_zh">中文</string>
+    <string name="selected_language_en">英语</string>
+    <string name="language_follow_system">跟随系统</string>
+    <string name="font_size">字体大小</string>
+    <string name="flow">流量</string>
+    <string name="clear_cache">缓存清理</string>
+
+    <string name="privicy_setting">隐私设置</string>
+    <string name="privicy">隐私</string>
+    <string name="show_personal_info">展示个人信息</string>
+
+    <string name="security_setting">安全设置</string>
+    <string name="security">安全</string>
+    <string name="bind_phone">绑定手机</string>
+    <string name="bind_email">绑定邮箱</string>
+    <string name="change_password">修改密码</string>
+
+    <string name="about_app">关于应用</string>
+    <string name="user_report">用户反馈</string>
+
+    <string name="font_size_not_need_change">字体大小已最佳，无须更改</string>
+    <string name="cache_clear_finish">缓存已清理</string>
+    <string name="current_flow">当前流量为120M</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

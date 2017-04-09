@@ -53,8 +53,8 @@ public class SplashActivity extends Activity {
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SplashActivity.this.finish();
                 NavigationUtil.navigateToMainActivity(SplashActivity.this);
+                SplashActivity.this.finish();
             }
         });
 

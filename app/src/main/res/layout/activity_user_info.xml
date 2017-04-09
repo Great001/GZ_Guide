@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="昵称" />
+                android:text="@string/nick_name" />
 
             <TextView
                 android:id="@+id/tv_user_info_name"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="性别" />
+                android:text="@string/sex" />
 
             <TextView
                 android:id="@+id/tv_user_info_sex"
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="年龄" />
+                android:text="@string/age" />
 
             <TextView
                 android:id="@+id/tv_user_info_age"
@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="职业" />
+                android:text="@string/job" />
 
             <TextView
                 android:id="@+id/tv_user_info_job"
@@ -153,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="等级" />
+                android:text="@string/range" />
 
             <TextView
                 android:id="@+id/tv_user_info_range"
@@ -180,7 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="积分" />
+                android:text="@string/intergral" />
 
             <TextView
                 android:id="@+id/tv_user_info_intergral"
@@ -209,7 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="电话" />
+                android:text="@string/phone_number" />
 
             <TextView
                 android:id="@+id/tv_user_info_tel"
@@ -237,7 +237,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="邮件" />
+                android:text="@string/email" />
 
             <TextView
                 android:id="@+id/tv_user_info_email"
@@ -264,7 +264,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="微信" />
+                android:text="@string/wechat" />
 
             <TextView
                 android:id="@+id/tv_user_info_wechat"
@@ -291,7 +291,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="地址" />
+                android:text="@string/address" />
 
             <TextView
                 android:id="@+id/tv_user_info_addr"

@@ -9,11 +9,15 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.activity.MainActivity;
 import com.lhc.android.gz_guide.fragment.ImageDialogFragment;
 import com.lhc.android.gz_guide.model.RecommendGood;
+import com.lhc.android.gz_guide.model.RecommendModel;
+import com.lhc.android.gz_guide.view.ShareAppendixTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,14 +26,17 @@ import java.util.List;
 public class RecommendGoodsAdapter extends BaseAdapter {
 
     private Context context;
-    private List<RecommendGood> goods;
+    private List<RecommendGood> goods = new ArrayList<>();
+    String imgUrl;
 
-
-    public RecommendGoodsAdapter(Context context, List<RecommendGood> lists) {
+    public RecommendGoodsAdapter(Context context) {
         this.context = context;
-        goods = lists;
-
     }
+
+    public void setGoods(List<RecommendGood> list){
+        goods = list;
+    }
+
 
     @Override
     public int getCount() {
@@ -59,14 +66,15 @@ public class RecommendGoodsAdapter extends BaseAdapter {
         final RecommendGood good = goods.get(position);
         holder.title.setText(good.getTitle());
         holder.desc.setText(good.getDesc());
-        holder.pic.setImageResource(good.getImgRes());
-        holder.ratingbar.setRating(good.getRating());
+        imgUrl = good.getImgUrl();
+        Glide.with(context).load(good.getImgUrl()).thumbnail(0.2f).placeholder(R.drawable.loading).centerCrop().into(holder.pic);
+        holder.ratingbar.setRating(Float.valueOf(good.getRating()));
         holder.thumbsUp.setImageResource(good.isPhiase() ? R.drawable.have_give_shumbs_up : R.drawable.havent_give_thumbs_up);
 
         holder.pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageDialogFragment.newInstance(good.getImgRes()).show(((MainActivity) context).getSupportFragmentManager(), "dialog");
+                ImageDialogFragment.newInstance(good.getImgUrl()).show(((MainActivity) context).getSupportFragmentManager(), "dialog");
             }
         });
 
@@ -88,7 +96,7 @@ public class RecommendGoodsAdapter extends BaseAdapter {
 
     class ViewHolder {
         TextView title;
-        TextView desc;
+        ShareAppendixTextView desc;
         ImageView pic;
         RatingBar ratingbar;
         ImageView thumbsUp;
@@ -96,7 +104,7 @@ public class RecommendGoodsAdapter extends BaseAdapter {
 
         ViewHolder(View itemView) {
             title = (TextView) itemView.findViewById(R.id.tv_recommend_goods_title);
-            desc = (TextView) itemView.findViewById(R.id.tv_recommend_goods_desc);
+            desc = (ShareAppendixTextView) itemView.findViewById(R.id.tv_recommend_goods_desc);
             pic = (ImageView) itemView.findViewById(R.id.iv_recommend_goods_pic);
             ratingbar = (RatingBar) itemView.findViewById(R.id.rb_recommend_goods);
             thumbsUp = (ImageView) itemView.findViewById(R.id.iv_give_thumbs_up);

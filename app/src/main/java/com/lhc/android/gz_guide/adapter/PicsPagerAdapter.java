@@ -8,8 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.lhc.android.gz_guide.R;
+import com.lhc.android.gz_guide.model.RecommendPagerData;
 import com.lhc.android.gz_guide.util.NavigationUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -19,18 +23,17 @@ import java.util.regex.Matcher;
 public class PicsPagerAdapter extends PagerAdapter {
 
     private Context context;
-    private List<Bitmap> bitmaps;
-    private int[] images;
+    private List<RecommendPagerData> pagerDataList = new ArrayList<>();
 
-    public PicsPagerAdapter(Context context, List<Bitmap> bitmaps){
+    public PicsPagerAdapter(Context context){
         this.context = context;
-        this.bitmaps = bitmaps;
     }
 
-    public PicsPagerAdapter(Context context,int [] images){
-        this.context = context;
-        this.images = images;
+    public void setData(List<RecommendPagerData> list){
+        pagerDataList = list;
     }
+
+
 
 
 
@@ -47,7 +50,8 @@ public class PicsPagerAdapter extends PagerAdapter {
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewPager.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
         imageView.setLayoutParams(params);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        imageView.setImageResource(images[position]);
+        RecommendPagerData data = pagerDataList.get(position);
+        Glide.with(context).load(data.getImgUrl()).placeholder(R.drawable.loading).into(imageView);
         container.addView(imageView);
         return imageView;
     }
@@ -61,17 +65,12 @@ public class PicsPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return images.length;
+        return pagerDataList.size();
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
-    }
-
-    public Bitmap loadBitmap(ImageView imageView,int resId){
-        Bitmap bitmap = null;
-        return bitmap;
     }
 
 }

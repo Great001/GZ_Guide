@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.lhc.android.gz_guide.AppActivityManager;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.fragment.MainPageFragment;
 import com.lhc.android.gz_guide.fragment.UserProfileFragment;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+        AppActivityManager.getInstance().push(this);
         mFm = getSupportFragmentManager();
         exitTime = 0;
         initView();
@@ -168,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 ToastUtil.show(this, R.string.exit_remind);
                 exitTime = System.currentTimeMillis();
             } else {
-                System.exit(0);
+               AppActivityManager.getInstance().clear();
             }
         }
     }
@@ -191,6 +193,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void hideActionBar() {
         searchActionBar.hide();
+    }
+
+    public void showActionBarBg(){
+        searchActionBar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+    }
+
+    public void hideActionBarBg(){
+        searchActionBar.setBackgroundColor(getResources().getColor(R.color.search_action_bar_bg_color));
     }
 
 

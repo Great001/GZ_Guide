@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.baidu.mapapi.model.LatLng;
@@ -23,6 +25,8 @@ import com.lhc.android.gz_guide.adapter.PicsPagerAdapter;
 import com.lhc.android.gz_guide.adapter.RecommendGoodsAdapter;
 import com.lhc.android.gz_guide.model.Location;
 import com.lhc.android.gz_guide.model.RecommendGood;
+import com.lhc.android.gz_guide.model.RecommendModel;
+import com.lhc.android.gz_guide.model.RecommendPagerData;
 import com.lhc.android.gz_guide.util.DimensionUtil;
 import com.lhc.android.gz_guide.util.NavigationUtil;
 
@@ -33,7 +37,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class MainPageFragment extends Fragment {
+public class MainPageFragment extends Fragment implements RecommendModel.OnGetGoodsListener,
+        RecommendModel.OnGetPagerDataListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -47,13 +52,13 @@ public class MainPageFragment extends Fragment {
     private PicsPagerAdapter pagerAdapter;
     private RecommendGoodsAdapter goodsAdapter;
 
-
     private Handler handler;
     private int currentItem;
 
-    private int images[] = {R.drawable.sxj, R.drawable.gz_night, R.drawable.cjc, R.drawable.sxj, R.drawable.gz_night};
     private int optionIcons[] = {R.drawable.hotel, R.drawable.eat, R.drawable.play, R.drawable.traffic, R.drawable.stratery, R.drawable.map, R.drawable.guide, R.drawable.partner};
     private int optionTexts[] = {R.string.hotel, R.string.eat, R.string.play, R.string.traffic, R.string.stratery, R.string.map, R.string.get_guide, R.string.get_partner};
+
+    private List<RecommendPagerData> pagerDatas = new ArrayList<>();
     private List<RecommendGood> goods = new ArrayList<>();
 
 
@@ -97,7 +102,7 @@ public class MainPageFragment extends Fragment {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case UPDATE_VIEWPAGER:
-                        viewPager.setCurrentItem(currentItem % images.length);
+                        viewPager.setCurrentItem(currentItem % pagerDatas.size());
                         break;
                     default:
                         break;
@@ -119,6 +124,10 @@ public class MainPageFragment extends Fragment {
         setUpViewPager();
         setUpGridView();
         setUpListView();
+        RecommendModel.getInstance().addOnGetGoodsListener(this);
+        RecommendModel.getInstance().setOnGetPagerDataListener(this);
+        RecommendModel.getInstance().getRecommendGoods(getContext());
+        RecommendModel.getInstance().getRecommendPagerData(getContext());
         return view;
     }
 
@@ -131,10 +140,10 @@ public class MainPageFragment extends Fragment {
 
 
     public void setUpViewPager(){
-        final int picsCount = images.length;
-        pagerAdapter = new PicsPagerAdapter(this.getActivity(), images);
+        final int picsCount = pagerDatas.size();
+        pagerAdapter = new PicsPagerAdapter(this.getActivity());
         viewPager.setAdapter(pagerAdapter);
-        viewPager.setCurrentItem(1);
+
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -161,15 +170,12 @@ public class MainPageFragment extends Fragment {
     }
 
     public void setUpListView(){
-        initGoodData();
-        goodsAdapter = new RecommendGoodsAdapter(getActivity(), goods);
+        goodsAdapter = new RecommendGoodsAdapter(getContext());
         listView.setAdapter(goodsAdapter);
-        initListViewHeight();
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NavigationUtil.navigateToSpotDetailActivity(getActivity(),position);
+                NavigationUtil.navigateToWebViewActivity(getContext(),goods.get(position).getContentLink());
             }
         });
     }
@@ -216,6 +222,7 @@ public class MainPageFragment extends Fragment {
 
 
     public void setUpScrollView(){
+
         scrollView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -245,12 +252,26 @@ public class MainPageFragment extends Fragment {
         executorService.scheduleWithFixedDelay(vpUpdateTask, 8000, 8000, TimeUnit.MILLISECONDS);
     }
 
-    public void initGoodData() {
-        RecommendGood good1 = new RecommendGood("广州塔是个好地方，广州塔塔身168米–334.4米处设有“蜘蛛侠栈道”，是世界最高最长的空中漫步云梯[7]  。塔身422.8米处设有旋转餐厅，是世界最高的旋转餐厅[8]  。塔身顶部450~454米处设有摩天轮，是世界最高摩天轮[9] ", R.drawable.gz, "", true, 3, "广州塔");
-        RecommendGood good2 = new RecommendGood("陈家祠是个好地方，陈氏书院，俗称陈家祠，位于广州市中山七路。陈家祠是广东现存祠堂中最富有广东特色的艺术建筑群，布局严整，装饰精巧，富丽堂皇，是全国文物重点保护单位。", R.drawable.chenjiaci, "", false, 3, "陈家祠");
-        for (int i = 0; i < 5; i++) {
-            goods.add(good1);
-            goods.add(good2);
+
+    @Override
+    public void onGetGoods(List<RecommendGood> goods) {
+        if(goods != null){
+            this.goods = goods;
+            goodsAdapter.setGoods(goods);
+            goodsAdapter.notifyDataSetChanged();
+            initListViewHeight();
+        }
+    }
+
+    @Override
+    public void onGetPagerData(List<RecommendPagerData> datas) {
+        if(datas != null){
+            pagerDatas = datas;
+            pagerDatas.add(0,pagerDatas.get(pagerDatas.size()-1));
+            pagerDatas.add(pagerDatas.get(1));
+            pagerAdapter.setData(pagerDatas);
+            pagerAdapter.notifyDataSetChanged();
+            viewPager.setCurrentItem(1);
         }
     }
 
@@ -263,9 +284,9 @@ public class MainPageFragment extends Fragment {
             totalHeight += itemView.getMeasuredHeight();
         }
         totalHeight += listView.getDividerHeight() * (itemCount - 1);
-//        int height = itemSum * DimensionUtil.dp2px(getActivity(),170);
-        listView.getLayoutParams().height = totalHeight;
-
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) listView.getLayoutParams();
+        params.height = totalHeight;
+        listView.setLayoutParams(params);
     }
 
 

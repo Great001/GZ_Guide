@@ -1,5 +1,12 @@
 package com.lhc.android.gz_guide.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/24.
  */
@@ -9,10 +16,16 @@ public class RecommendGood {
     private String desc;
     private String imgUrl;
     private int imgRes;
-    private float rating;
+    private String rating;
     private boolean isPhiase;
 
-    public RecommendGood(String desc, int imgRes, String imgUrl, boolean isPhiase, float rating, String title) {
+    private String contentLink;
+
+    public RecommendGood(){
+        super();
+    }
+
+    public RecommendGood(String desc, int imgRes, String imgUrl, boolean isPhiase, String rating, String title) {
         this.desc = desc;
         this.imgRes = imgRes;
         this.imgUrl = imgUrl;
@@ -45,11 +58,11 @@ public class RecommendGood {
         isPhiase = phiase;
     }
 
-    public float getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
@@ -68,4 +81,37 @@ public class RecommendGood {
     public void setImgRes(int imgRes) {
         this.imgRes = imgRes;
     }
+
+    public String getContentLink() {
+        return contentLink;
+    }
+
+    public void setContentLink(String contentLink) {
+        this.contentLink = contentLink;
+    }
+
+    public static List<RecommendGood> getRecommendGoods(JSONObject jsonObject){
+        List<RecommendGood> goods = new ArrayList<>();
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("results");
+            int len = jsonArray.length();
+            for(int i = 0;i < len ;i++){
+                JSONObject json = jsonArray.getJSONObject(i);
+                RecommendGood good = new RecommendGood();
+                good.setPhiase(json.optBoolean("isPhraise"));
+                good.setTitle(json.optString("title"));
+                good.setDesc(json.optString("desc"));
+                good.setRating(json.optString("rating"));
+                good.setImgUrl(json.optString("imgUrl"));
+                good.setContentLink(json.optString("contentLink"));
+                goods.add(good);
+            }
+
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+
+        return goods;
+    }
+
 }
