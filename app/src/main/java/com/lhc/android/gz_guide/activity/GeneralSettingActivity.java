@@ -109,6 +109,7 @@ public class GeneralSettingActivity extends BaseActivity implements View.OnClick
     }
 
 
+    //应用内语言切换
     public void changeLanguage(Locale locale){
         Resources  resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
@@ -119,6 +120,7 @@ public class GeneralSettingActivity extends BaseActivity implements View.OnClick
         saveLanguageConfig(locale);
     }
 
+    //保存语言设置
     public void saveLanguageConfig(Locale locale){
         String language;
         if(locale.equals(Locale.SIMPLIFIED_CHINESE)){

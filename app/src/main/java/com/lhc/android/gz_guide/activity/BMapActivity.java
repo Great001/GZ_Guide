@@ -197,6 +197,7 @@ public class BMapActivity extends BaseActivity implements FloatingButton.OnButto
         }
     }
 
+    //步行路线规划
     public void showWalkRoute(){
         startPlace = mEtStartPlace.getText().toString().trim();
         endPlace = mEtEndPlace.getText().toString().trim();
