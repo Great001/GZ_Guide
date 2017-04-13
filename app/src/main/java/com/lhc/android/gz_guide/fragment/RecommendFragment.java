@@ -2,12 +2,14 @@ package com.lhc.android.gz_guide.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.lhc.android.gz_guide.Interface.OnGetGoodsListener;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.adapter.RecommendGoodsAdapter;
 import com.lhc.android.gz_guide.model.RecommendGood;
@@ -17,8 +19,9 @@ import com.lhc.android.gz_guide.util.NavigationUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecommendFragment extends Fragment implements RecommendModel.OnGetGoodsListener {
+public class RecommendFragment extends Fragment implements OnGetGoodsListener {
 
+    private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
     private List<RecommendGood> goods = new ArrayList<>();
     private RecommendGoodsAdapter adapter;
@@ -32,7 +35,9 @@ public class RecommendFragment extends Fragment implements RecommendModel.OnGetG
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recommend, container, false);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srlv_recommend);
         listView = (ListView) view.findViewById(R.id.lv_recommend);
+        setUpRefreshLayout();
         adapter = new RecommendGoodsAdapter(getContext());
         listView.setAdapter(adapter);
         RecommendModel.getInstance().addOnGetGoodsListener(this);
@@ -58,10 +63,23 @@ public class RecommendFragment extends Fragment implements RecommendModel.OnGetG
 
     @Override
     public void onGetGoods(List<RecommendGood> goods) {
+
+
         this.goods = goods;
         if(adapter != null) {
             adapter.setGoods(goods);
             adapter.notifyDataSetChanged();
+            swipeRefreshLayout.setRefreshing(false);
         }
+    }
+
+    public void setUpRefreshLayout(){
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                RecommendModel.getInstance().getRecommendGoods(getContext());
+            }
+        });
     }
 }

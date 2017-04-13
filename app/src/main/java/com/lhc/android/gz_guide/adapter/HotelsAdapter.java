@@ -10,10 +10,12 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.fragment.ImageDialogFragment;
 import com.lhc.android.gz_guide.model.Hotel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,12 +24,17 @@ import java.util.List;
 public class HotelsAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Hotel> hotels;
+    private List<Hotel> hotels = new ArrayList<>();
 
-    public HotelsAdapter(Context context, List<Hotel> lists) {
+    public HotelsAdapter(Context context) {
         this.context = context;
-        hotels = lists;
     }
+
+
+    public void setData(List<Hotel> list){
+        this.hotels = list;
+    }
+
 
 
     @Override
@@ -56,13 +63,14 @@ public class HotelsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         final Hotel hotel = hotels.get(position);
-        holder.image.setImageResource(hotel.getImgResId());
         holder.name.setText(hotel.getName());
         holder.type.setText(hotel.getType());
         holder.price.setText(hotel.getLeastPrice());
         holder.state.setText(hotel.isAvailable() ? "有房" : "满房");
         holder.address.setText(hotel.getAddress());
-        holder.rating.setRating(hotel.getRating());
+        holder.rating.setRating(Float.valueOf(hotel.getRating()));
+
+        Glide.with(context).load(hotel.getImgUrl()).placeholder(R.drawable.loading).into(holder.image);
 
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override

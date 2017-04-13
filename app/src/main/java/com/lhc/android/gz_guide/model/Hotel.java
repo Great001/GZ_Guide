@@ -1,5 +1,12 @@
 package com.lhc.android.gz_guide.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/25.
  */
@@ -9,7 +16,7 @@ public class Hotel {
     private String name;
     private String desc;
     private String leastPrice;
-    private float rating;
+    private String rating;
     private boolean isAvailable;
     private String imgUrl;
     private int imgResId;
@@ -81,11 +88,11 @@ public class Hotel {
         this.name = name;
     }
 
-    public float getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
@@ -112,4 +119,34 @@ public class Hotel {
                 ", type='" + type + '\'' +
                 '}';
     }
+
+
+    public static List<Hotel> getHotelList(JSONObject json){
+        List<Hotel> list = new ArrayList<>();
+        if(json != null){
+            try {
+                JSONArray jsonArray = json.getJSONArray("results");
+                int len = jsonArray.length();
+                for(int i = 0;i<len;i++){
+                    Hotel data = new Hotel();
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    data.setName(jsonObject.optString("name"));
+                    data.setDesc(jsonObject.optString("desc"));
+                    data.setAvailable(jsonObject.optBoolean("isAvailable"));
+                    data.setRating(jsonObject.optString("rating"));
+                    data.setLeastPrice(jsonObject.optString("leastPrice"));
+                    data.setAddress(jsonObject.optString("address"));
+                    data.setImgUrl(jsonObject.optString("imgUrl"));
+                    data.setType(jsonObject.optString("type"));
+                    list.add(data);
+                }
+
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
 }

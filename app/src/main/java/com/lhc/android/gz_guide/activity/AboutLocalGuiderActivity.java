@@ -5,15 +5,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.lhc.android.gz_guide.Interface.OnGetGuidesListener;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.adapter.LocalGuiderAdapter;
 import com.lhc.android.gz_guide.model.LocalGuide;
+import com.lhc.android.gz_guide.model.LocalModel;
 import com.lhc.android.gz_guide.util.NavigationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutLocalGuiderActivity extends BaseActivity {
+public class AboutLocalGuiderActivity extends BaseActivity implements OnGetGuidesListener{
 
     private ListView listView;
     private List<LocalGuide> localGuides = new ArrayList<>();
@@ -25,8 +27,7 @@ public class AboutLocalGuiderActivity extends BaseActivity {
         setContentView(R.layout.activity_about_local_guider);
 
         listView = (ListView) findViewById(R.id.lv_local_guides);
-        initData();
-        adapter = new LocalGuiderAdapter(this, localGuides);
+        adapter = new LocalGuiderAdapter(this);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -34,6 +35,9 @@ public class AboutLocalGuiderActivity extends BaseActivity {
                 NavigationUtil.navigateToLocalGuideDetailActivity(AboutLocalGuiderActivity.this);
             }
         });
+
+        LocalModel.getInstance().setOnGetGuidesListener(this);
+        LocalModel.getInstance().getLocalGuides(this);
     }
 
     @Override
@@ -66,4 +70,11 @@ public class AboutLocalGuiderActivity extends BaseActivity {
         }
     }
 
+
+    @Override
+    public void onGetGuides(List<LocalGuide> guideList) {
+        this.localGuides = guideList;
+        adapter.setData(localGuides);
+        adapter.notifyDataSetChanged();
+    }
 }

@@ -1,5 +1,12 @@
 package com.lhc.android.gz_guide.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/25.
  */
@@ -10,7 +17,7 @@ public class TastyFood {
     private int imgResId;
     private String imgUrl;
     private String desc;
-    private float rating;
+    private String rating;
 
     public String getDesc() {
         return desc;
@@ -52,11 +59,39 @@ public class TastyFood {
         this.price = price;
     }
 
-    public float getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
+
+
+    public static List<TastyFood> getTastyList(JSONObject json){
+        List<TastyFood> list = new ArrayList<>();
+        if(json != null){
+            try {
+                JSONArray jsonArray = json.getJSONArray("results");
+                int len = jsonArray.length();
+                for(int i = 0;i<len;i++){
+                    TastyFood data = new TastyFood();
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    data.setName(jsonObject.optString("name"));
+                    data.setDesc(jsonObject.optString("desc"));
+                    data.setRating(jsonObject.optString("rating"));
+                    data.setImgUrl(jsonObject.optString("imgUrl"));
+                    data.setPrice(jsonObject.optString("price"));
+                    list.add(data);
+                }
+
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+
 }

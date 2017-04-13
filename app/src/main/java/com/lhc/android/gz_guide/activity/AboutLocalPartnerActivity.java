@@ -6,15 +6,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.lhc.android.gz_guide.Interface.OnGetPartnersListener;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.adapter.LocalPartnersAdapter;
+import com.lhc.android.gz_guide.model.LocalModel;
 import com.lhc.android.gz_guide.model.LocalPartner;
 import com.lhc.android.gz_guide.util.NavigationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutLocalPartnerActivity extends BaseActivity {
+public class AboutLocalPartnerActivity extends BaseActivity implements OnGetPartnersListener {
 
     private ListView listView;
     private LocalPartnersAdapter adapter;
@@ -27,8 +29,7 @@ public class AboutLocalPartnerActivity extends BaseActivity {
         setContentView(R.layout.activity_about_local_partner);
 
         listView = (ListView) findViewById(R.id.lv_local_partners);
-        initData();
-        adapter = new LocalPartnersAdapter(this, partners);
+        adapter = new LocalPartnersAdapter(this);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -36,6 +37,9 @@ public class AboutLocalPartnerActivity extends BaseActivity {
                 NavigationUtil.navigateToPersonalDetailActivity(AboutLocalPartnerActivity.this);
             }
         });
+
+        LocalModel.getInstance().setOnGetPartnersListener(this);
+        LocalModel.getInstance().getLocalPartners(this);
     }
 
     @Override
@@ -66,4 +70,10 @@ public class AboutLocalPartnerActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onGetPartners(List<LocalPartner> partnerList) {
+       partners =  partnerList;
+        adapter.setData(partnerList);
+        adapter.notifyDataSetChanged();
+    }
 }

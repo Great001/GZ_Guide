@@ -39,7 +39,7 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.SpotDetailActivity" />
         <activity android:name=".activity.AboutHotelActivity" />
-        <activity android:name=".activity.AboutEatActivity" />
+        <activity android:name=".activity.AboutTastyActivity" />
         <activity android:name=".activity.AboutTrafficActivity" />
         <activity android:name=".activity.AboutMapActivity" />
         <activity android:name=".activity.AboutSpotActivity" />

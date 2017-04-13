@@ -14,10 +14,11 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.baidu.mapapi.model.LatLng;
+import com.lhc.android.gz_guide.Interface.OnGetGoodsListener;
+import com.lhc.android.gz_guide.Interface.OnGetPagerDataListener;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.activity.MainActivity;
 import com.lhc.android.gz_guide.adapter.OptionsGvAdapter;
@@ -30,15 +31,14 @@ import com.lhc.android.gz_guide.model.RecommendPagerData;
 import com.lhc.android.gz_guide.util.DimensionUtil;
 import com.lhc.android.gz_guide.util.NavigationUtil;
 
-import java.security.DigestException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class MainPageFragment extends Fragment implements RecommendModel.OnGetGoodsListener,
-        RecommendModel.OnGetPagerDataListener {
+public class MainPageFragment extends Fragment implements OnGetGoodsListener,
+        OnGetPagerDataListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";

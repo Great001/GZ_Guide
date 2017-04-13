@@ -1,6 +1,5 @@
 package com.lhc.android.gz_guide.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -11,10 +10,12 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.fragment.ImageDialogFragment;
 import com.lhc.android.gz_guide.model.TastyFood;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,12 +24,16 @@ import java.util.List;
 public class TastyFoodAdapter extends BaseAdapter {
 
     private Context context;
-    private List<TastyFood> foods;
+    private List<TastyFood> foods  = new ArrayList<>();
 
-    public TastyFoodAdapter(Context context, List<TastyFood> lists){
+    public TastyFoodAdapter(Context context){
         this.context = context;
-        foods = lists;
     }
+
+    public void setData(List<TastyFood> list){
+        foods = list;
+    }
+
 
     @Override
     public int getCount() {
@@ -58,9 +63,8 @@ public class TastyFoodAdapter extends BaseAdapter {
         final TastyFood food = foods.get(position);
         holder.name.setText(food.getName());
         holder.desc.setText(food.getDesc());
-        holder.rating.setRating(food.getRating());
-        holder.image.setImageResource(food.getImgResId());
-
+        holder.rating.setRating(Float.valueOf(food.getRating()));
+        Glide.with(context).load(food.getImgUrl()).placeholder(R.drawable.loading).into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

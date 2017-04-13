@@ -10,10 +10,12 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.fragment.ImageDialogFragment;
 import com.lhc.android.gz_guide.model.Spot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,10 +24,13 @@ import java.util.List;
 public class SpotsAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Spot> spots;
+    private List<Spot> spots = new ArrayList<>();
 
-    public SpotsAdapter(Context context,List<Spot> list){
+    public SpotsAdapter(Context context){
         this.context = context;
+    }
+
+    public void setData(List<Spot> list){
         spots = list;
     }
 
@@ -60,9 +65,9 @@ public class SpotsAdapter extends BaseAdapter {
         holder.desc.setText(spot.getDesc());
         holder.ticket.setText(spot.getTicketPrice() + "元/人");
         holder.address.setText(spot.getAddress());
-        holder.rating.setRating(spot.getRating());
-        holder.image.setImageResource(spot.getImgResId());
+        holder.rating.setRating(Float.valueOf(spot.getRating()));
 
+        Glide.with(context).load(spot.getImgUrl()).placeholder(R.drawable.loading).into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

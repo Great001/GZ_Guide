@@ -9,10 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.fragment.ImageDialogFragment;
-import com.lhc.android.gz_guide.model.Stragery;
+import com.lhc.android.gz_guide.model.Strategy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,12 +23,16 @@ import java.util.List;
 public class StrageriesAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Stragery> strageryList;
+    private List<Strategy> strageryList = new ArrayList<>();
 
-    public StrageriesAdapter(Context context,List<Stragery> list){
+    public StrageriesAdapter(Context context){
         this.context = context;
+    }
+
+    public void setData(List<Strategy> list){
         strageryList = list;
     }
+
 
     @Override
     public int getCount() {
@@ -53,12 +59,12 @@ public class StrageriesAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        final Stragery stragery = strageryList.get(position);
+        final Strategy stragery = strageryList.get(position);
         holder.title.setText(stragery.getTitle());
         holder.desc.setText(stragery.getDesc());
         holder.readCount.setText(stragery.getReadCount()+"");
         holder.commentCount.setText(stragery.getCommentCount()+"");
-        holder.image.setImageResource(stragery.getImgResId());
+        Glide.with(context).load(stragery.getImgUrl()).placeholder(R.drawable.loading).into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

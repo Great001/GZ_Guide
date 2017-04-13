@@ -6,7 +6,7 @@ import android.content.Intent;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.lhc.android.gz_guide.activity.AboutAppActivity;
-import com.lhc.android.gz_guide.activity.AboutEatActivity;
+import com.lhc.android.gz_guide.activity.AboutTastyActivity;
 import com.lhc.android.gz_guide.activity.AboutHotelActivity;
 import com.lhc.android.gz_guide.activity.AboutLocalGuiderActivity;
 import com.lhc.android.gz_guide.activity.AboutLocalPartnerActivity;
@@ -76,7 +76,7 @@ public class NavigationUtil {
 
 
     public static void navigateToAboutEatActivity(Context context){
-        Intent intent = new Intent(context, AboutEatActivity.class);
+        Intent intent = new Intent(context, AboutTastyActivity.class);
         context.startActivity(intent);
     }
 

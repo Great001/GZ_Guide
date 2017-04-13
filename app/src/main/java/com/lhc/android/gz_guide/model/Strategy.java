@@ -1,9 +1,16 @@
 package com.lhc.android.gz_guide.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/26.
  */
-public class Stragery {
+public class Strategy {
 
     private String title;
     private String desc;
@@ -69,4 +76,33 @@ public class Stragery {
     public void setTitle(String title) {
         this.title = title;
     }
+
+
+
+
+    public static List<Strategy> getStrategyList(JSONObject json){
+        List<Strategy> list = new ArrayList<>();
+        if(json != null){
+            try {
+                JSONArray jsonArray = json.getJSONArray("results");
+                int len = jsonArray.length();
+                for(int i = 0;i<len;i++){
+                    Strategy data = new Strategy();
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    data.setTitle(jsonObject.optString("title"));
+                    data.setDesc(jsonObject.optString("desc"));
+                    data.setReadCount(jsonObject.optInt("readCount"));
+                    data.setImgUrl(jsonObject.optString("imgUrl"));
+                    data.setCommentCount(jsonObject.optInt("commentCount"));
+                    list.add(data);
+                }
+
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
 }

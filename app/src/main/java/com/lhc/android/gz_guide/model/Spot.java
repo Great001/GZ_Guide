@@ -2,6 +2,13 @@ package com.lhc.android.gz_guide.model;
 
 import com.baidu.mapapi.model.LatLng;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/26.
  */
@@ -10,26 +17,16 @@ public class Spot {
     private String name;
     private String desc;
     private String address;
-    private float ticketPrice;
+    private String ticketPrice;
     private int imgResId;
     private String imgUrl;
-    private float rating;
+    private String rating;
     private String type;
     private LatLng location;
 
     public Spot(){}
 
 
-    public Spot(String address, String desc, int imgResId, String imgUrl, String name, float rating, float ticketPrice, String type) {
-        this.address = address;
-        this.desc = desc;
-        this.imgResId = imgResId;
-        this.imgUrl = imgUrl;
-        this.name = name;
-        this.rating = rating;
-        this.ticketPrice = ticketPrice;
-        this.type = type;
-    }
 
     public String getAddress() {
         return address;
@@ -71,19 +68,19 @@ public class Spot {
         this.name = name;
     }
 
-    public float getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
-    public float getTicketPrice() {
+    public String getTicketPrice() {
         return ticketPrice;
     }
 
-    public void setTicketPrice(float ticketPrice) {
+    public void setTicketPrice(String ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
 
@@ -102,4 +99,33 @@ public class Spot {
     public void setLocation(LatLng location) {
         this.location = location;
     }
+
+
+    public static List<Spot> getSpotList(JSONObject json){
+        List<Spot> list = new ArrayList<>();
+        if(json != null){
+            try {
+                JSONArray jsonArray = json.getJSONArray("results");
+                int len = jsonArray.length();
+                for(int i = 0;i<len;i++){
+                    Spot data = new Spot();
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    data.setName(jsonObject.optString("name"));
+                    data.setDesc(jsonObject.optString("desc"));
+                    data.setRating(jsonObject.optString("rating"));
+                    data.setAddress(jsonObject.optString("address"));
+                    data.setImgUrl(jsonObject.optString("imgUrl"));
+                    data.setType(jsonObject.optString("type"));
+                    data.setTicketPrice(jsonObject.optString("ticketPrice"));
+                    list.add(data);
+                }
+
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
 }

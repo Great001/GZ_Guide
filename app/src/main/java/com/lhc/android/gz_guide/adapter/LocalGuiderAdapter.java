@@ -8,9 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.model.LocalGuide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,12 +21,16 @@ import java.util.List;
 public class LocalGuiderAdapter extends BaseAdapter {
 
     private Context context;
-    private List<LocalGuide> localGuideList;
+    private List<LocalGuide> localGuideList = new ArrayList<>();
 
-    public LocalGuiderAdapter(Context context,List<LocalGuide> list){
+    public LocalGuiderAdapter(Context context){
         this.context = context;
+    }
+
+    public void setData(List<LocalGuide> list){
         localGuideList = list;
     }
+
 
     @Override
     public int getCount() {
@@ -58,7 +64,9 @@ public class LocalGuiderAdapter extends BaseAdapter {
         holder.tel.setText("tel:"+guide.getTel());
         holder.briefInfo.setText("简介:"+guide.getBriefInfo());
 
-        holder.avatar.setImageResource(guide.getThumpResId());
+//        holder.avatar.setImageResource(guide.getThumpResId());
+
+        Glide.with(context).load(guide.getThumpUrl()).placeholder(R.drawable.loading).into(holder.avatar);
         if(guide.getSex() == 1){
             holder.sex.setImageResource(R.drawable.icn_sex_male);
         }else{

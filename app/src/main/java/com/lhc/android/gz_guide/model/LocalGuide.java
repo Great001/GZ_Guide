@@ -1,5 +1,12 @@
 package com.lhc.android.gz_guide.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/26.
  */
@@ -141,4 +148,40 @@ public class LocalGuide {
     public void setBriefInfo(String briefInfo) {
         this.briefInfo = briefInfo;
     }
+
+
+    public static List<LocalGuide> getLocalGuideList(JSONObject json){
+        List<LocalGuide> list = new ArrayList<>();
+        if(json != null){
+            try {
+                JSONArray jsonArray = json.getJSONArray("results");
+                int len = jsonArray.length();
+                for(int i = 0;i<len;i++){
+                    LocalGuide data = new LocalGuide();
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    data.setName(jsonObject.optString("name"));
+                    data.setSex(jsonObject.optInt("sex"));
+                    data.setAge(jsonObject.optInt("age"));
+                    data.setJob(jsonObject.optString("job"));
+                    data.setRange(jsonObject.optInt("range"));
+                    data.setOrderCount(jsonObject.optInt("orderCount"));
+                    data.setBriefInfo(jsonObject.optString("briefInfo"));
+                    data.setSignature(jsonObject.optString("signature"));
+                    data.setTel(jsonObject.optString("tel"));
+                    data.setWeChat(jsonObject.optString("weChat"));
+                    data.setEmail(jsonObject.optString("email"));
+                    data.setVerified(jsonObject.optBoolean("isVerified"));
+                    data.setThumpUrl(jsonObject.optString("thumpUrl"));
+
+                    list.add(data);
+                }
+
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
 }

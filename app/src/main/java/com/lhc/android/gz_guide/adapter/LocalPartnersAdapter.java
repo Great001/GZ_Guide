@@ -8,9 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.model.LocalPartner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,10 +21,13 @@ import java.util.List;
 public class LocalPartnersAdapter extends BaseAdapter {
 
     private Context context;
-    private List<LocalPartner> localPartnerList;
+    private List<LocalPartner> localPartnerList = new ArrayList<>();
 
-    public LocalPartnersAdapter(Context context,List<LocalPartner> list){
+    public LocalPartnersAdapter(Context context){
         this.context = context;
+    }
+
+    public void setData(List<LocalPartner> list){
         localPartnerList = list;
     }
 
@@ -58,7 +63,8 @@ public class LocalPartnersAdapter extends BaseAdapter {
         holder.job.setText("职业："+partner.getJob());
         holder.tel.setText("电话:"+partner.getTel());
         holder.requirement.setText("要求："+partner.getRequirment());
-        holder.avatar.setImageResource(partner.getAvatarResId());
+//        holder.avatar.setImageResource(partner.getAvatarResId());
+        Glide.with(context).load(partner.getAvatarUrl()).placeholder(R.drawable.loading).into(holder.avatar);
         if(partner.getSex() == 1){
             holder.sex.setImageResource(R.drawable.icn_sex_male);
         }else{
