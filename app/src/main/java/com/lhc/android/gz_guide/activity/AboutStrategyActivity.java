@@ -15,7 +15,7 @@ import com.lhc.android.gz_guide.util.NavigationUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutStrageryActivity extends BaseActivity implements OnGetStrategiesListener{
+public class AboutStrategyActivity extends BaseActivity implements OnGetStrategiesListener{
 
     private ListView listView;
     private StrageriesAdapter adapter;
@@ -33,7 +33,7 @@ public class AboutStrageryActivity extends BaseActivity implements OnGetStrategi
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NavigationUtil.navigateToStrageryDetailActivity(AboutStrageryActivity.this);
+                NavigationUtil.navigateToStrageryDetailActivity(AboutStrategyActivity.this);
             }
         });
 

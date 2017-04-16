@@ -11,7 +11,7 @@ import com.lhc.android.gz_guide.activity.AboutHotelActivity;
 import com.lhc.android.gz_guide.activity.AboutLocalGuiderActivity;
 import com.lhc.android.gz_guide.activity.AboutLocalPartnerActivity;
 import com.lhc.android.gz_guide.activity.AboutSpotActivity;
-import com.lhc.android.gz_guide.activity.AboutStrageryActivity;
+import com.lhc.android.gz_guide.activity.AboutStrategyActivity;
 import com.lhc.android.gz_guide.activity.AboutTrafficActivity;
 import com.lhc.android.gz_guide.activity.BMapActivity;
 import com.lhc.android.gz_guide.activity.EditUserInfoActivity;
@@ -92,7 +92,7 @@ public class NavigationUtil {
     }
 
     public static void navigateToAboutStrageryActivity(Context  context){
-        Intent intent = new Intent(context, AboutStrageryActivity.class);
+        Intent intent = new Intent(context, AboutStrategyActivity.class);
         context.startActivity(intent);
     }
 

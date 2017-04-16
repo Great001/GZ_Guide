@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.android.volley.Response;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private SearchActionBar searchActionBar;
     private RadioGroup rgBottomTabs;
+
+    private int currentItem;
 
     private FragmentManager mFm;
     private long exitTime;
@@ -61,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
         searchActionBar = (SearchActionBar) findViewById(R.id.search_actionbar);
 
         viewPager.setAdapter(new FragmentAdapter(mFm));
-        viewPager.setCurrentItem(0);
+        currentItem = 0;
+        viewPager.setCurrentItem(currentItem);
+        ((RadioButton)rgBottomTabs.getChildAt(currentItem)).setTextColor(getResources().getColor(R.color.colorPrimary));
         showActionBar();
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -71,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-
                 int checkId = R.id.rbtn_tab_one;
                 switch (position) {
                     case 0:
@@ -87,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 rgBottomTabs.check(checkId);
+                ((RadioButton)rgBottomTabs.getChildAt(currentItem)).setTextColor(getResources().getColor(R.color.black));
+                currentItem = position;
+                ((RadioButton)rgBottomTabs.getChildAt(position)).setTextColor(getResources().getColor(R.color.colorPrimary));
             }
 
             @Override
@@ -171,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
                 exitTime = System.currentTimeMillis();
             } else {
                AppActivityManager.getInstance().clear();
+                System.exit(1);
             }
         }
     }

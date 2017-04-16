@@ -64,26 +64,31 @@ public class RecommendModel {
                }
            }
         }else {
-            ReftHttpClient.getInstance(context).get(URL_GET_GOODS, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject jsonObject) {
-                        goodList = RecommendGood.getRecommendGoods(jsonObject);
-                    for(OnGetGoodsListener listener:getGoodsListeners){
-                        if(listener != null){
-                            listener.onGetGoods(goodList);
-                        }
-                    }
-
-                }
-
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-
-                }
-            });
+           requestRecommendGoods(context);
         }
     }
+
+    public void requestRecommendGoods(Context context){
+        ReftHttpClient.getInstance(context).get(URL_GET_GOODS, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                goodList = RecommendGood.getRecommendGoods(jsonObject);
+                for(OnGetGoodsListener listener:getGoodsListeners){
+                    if(listener != null){
+                        listener.onGetGoods(goodList);
+                    }
+                }
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        });
+    }
+
 
     public void getRecommendPagerData(Context context){
         if(pagerDataList!= null){

@@ -47,29 +47,6 @@ public class AboutLocalPartnerActivity extends BaseActivity implements OnGetPart
         return R.string.get_partner;
     }
 
-    public void initData() {
-        LocalPartner partner1 = new LocalPartner();
-        partner1.setName("张三");
-        partner1.setSex(0);
-        partner1.setJob("销售");
-        partner1.setTel("1560304839");
-        partner1.setRequirment("准时守时，善良开朗，最好后摄影");
-        partner1.setAvatarResId(R.drawable.person_136);
-
-        LocalPartner partner2 = new LocalPartner();
-        partner2.setName("王五");
-        partner2.setSex(1);
-        partner2.setJob("警察");
-        partner2.setTel("020-110");
-        partner2.setRequirment("正直，热爱广府文化");
-        partner2.setAvatarResId(R.drawable.person_111);
-
-        for (int i = 0; i < 5; i++) {
-            partners.add(partner1);
-            partners.add(partner2);
-        }
-    }
-
     @Override
     public void onGetPartners(List<LocalPartner> partnerList) {
        partners =  partnerList;

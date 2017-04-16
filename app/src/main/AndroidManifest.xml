@@ -43,7 +43,7 @@
         <activity android:name=".activity.AboutTrafficActivity" />
         <activity android:name=".activity.AboutMapActivity" />
         <activity android:name=".activity.AboutSpotActivity" />
-        <activity android:name=".activity.AboutStrageryActivity" />
+        <activity android:name=".activity.AboutStrategyActivity" />
         <activity android:name=".activity.AboutLocalGuiderActivity" />
         <activity android:name=".activity.AboutLocalPartnerActivity" />
         <activity android:name=".activity.HotelDetailActivity" />

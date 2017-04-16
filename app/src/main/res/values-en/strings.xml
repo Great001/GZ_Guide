@@ -112,6 +112,12 @@
     <string name="cache_clear_finish">cache has cleared</string>
     <string name="current_flow">current flow is 120M</string>
 
+    <string name="pull_to_refresh">pull to refresh</string>
+    <string name="release_to_refresh">release to refresh</string>
+    <string name="refreshing">refreshing</string>
+    <string name="refresh_success">refresh success</string>
+    <string name="refresh_failed">refresh failed</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
