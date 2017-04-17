@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +22,8 @@ import com.lhc.android.gz_guide.util.DimensionUtil;
  * Created by Administrator on 2017/4/14.
  */
 public class PullToRefreshLayout extends LinearLayout {
+
+    public static final String TAG = "PullToRefreshLayout";
 
     public static final int STATUS_FINISH_REFRESH = 0;
     public static final int STATUS_PULL_TO_REFRESH = 1;
@@ -46,7 +49,6 @@ public class PullToRefreshLayout extends LinearLayout {
     private MarginLayoutParams headerParams;
 
     private boolean isFirstLayout = true;
-    private int lvFirstItemHeight;  //listView第一个item的高度
 
     private int fromY;
     private int toY;
@@ -66,7 +68,7 @@ public class PullToRefreshLayout extends LinearLayout {
                     if (refreshStatus == STATUS_REFRESHING) {
                         tvRefreshStatus.setText(R.string.refresh_failed);
                         pbLoading.setVisibility(GONE);
-                        handler.sendEmptyMessageDelayed(MSG_FINISH_REFRESH, 2000);
+                        handler.sendEmptyMessageDelayed(MSG_FINISH_REFRESH, 5000);
                     }
                     break;
                 case MSG_FINISH_REFRESH:
@@ -112,64 +114,7 @@ public class PullToRefreshLayout extends LinearLayout {
             listView = (ListView) getChildAt(1);  //获取listView实例
             isFirstLayout = false;
         }
-        if (refreshStatus == STATUS_FINISH_REFRESH && listView.getChildAt(0) != null) {
-            lvFirstItemHeight = listView.getChildAt(0).getHeight();
-        }
     }
-
-    /*
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (canPull()) {
-            int action = ev.getAction();
-            switch (action) {
-                case MotionEvent.ACTION_DOWN:
-                    fromY = (int) ev.getRawY();
-                    headerParams = (MarginLayoutParams) headView.getLayoutParams();
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    toY = (int) ev.getRawY();
-                    disY = toY - fromY;
-                    fromY = toY;
-                    if (disY < touchSlop) {
-                        break;
-                    }
-
-                    headerParams.topMargin += (disY * 0.4);
-                    if (headerParams.topMargin < 15) {
-                        tvRefreshStatus.setText(R.string.pull_to_refresh);
-                        refreshStatus = STATUS_PULL_TO_REFRESH;
-                    } else {
-                        tvRefreshStatus.setText(R.string.release_to_refresh);
-                        refreshStatus = STATUS_RELEASE_TO_REFRESH;
-                    }
-
-                    if (headerParams.topMargin >= maxTopMargin) {
-                        headerParams.topMargin = maxTopMargin;
-                    }else if (headerParams.topMargin <= minTopMargin) {
-                        headerParams.topMargin = minTopMargin;
-                    }
-
-                    headView.setLayoutParams(headerParams);
-                    break;
-                case MotionEvent.ACTION_UP:
-                default:
-                    if (refreshStatus == STATUS_PULL_TO_REFRESH) {
-                        headerParams.topMargin = - headerHeight;
-                        headView.setLayoutParams(headerParams);
-                        refreshStatus = STATUS_FINISH_REFRESH;
-                    } else if (refreshStatus == STATUS_RELEASE_TO_REFRESH) {
-                        pbLoading.setVisibility(VISIBLE);
-                        tvRefreshStatus.setText(R.string.refreshing);
-                        refreshStatus = STATUS_REFRESHING;
-                        handler.sendEmptyMessageAtTime(MSG_REFRESH_ERROR,System.currentTimeMillis() + refreshTimeOut);
-                        doRefresh();
-                    }
-                    break;
-            }
-        }
-        return super.dispatchTouchEvent(ev);
-    }*/
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -249,12 +194,17 @@ public class PullToRefreshLayout extends LinearLayout {
     }
 
     public boolean canPull() {
-        if (listView.getFirstVisiblePosition() == 0) {
-            int firstViewBottom = listView.getChildAt(0).getBottom();
-            return firstViewBottom == lvFirstItemHeight && refreshStatus != STATUS_REFRESHING;
+        if (listView.getChildCount() != 0) {
+            if (listView.getFirstVisiblePosition() == 0) {
+                int firstViewTop = listView.getChildAt(0).getTop();
+                return firstViewTop == 0 && refreshStatus != STATUS_REFRESHING;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            return true;
         }
+
     }
 
     public void doRefresh() {
