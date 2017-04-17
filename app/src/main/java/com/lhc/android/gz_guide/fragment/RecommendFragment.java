@@ -61,10 +61,15 @@ public class RecommendFragment extends Fragment implements OnGetGoodsListener {
         if(adapter != null) {
             adapter.setGoods(goods);
             adapter.notifyDataSetChanged();
-            if(mPrfLayout.refreshStatus == PullToRefreshLayout.STATUS_REFRESHING) {
+            if(mPrfLayout.getRefreshStatus() == PullToRefreshLayout.STATUS_REFRESHING) {
                 mPrfLayout.refreshComplete();
             }
         }
+    }
+
+    @Override
+    public void onGetFailed() {
+        mPrfLayout.refreshError();
     }
 
     public void setUpRefreshLayout(){

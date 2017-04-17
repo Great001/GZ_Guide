@@ -9,8 +9,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.lhc.android.gz_guide.activity.AboutSpotActivity">
 
-    <ListView
-        android:id="@+id/lv_spots"
+    <com.lhc.android.gz_guide.view.PullToRefreshLayout
+        android:id="@+id/prfl_spots"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv_spots"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+    </com.lhc.android.gz_guide.view.PullToRefreshLayout>
 </RelativeLayout>

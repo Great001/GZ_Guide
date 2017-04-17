@@ -11,12 +11,14 @@ import com.lhc.android.gz_guide.adapter.LocalGuiderAdapter;
 import com.lhc.android.gz_guide.model.LocalGuide;
 import com.lhc.android.gz_guide.model.LocalModel;
 import com.lhc.android.gz_guide.util.NavigationUtil;
+import com.lhc.android.gz_guide.view.PullToRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AboutLocalGuiderActivity extends BaseActivity implements OnGetGuidesListener{
 
+    private PullToRefreshLayout prflGuides;
     private ListView listView;
     private List<LocalGuide> localGuides = new ArrayList<>();
     private LocalGuiderAdapter adapter;
@@ -25,7 +27,7 @@ public class AboutLocalGuiderActivity extends BaseActivity implements OnGetGuide
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_local_guider);
-
+        prflGuides = (PullToRefreshLayout) findViewById(R.id.prfl_guides);
         listView = (ListView) findViewById(R.id.lv_local_guides);
         adapter = new LocalGuiderAdapter(this);
         listView.setAdapter(adapter);
@@ -36,6 +38,12 @@ public class AboutLocalGuiderActivity extends BaseActivity implements OnGetGuide
             }
         });
 
+        prflGuides.setOnRefreshLister(new PullToRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                LocalModel.getInstance().requestLocalGuides(AboutLocalGuiderActivity.this);
+            }
+        });
         LocalModel.getInstance().setOnGetGuidesListener(this);
         LocalModel.getInstance().getLocalGuides(this);
     }
@@ -51,5 +59,8 @@ public class AboutLocalGuiderActivity extends BaseActivity implements OnGetGuide
         this.localGuides = guideList;
         adapter.setData(localGuides);
         adapter.notifyDataSetChanged();
+        if(prflGuides.getRefreshStatus() == PullToRefreshLayout.STATUS_REFRESHING){
+            prflGuides.refreshComplete();
+        }
     }
 }

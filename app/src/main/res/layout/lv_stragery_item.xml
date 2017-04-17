@@ -9,50 +9,53 @@
         android:id="@+id/iv_stragery_icon"
         android:layout_width="@dimen/lv_item_img_size"
         android:layout_height="@dimen/lv_item_img_size"
-        android:scaleType="fitXY"
-        android:padding="5dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/gz_sx"/>
+        android:padding="5dp"
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/tv_stragery_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iv_stragery_icon"
         android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/iv_stragery_icon"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="广州古韵一日游"
-        android:textSize="@dimen/lv_item_title_size"
-        android:textColor="@color/lv_item_title"/>
+        android:textColor="@color/lv_item_title"
+        android:textSize="@dimen/lv_item_title_size" />
 
     <TextView
         android:id="@+id/tv_stragery_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_stragery_title"
         android:layout_alignLeft="@id/tv_stragery_title"
-        android:text="经典广州一日游，带你领略老广州的韵味"
+        android:layout_below="@id/tv_stragery_title"
         android:layout_marginTop="10dp"
-        android:maxLength="150"/>
+        android:ellipsize="end"
+        android:maxLength="150"
+        android:maxLines="3"
+        android:text="经典广州一日游，带你领略老广州的韵味" />
 
     <TextView
         android:id="@+id/tv_stragery_readCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/listview_readcount"
-        android:drawablePadding="10dp"
-        android:text="10000"
         android:layout_alignLeft="@id/tv_stragery_title"
         android:layout_below="@id/tv_stragery_desc"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:drawableLeft="@drawable/listview_readcount"
+        android:drawablePadding="10dp"
+        android:text="10000" />
 
     <TextView
         android:id="@+id/tv_stragery_commentCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/tv_stragery_readCount"
         android:drawableLeft="@drawable/listview_commentcount"
         android:drawablePadding="10dp"
-        android:text="390"
-        android:layout_alignTop="@id/tv_stragery_readCount"
-        android:layout_alignParentRight="true" />
+        android:text="390" />
 
 </RelativeLayout>

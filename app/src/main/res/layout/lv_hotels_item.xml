@@ -10,7 +10,6 @@
         android:layout_width="@dimen/lv_item_img_size"
         android:layout_height="@dimen/lv_item_img_size"
         android:scaleType="fitXY"
-        android:src="@drawable/hotel_scnu"
         android:layout_gravity="center_vertical"
         android:clickable="true"/>
 
@@ -22,6 +21,8 @@
         android:layout_marginLeft="15dp"
         android:paddingRight="10dp"
         android:singleLine="true"
+        android:maxLength="9"
+        android:ellipsize="end"
         android:textSize="@dimen/lv_item_title_size"
         android:textColor="@color/lv_item_title"
         android:text="华师"/>
@@ -59,6 +60,8 @@
         android:layout_alignLeft="@id/tv_hotel_name"
         android:layout_below="@id/tv_hotel_price"
         android:layout_marginTop="10dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:text="中山大道西55号华南师范大学"/>
 
     <RatingBar

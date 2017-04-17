@@ -45,22 +45,27 @@ public class LocalModel {
         if(guideList != null){
             onGetGuidesListener.onGetGuides(guideList);
         }else{
-            ReftHttpClient.getInstance(context).get(URL_GET_GUIDE, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject jsonObject) {
-
-                    guideList = LocalGuide.getLocalGuideList(jsonObject);
-                    onGetGuidesListener.onGetGuides(guideList);
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-
-                }
-            });
+          requestLocalGuides(context);
         }
     }
+
+    public void requestLocalGuides(Context context){
+        ReftHttpClient.getInstance(context).get(URL_GET_GUIDE, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+
+                guideList = LocalGuide.getLocalGuideList(jsonObject);
+                onGetGuidesListener.onGetGuides(guideList);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        });
+    }
+
 
     public void getLocalPartners(Context context){
         if(onGetPartnersListener == null){
@@ -69,20 +74,24 @@ public class LocalModel {
         if(partnerList != null){
             onGetPartnersListener.onGetPartners(partnerList);
         }else{
-            ReftHttpClient.getInstance(context).get(URL_GET_PARTNER, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject jsonObject) {
-
-                    partnerList = LocalPartner.getLocalPartnerList(jsonObject);
-                    onGetPartnersListener.onGetPartners(partnerList);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-
-                }
-            });
+          requestLocalPartners(context);
         }
+    }
+
+    public void requestLocalPartners(Context context){
+        ReftHttpClient.getInstance(context).get(URL_GET_PARTNER, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+
+                partnerList = LocalPartner.getLocalPartnerList(jsonObject);
+                onGetPartnersListener.onGetPartners(partnerList);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        });
     }
 
 

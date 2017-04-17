@@ -4,8 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.lhc.android.gz_guide.activity.AboutHotelActivity">
+    <com.lhc.android.gz_guide.view.PullToRefreshLayout
+        android:id="@+id/prfl_hotels"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ListView
         android:id="@+id/lv_hotels"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    </com.lhc.android.gz_guide.view.PullToRefreshLayout>
 </RelativeLayout>

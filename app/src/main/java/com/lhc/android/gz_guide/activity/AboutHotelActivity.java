@@ -12,12 +12,14 @@ import com.lhc.android.gz_guide.adapter.HotelsAdapter;
 import com.lhc.android.gz_guide.model.Hotel;
 import com.lhc.android.gz_guide.model.RecommendModel;
 import com.lhc.android.gz_guide.util.NavigationUtil;
+import com.lhc.android.gz_guide.view.PullToRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutHotelActivity extends BaseActivity implements OnGetHotelsListener{
+public class AboutHotelActivity extends BaseActivity implements OnGetHotelsListener,PullToRefreshLayout.OnRefreshListener{
 
+    private PullToRefreshLayout prflHotels;
     private ListView lvHotels;
     private HotelsAdapter adapter;
     private List<Hotel> hotels = new ArrayList<>();
@@ -26,6 +28,7 @@ public class AboutHotelActivity extends BaseActivity implements OnGetHotelsListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_hotel);
+        prflHotels = (PullToRefreshLayout) findViewById(R.id.prfl_hotels);
         lvHotels = (ListView) findViewById(R.id.lv_hotels);
         RecommendModel.getInstance().setOnGetHotelsListener(this);
         adapter = new HotelsAdapter(this);
@@ -37,6 +40,8 @@ public class AboutHotelActivity extends BaseActivity implements OnGetHotelsListe
                 NavigationUtil.navigateToHotelDetailActivity(AboutHotelActivity.this);
             }
         });
+
+        prflHotels.setOnRefreshLister(this);
 
         RecommendModel.getInstance().getRecommendHotels(this);
 
@@ -54,6 +59,9 @@ public class AboutHotelActivity extends BaseActivity implements OnGetHotelsListe
         this.hotels  = hotels;
         adapter.setData(hotels);
         adapter.notifyDataSetChanged();
+        if(prflHotels.getRefreshStatus() == PullToRefreshLayout.STATUS_REFRESHING) {
+            prflHotels.refreshComplete();
+        }
     }
 
     @Override
@@ -64,5 +72,10 @@ public class AboutHotelActivity extends BaseActivity implements OnGetHotelsListe
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRefresh() {
+        RecommendModel.getInstance().requestRecommendHotels(this);
     }
 }

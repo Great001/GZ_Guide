@@ -36,8 +36,8 @@ public class RecommendModel {
     private List<Strategy> strageryList;
     private List<Spot> spotList;
 
-    private  List<OnGetGoodsListener> getGoodsListeners = new ArrayList<>();
-    private  OnGetPagerDataListener onGetPagerDataListener;
+    private List<OnGetGoodsListener> getGoodsListeners = new ArrayList<>();
+    private OnGetPagerDataListener onGetPagerDataListener;
 
     private OnGetFunsListener onGetFunsListener;
     private OnGetHotelsListener onGetHotelsListener;
@@ -47,34 +47,34 @@ public class RecommendModel {
 
     private volatile static RecommendModel instance;
 
-    public static RecommendModel getInstance(){
-        if(instance == null){
-            synchronized (RecommendModel.class){
+    public static RecommendModel getInstance() {
+        if (instance == null) {
+            synchronized (RecommendModel.class) {
                 instance = new RecommendModel();
             }
         }
-            return instance;
+        return instance;
     }
 
-    public  void getRecommendGoods(Context context){
+    public void getRecommendGoods(Context context) {
         if (goodList != null) {
-           for(OnGetGoodsListener listener:getGoodsListeners){
-               if(listener != null){
-                   listener.onGetGoods(goodList);
-               }
-           }
-        }else {
-           requestRecommendGoods(context);
+            for (OnGetGoodsListener listener : getGoodsListeners) {
+                if (listener != null) {
+                    listener.onGetGoods(goodList);
+                }
+            }
+        } else {
+            requestRecommendGoods(context);
         }
     }
 
-    public void requestRecommendGoods(Context context){
+    public void requestRecommendGoods(Context context) {
         ReftHttpClient.getInstance(context).get(URL_GET_GOODS, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 goodList = RecommendGood.getRecommendGoods(jsonObject);
-                for(OnGetGoodsListener listener:getGoodsListeners){
-                    if(listener != null){
+                for (OnGetGoodsListener listener : getGoodsListeners) {
+                    if (listener != null) {
                         listener.onGetGoods(goodList);
                     }
                 }
@@ -84,21 +84,25 @@ public class RecommendModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-
+                for (OnGetGoodsListener listener : getGoodsListeners) {
+                    if (listener != null) {
+                        listener.onGetFailed();
+                    }
+                }
             }
         });
     }
 
 
-    public void getRecommendPagerData(Context context){
-        if(pagerDataList!= null){
+    public void getRecommendPagerData(Context context) {
+        if (pagerDataList != null) {
             onGetPagerDataListener.onGetPagerData(pagerDataList);
-        }else {
+        } else {
             ReftHttpClient.getInstance(context).get(URL_GET_PAGER_DATA, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject jsonObject) {
                     if (onGetPagerDataListener != null) {
-                      pagerDataList = RecommendPagerData.getRecommendPageDataList(jsonObject);
+                        pagerDataList = RecommendPagerData.getRecommendPageDataList(jsonObject);
                         onGetPagerDataListener.onGetPagerData(pagerDataList);
                     }
                 }
@@ -113,125 +117,140 @@ public class RecommendModel {
     }
 
 
-    public void getRecommendHotels(Context context){
-        if(onGetHotelsListener == null){
+    public void getRecommendHotels(Context context) {
+        if (onGetHotelsListener == null) {
             return;
         }
-        if(hotelList != null ){
+        if (hotelList != null) {
             onGetHotelsListener.onGetHotels(hotelList);
-        }else{
-            ReftHttpClient.getInstance(context).get(URL_GET_HOTELS, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject jsonObject) {
-                    hotelList = Hotel.getHotelList(jsonObject);
-                    onGetHotelsListener.onGetHotels(hotelList);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-
-                }
-            });
+        } else {
+            requestRecommendHotels(context);
         }
 
     }
 
-    public void getRecommendSpots(Context context){
-        if(onGetFunsListener == null){
+    public void requestRecommendHotels(Context context) {
+        ReftHttpClient.getInstance(context).get(URL_GET_HOTELS, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                hotelList = Hotel.getHotelList(jsonObject);
+                onGetHotelsListener.onGetHotels(hotelList);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        });
+    }
+
+
+    public void getRecommendSpots(Context context) {
+        if (onGetFunsListener == null) {
             return;
         }
-
-        if(spotList != null){
+        if (spotList != null) {
             onGetFunsListener.onGetFuns(spotList);
-        }else{
-            ReftHttpClient.getInstance(context).get(URL_GET_SPOTS, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject jsonObject) {
-                    spotList = Spot.getSpotList(jsonObject);
-                    onGetFunsListener.onGetFuns(spotList);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-
-                }
-            });
+        } else {
+           requestRecommendSpot(context);
         }
     }
 
+    public void requestRecommendSpot(Context context){
+        ReftHttpClient.getInstance(context).get(URL_GET_SPOTS, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                spotList = Spot.getSpotList(jsonObject);
+                onGetFunsListener.onGetFuns(spotList);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
 
-    public void getRecommendStrategies(Context context){
-        if(onGetStrateriesListener == null){
+            }
+        });
+    }
+
+    public void getRecommendStrategies(Context context) {
+        if (onGetStrateriesListener == null) {
             return;
         }
-        if(strageryList!=null){
+        if (strageryList != null) {
             onGetStrateriesListener.onGetStrateries(strageryList);
-        }else{
-            ReftHttpClient.getInstance(context).get(URL_GET_STARTEGIES, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject jsonObject) {
-                    strageryList = Strategy.getStrategyList(jsonObject);
-                    onGetStrateriesListener.onGetStrateries(strageryList);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-
-                }
-            });
+        } else {
+            requestRecommendStrategies(context);
         }
     }
 
 
+    public void requestRecommendStrategies(Context context) {
+        ReftHttpClient.getInstance(context).get(URL_GET_STARTEGIES, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                strageryList = Strategy.getStrategyList(jsonObject);
+                onGetStrateriesListener.onGetStrateries(strageryList);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
 
-    public void getRecommendTasties(Context context){
-        if(onGetTastyFoodsListener == null){
+            }
+        });
+    }
+
+
+    public void getRecommendTasties(Context context) {
+        if (onGetTastyFoodsListener == null) {
             return;
         }
-        if(tastyFoodList != null){
+        if (tastyFoodList != null) {
             onGetTastyFoodsListener.onGetTasties(tastyFoodList);
-        }else{
-            ReftHttpClient.getInstance(context).get(URL_GET_TASTIES, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject jsonObject) {
-
-                    tastyFoodList = TastyFood.getTastyList(jsonObject);
-                    onGetTastyFoodsListener.onGetTasties(tastyFoodList);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-
-                }
-            });
+        } else {
+            requestRecommendTasties(context);
         }
 
     }
 
+    public void requestRecommendTasties(Context context) {
+        ReftHttpClient.getInstance(context).get(URL_GET_TASTIES, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+
+                tastyFoodList = TastyFood.getTastyList(jsonObject);
+                onGetTastyFoodsListener.onGetTasties(tastyFoodList);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        });
+
+    }
 
 
-    public void addOnGetGoodsListener(OnGetGoodsListener listener){
+    public void addOnGetGoodsListener(OnGetGoodsListener listener) {
         getGoodsListeners.add(listener);
     }
 
-    public void setOnGetPagerDataListener(OnGetPagerDataListener listener){
+    public void setOnGetPagerDataListener(OnGetPagerDataListener listener) {
         onGetPagerDataListener = listener;
     }
 
-    public void setOnGetHotelsListener(OnGetHotelsListener listener){
+    public void setOnGetHotelsListener(OnGetHotelsListener listener) {
         onGetHotelsListener = listener;
     }
 
-    public void setOnGetFunsListener(OnGetFunsListener listener){
+    public void setOnGetFunsListener(OnGetFunsListener listener) {
         onGetFunsListener = listener;
     }
 
 
-    public void setOnGetTastyFoodsListener(OnGetTastyFoodsListener listener){
+    public void setOnGetTastyFoodsListener(OnGetTastyFoodsListener listener) {
         onGetTastyFoodsListener = listener;
     }
 
-    public void setOnGetStrategiesListener(OnGetStrategiesListener listener){
+    public void setOnGetStrategiesListener(OnGetStrategiesListener listener) {
         onGetStrateriesListener = listener;
     }
 

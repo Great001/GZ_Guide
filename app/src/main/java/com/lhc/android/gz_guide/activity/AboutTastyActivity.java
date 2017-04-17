@@ -11,12 +11,14 @@ import com.lhc.android.gz_guide.adapter.TastyFoodAdapter;
 import com.lhc.android.gz_guide.model.RecommendModel;
 import com.lhc.android.gz_guide.model.TastyFood;
 import com.lhc.android.gz_guide.util.NavigationUtil;
+import com.lhc.android.gz_guide.view.PullToRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AboutTastyActivity extends BaseActivity implements OnGetTastyFoodsListener {
 
+    private PullToRefreshLayout prflTasty;
     private ListView listView;
     private TastyFoodAdapter adapter;
     private List<TastyFood> foodList = new ArrayList<>();
@@ -26,6 +28,7 @@ public class AboutTastyActivity extends BaseActivity implements OnGetTastyFoodsL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_eat);
         RecommendModel.getInstance().setOnGetTastyFoodsListener(this);
+        prflTasty = (PullToRefreshLayout) findViewById(R.id.prfl_tasty);
         listView = (ListView) findViewById(R.id.lv_tasty_food);
         adapter = new TastyFoodAdapter(this);
         listView.setAdapter(adapter);
@@ -37,6 +40,12 @@ public class AboutTastyActivity extends BaseActivity implements OnGetTastyFoodsL
             }
         });
 
+        prflTasty.setOnRefreshLister(new PullToRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                RecommendModel.getInstance().requestRecommendTasties(AboutTastyActivity.this);
+            }
+        });
         RecommendModel.getInstance().getRecommendTasties(this);
     }
 
@@ -53,5 +62,9 @@ public class AboutTastyActivity extends BaseActivity implements OnGetTastyFoodsL
         foodList = tastyFoods;
         adapter.setData(foodList);
         adapter.notifyDataSetChanged();
+
+        if(prflTasty.getRefreshStatus() == PullToRefreshLayout.STATUS_REFRESHING){
+            prflTasty.refreshComplete();
+        }
     }
 }

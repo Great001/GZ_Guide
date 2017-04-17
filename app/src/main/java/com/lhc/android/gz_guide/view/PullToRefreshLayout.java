@@ -54,7 +54,7 @@ public class PullToRefreshLayout extends LinearLayout {
     private int toY;
     private int disY;
 
-    public int refreshStatus = STATUS_FINISH_REFRESH;
+    private int refreshStatus = STATUS_FINISH_REFRESH;
 
     private OnRefreshListener onRefreshListener;
 
@@ -68,7 +68,7 @@ public class PullToRefreshLayout extends LinearLayout {
                     if (refreshStatus == STATUS_REFRESHING) {
                         tvRefreshStatus.setText(R.string.refresh_failed);
                         pbLoading.setVisibility(GONE);
-                        handler.sendEmptyMessageDelayed(MSG_FINISH_REFRESH, 5000);
+                        handler.sendEmptyMessageDelayed(MSG_FINISH_REFRESH, 2000);
                     }
                     break;
                 case MSG_FINISH_REFRESH:
@@ -197,7 +197,7 @@ public class PullToRefreshLayout extends LinearLayout {
         if (listView.getChildCount() != 0) {
             if (listView.getFirstVisiblePosition() == 0) {
                 int firstViewTop = listView.getChildAt(0).getTop();
-                return firstViewTop == 0 && refreshStatus != STATUS_REFRESHING;
+                return firstViewTop == listView.getTop()  && refreshStatus != STATUS_REFRESHING;
             } else {
                 return false;
             }
@@ -220,6 +220,15 @@ public class PullToRefreshLayout extends LinearLayout {
         refreshStatus = STATUS_FINISH_REFRESH;
     }
 
+    public void refreshError(){
+        handler.sendEmptyMessage(MSG_REFRESH_ERROR);
+    }
+
+
+
+    public int getRefreshStatus(){
+        return refreshStatus;
+    }
 
     public interface OnRefreshListener {
         void onRefresh();
@@ -228,4 +237,5 @@ public class PullToRefreshLayout extends LinearLayout {
     public void setOnRefreshLister(OnRefreshListener listener) {
         onRefreshListener = listener;
     }
+
 }

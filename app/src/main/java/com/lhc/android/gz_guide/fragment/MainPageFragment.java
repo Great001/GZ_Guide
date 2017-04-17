@@ -264,6 +264,11 @@ public class MainPageFragment extends Fragment implements OnGetGoodsListener,
     }
 
     @Override
+    public void onGetFailed() {
+
+    }
+
+    @Override
     public void onGetPagerData(List<RecommendPagerData> datas) {
         if(datas != null){
             pagerDatas = datas;

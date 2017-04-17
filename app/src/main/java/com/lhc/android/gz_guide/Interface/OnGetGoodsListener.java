@@ -9,4 +9,7 @@ import java.util.List;
  */
 public interface OnGetGoodsListener{
     void onGetGoods(List<RecommendGood> goods);
+
+    void onGetFailed();
+
 }

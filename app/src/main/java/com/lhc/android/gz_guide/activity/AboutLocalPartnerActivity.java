@@ -12,12 +12,14 @@ import com.lhc.android.gz_guide.adapter.LocalPartnersAdapter;
 import com.lhc.android.gz_guide.model.LocalModel;
 import com.lhc.android.gz_guide.model.LocalPartner;
 import com.lhc.android.gz_guide.util.NavigationUtil;
+import com.lhc.android.gz_guide.view.PullToRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AboutLocalPartnerActivity extends BaseActivity implements OnGetPartnersListener {
 
+    private PullToRefreshLayout prflPartners;
     private ListView listView;
     private LocalPartnersAdapter adapter;
     private List<LocalPartner> partners = new ArrayList<>();
@@ -28,6 +30,7 @@ public class AboutLocalPartnerActivity extends BaseActivity implements OnGetPart
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_local_partner);
 
+        prflPartners = (PullToRefreshLayout) findViewById(R.id.prfl_partners);
         listView = (ListView) findViewById(R.id.lv_local_partners);
         adapter = new LocalPartnersAdapter(this);
         listView.setAdapter(adapter);
@@ -38,6 +41,12 @@ public class AboutLocalPartnerActivity extends BaseActivity implements OnGetPart
             }
         });
 
+        prflPartners.setOnRefreshLister(new PullToRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                LocalModel.getInstance().requestLocalPartners(AboutLocalPartnerActivity.this);
+            }
+        });
         LocalModel.getInstance().setOnGetPartnersListener(this);
         LocalModel.getInstance().getLocalPartners(this);
     }
@@ -52,5 +61,8 @@ public class AboutLocalPartnerActivity extends BaseActivity implements OnGetPart
        partners =  partnerList;
         adapter.setData(partnerList);
         adapter.notifyDataSetChanged();
+        if(prflPartners.getRefreshStatus() == PullToRefreshLayout.STATUS_REFRESHING){
+            prflPartners.refreshComplete();
+        }
     }
 }

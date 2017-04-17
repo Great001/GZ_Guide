@@ -7,8 +7,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activity.AboutStrategyActivity">
 
-    <ListView
-        android:id="@+id/lv_stragery"
+    <com.lhc.android.gz_guide.view.PullToRefreshLayout
+        android:id="@+id/prfl_strategy"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv_stragery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+    </com.lhc.android.gz_guide.view.PullToRefreshLayout>
 </RelativeLayout>
