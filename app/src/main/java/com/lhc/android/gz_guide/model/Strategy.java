@@ -19,6 +19,7 @@ public class Strategy {
     private int imgResId;
     private int readCount;
     private int commentCount;
+    private String contentLink;
 
     public int getCommentCount() {
 
@@ -77,8 +78,13 @@ public class Strategy {
         this.title = title;
     }
 
+    public String getContentLink() {
+        return contentLink;
+    }
 
-
+    public void setContentLink(String contentLink) {
+        this.contentLink = contentLink;
+    }
 
     public static List<Strategy> getStrategyList(JSONObject json){
         List<Strategy> list = new ArrayList<>();
@@ -94,6 +100,7 @@ public class Strategy {
                     data.setReadCount(jsonObject.optInt("readCount"));
                     data.setImgUrl(jsonObject.optString("imgUrl"));
                     data.setCommentCount(jsonObject.optInt("commentCount"));
+                    data.setContentLink(jsonObject.optString("contentLink"));
                     list.add(data);
                 }
 

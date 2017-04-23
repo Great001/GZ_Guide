@@ -37,7 +37,9 @@ public class AboutHotelActivity extends BaseActivity implements OnGetHotelsListe
         lvHotels.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NavigationUtil.navigateToHotelDetailActivity(AboutHotelActivity.this);
+                String contentLink = hotels.get(position).getContentLink();
+                String title = hotels.get(position).getName();
+                NavigationUtil.navigateToWebViewActivity(AboutHotelActivity.this,contentLink,title);
             }
         });
 

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.lhc.android.gz_guide.fragment.MainPageFragment">
 
-    <ScrollView
+    <com.lhc.android.gz_guide.view.MyScrollView
         android:id="@+id/sv_main_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,7 +15,7 @@
             android:orientation="vertical">
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/vp_pics"
+                android:id="@+id/vp_ads"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/mainpage_viewpager_height"
                 android:clickable="true"/>
@@ -28,12 +28,12 @@
                 android:numColumns="4" />
 
             <ListView
-                android:id="@+id/lv_list"
+                android:id="@+id/lv_gz_history"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp" />
         </LinearLayout>
-    </ScrollView>
+    </com.lhc.android.gz_guide.view.MyScrollView>
 
 </LinearLayout>
 

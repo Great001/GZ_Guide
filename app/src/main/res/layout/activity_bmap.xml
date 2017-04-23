@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
+        android:background="#55FFFFFF"
         android:visibility="gone"
         >
 
@@ -38,7 +39,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="起点"/>
+                android:text="起点"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
             <EditText
                 android:id="@+id/et_start_place"
                 android:layout_width="match_parent"
@@ -53,7 +56,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="终点"/>
+                android:text="终点"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
 
             <EditText
                 android:id="@+id/et_end_place"

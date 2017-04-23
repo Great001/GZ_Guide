@@ -101,7 +101,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         onRefresBackground();   //更新用户背景强
 
         //加载用户的个人资料信息
-        JSONObject jsonObject = UserModel.getLocalUserProfile(this);
+        JSONObject jsonObject = UserModel.getInstance().getLocalUserProfile(this);
 
         try {
             tvName.setText(jsonObject.getString("username"));
@@ -218,7 +218,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
-                UserModel.update(UserInfoActivity.this, jsonObject, new Response.Listener<JSONObject>() {
+                UserModel.getInstance().update(UserInfoActivity.this, jsonObject, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         tvSex.setText(items[which]);

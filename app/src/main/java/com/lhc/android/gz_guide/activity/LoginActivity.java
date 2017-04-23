@@ -73,7 +73,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         final String password = mEtPassword.getText().toString().trim();
         if (loginCheck(account, password)) {
             //登录
-            UserModel.login(this, account, password, new Response.Listener<JSONObject>() {
+            UserModel.getInstance().login(this, account, password, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject jsonObject) {
                     ToastUtil.show(LoginActivity.this, "登录成功");
@@ -83,9 +83,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     }catch (JSONException e){
                         e.printStackTrace();
                     }
-                    UserModel.saveUserProfile(LoginActivity.this.getApplicationContext(),jsonObject);
+                    UserModel.getInstance().saveUserProfile(LoginActivity.this.getApplicationContext(),jsonObject);
 //                    NavigationUtil.navigateToMainActivity(LoginActivity.this);
-                    UserModel.setLoginState(LoginActivity.this,true);
+                    UserModel.getInstance().saveLoginState(LoginActivity.this,true);
                     LoginActivity.this.finish();
                 }
             }, new Response.ErrorListener() {

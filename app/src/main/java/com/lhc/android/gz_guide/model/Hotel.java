@@ -22,6 +22,7 @@ public class Hotel {
     private int imgResId;
     private String type;
     private String address;
+    private String contentLink;
 
     public String getAddress() {
 
@@ -104,6 +105,14 @@ public class Hotel {
         this.type = type;
     }
 
+    public String getContentLink() {
+        return contentLink;
+    }
+
+    public void setContentLink(String contentLink) {
+        this.contentLink = contentLink;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
@@ -138,6 +147,7 @@ public class Hotel {
                     data.setAddress(jsonObject.optString("address"));
                     data.setImgUrl(jsonObject.optString("imgUrl"));
                     data.setType(jsonObject.optString("type"));
+                    data.setContentLink(jsonObject.optString("contentLink"));
                     list.add(data);
                 }
 

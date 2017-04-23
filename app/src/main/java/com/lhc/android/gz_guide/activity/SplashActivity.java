@@ -18,22 +18,6 @@ public class SplashActivity extends Activity {
     private ImageView ivPic;
     private ProgressBar progressBar;
 
-    private Handler handler;
-
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            int progress = progressBar.getProgress() + 10;
-            progressBar.setProgress(progress);
-            if (progress < 100) {
-                handler.postDelayed(this, 300);
-            } else {
-                progressBar.setProgress(0);
-            }
-        }
-    };
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +25,6 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         initView();
         loadConfig();
-        handler = new Handler();
-//        handler.postDelayed(runnable,300);
     }
 
     public void initView() {

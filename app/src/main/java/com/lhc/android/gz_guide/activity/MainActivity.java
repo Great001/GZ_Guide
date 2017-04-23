@@ -39,22 +39,24 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager mFm;
     private long exitTime;
 
-    private boolean isUserLogin = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);  //去除标题栏
+        //在AppCompatActivity中只能在代码中处理软键盘问题才有效
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_main);
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.hide();
+            actionBar.hide();  //隐藏自带的ActionBar
         }
-        AppActivityManager.getInstance().push(this);
+        AppActivityManager.getInstance().push(this);  //加入activity管理栈中
+
         mFm = getSupportFragmentManager();
         exitTime = 0;
         initView();
+
         autoLogin();   //自动登录
     }
 
@@ -66,8 +68,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new FragmentAdapter(mFm));
         currentItem = 0;
         viewPager.setCurrentItem(currentItem);
-        ((RadioButton)rgBottomTabs.getChildAt(currentItem)).setTextColor(getResources().getColor(R.color.colorPrimary));
+        ((RadioButton) rgBottomTabs.getChildAt(currentItem)).setTextColor(getResources().getColor(R.color.colorPrimary));
         showActionBar();
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -91,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 rgBottomTabs.check(checkId);
-                ((RadioButton)rgBottomTabs.getChildAt(currentItem)).setTextColor(getResources().getColor(R.color.black));
+                ((RadioButton) rgBottomTabs.getChildAt(currentItem)).setTextColor(getResources().getColor(R.color.black));
                 currentItem = position;
-                ((RadioButton)rgBottomTabs.getChildAt(position)).setTextColor(getResources().getColor(R.color.colorPrimary));
+                ((RadioButton) rgBottomTabs.getChildAt(position)).setTextColor(getResources().getColor(R.color.colorPrimary));
             }
 
             @Override
@@ -177,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 ToastUtil.show(this, R.string.exit_remind);
                 exitTime = System.currentTimeMillis();
             } else {
-               AppActivityManager.getInstance().clear();
+                AppActivityManager.getInstance().clear();
                 System.exit(1);
             }
         }
@@ -203,50 +206,31 @@ public class MainActivity extends AppCompatActivity {
         searchActionBar.hide();
     }
 
-    public void showActionBarBg(){
-        searchActionBar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-    }
-
-    public void hideActionBarBg(){
-        searchActionBar.setBackgroundColor(getResources().getColor(R.color.search_action_bar_bg_color));
-    }
-
-
     //实现自动登录
     public void autoLogin() {
         SharedPreferences sp = getSharedPreferences(UserModel.SP_USER_PROFILE, MODE_PRIVATE);
         String account = sp.getString("username", "null");
-        final String password = sp.getString("password", "null");
+        String password = sp.getString("password", "null");
 
         if (account.equals("null") || password.equals("null")) {
             NavigationUtil.navigateToLoginActivity(this);
             return;
         }
 
-        UserModel.login(this, account, password, new Response.Listener<JSONObject>() {
+        UserModel.getInstance().login(this, account, password, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                ToastUtil.show(MainActivity.this,"登录成功");
-                UserModel.setLoginState(MainActivity.this,true);
-                UserModel.saveUserProfile(MainActivity.this,jsonObject);
-                isUserLogin = true;
+                ToastUtil.show(MainActivity.this, R.string.login_success);
+                UserModel.getInstance().setLoginStatus(true);
+                UserModel.getInstance().saveUserProfile(MainActivity.this, jsonObject);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-
+//                ToastUtil.show(MainActivity.this, R.string.login_fail);
             }
         });
     }
-
-    public boolean getLoginState(){
-        return isUserLogin;
-    }
-
-    public void setLoginState(boolean loginState){
-        isUserLogin = loginState;
-    }
-
 
 }
 

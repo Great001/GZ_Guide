@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.lhc.android.gz_guide.Interface.OnGetGoodsListener;
+import com.lhc.android.gz_guide.Interface.OnGetRecommendGoodListener;
 import com.lhc.android.gz_guide.R;
-import com.lhc.android.gz_guide.adapter.RecommendGoodsAdapter;
+import com.lhc.android.gz_guide.adapter.RecommendGoodAdapter;
 import com.lhc.android.gz_guide.model.RecommendGood;
 import com.lhc.android.gz_guide.model.RecommendModel;
 import com.lhc.android.gz_guide.util.NavigationUtil;
@@ -19,12 +19,12 @@ import com.lhc.android.gz_guide.view.PullToRefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecommendFragment extends Fragment implements OnGetGoodsListener {
+public class RecommendFragment extends Fragment implements OnGetRecommendGoodListener {
 
     private PullToRefreshLayout mPrfLayout;
     private ListView listView;
     private List<RecommendGood> goods = new ArrayList<>();
-    private RecommendGoodsAdapter adapter;
+    private RecommendGoodAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,14 +38,16 @@ public class RecommendFragment extends Fragment implements OnGetGoodsListener {
         mPrfLayout = (PullToRefreshLayout) view.findViewById(R.id.prl_recommend);
         listView = (ListView) view.findViewById(R.id.lv_recommend);
         setUpRefreshLayout();
-        adapter = new RecommendGoodsAdapter(getContext());
+        adapter = new RecommendGoodAdapter(getContext());
         listView.setAdapter(adapter);
         RecommendModel.getInstance().addOnGetGoodsListener(this);
         initData();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NavigationUtil.navigateToSpotDetailActivity(getContext(),position);
+                String contentLink = goods.get(position).getContentLink();
+                String title = goods.get(position).getTitle();
+                NavigationUtil.navigateToWebViewActivity(getContext(),contentLink,title);
             }
         });
         return view;

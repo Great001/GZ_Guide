@@ -76,7 +76,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         }catch (JSONException e){
             e.printStackTrace();
         }
-        UserModel.resetPassword(ForgetPasswordActivity.this, jsonObject, new Response.Listener<JSONObject>() {
+        UserModel.getInstance().resetPassword(ForgetPasswordActivity.this, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 ToastUtil.show(ForgetPasswordActivity.this,"请及时接受邮件进行密码重置");

@@ -23,6 +23,7 @@ public class Spot {
     private String rating;
     private String type;
     private LatLng location;
+    private String contentLink;
 
     public Spot(){}
 
@@ -100,6 +101,13 @@ public class Spot {
         this.location = location;
     }
 
+    public String getContentLink() {
+        return contentLink;
+    }
+
+    public void setContentLink(String contentLink) {
+        this.contentLink = contentLink;
+    }
 
     public static List<Spot> getSpotList(JSONObject json){
         List<Spot> list = new ArrayList<>();
@@ -117,6 +125,7 @@ public class Spot {
                     data.setImgUrl(jsonObject.optString("imgUrl"));
                     data.setType(jsonObject.optString("type"));
                     data.setTicketPrice(jsonObject.optString("ticketPrice"));
+                    data.setContentLink(jsonObject.optString("contentLink"));
                     list.add(data);
                 }
 

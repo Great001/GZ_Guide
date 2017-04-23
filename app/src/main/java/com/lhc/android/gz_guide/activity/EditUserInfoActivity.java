@@ -63,11 +63,11 @@ public class EditUserInfoActivity extends BaseActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        UserModel.update(this, jsonObject, new Response.Listener<JSONObject>() {
+        UserModel.getInstance().update(this, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 ToastUtil.show(EditUserInfoActivity.this, "保存成功");
-                UserModel.updateUserProperty(EditUserInfoActivity.this, editItemKey, editItemValue);
+                UserModel.getInstance().updateUserProperty(EditUserInfoActivity.this, editItemKey, editItemValue);
                 finish();
             }
         }, new Response.ErrorListener() {
@@ -80,7 +80,7 @@ public class EditUserInfoActivity extends BaseActivity {
 
     public void onSaveSuccess() {
         ToastUtil.show(this, "保存成功");
-        UserModel.updateUserProperty(this, editItemKey, editItemValue);
+        UserModel.getInstance().updateUserProperty(this, editItemKey, editItemValue);
         finish();
     }
 }

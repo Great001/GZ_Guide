@@ -35,7 +35,9 @@ public class AboutSpotActivity extends BaseActivity implements OnGetFunsListener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NavigationUtil.navigateToSpotDetailActivity(AboutSpotActivity.this, position);
+                String contentLink = spotList.get(position).getContentLink();
+                String title = spotList.get(position).getName();
+                NavigationUtil.navigateToWebViewActivity(AboutSpotActivity.this, contentLink,title);
             }
         });
 

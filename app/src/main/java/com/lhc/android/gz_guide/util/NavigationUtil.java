@@ -37,6 +37,7 @@ import com.lhc.android.gz_guide.activity.UserReportActivity;
 import com.lhc.android.gz_guide.activity.UserSettingActivity;
 import com.lhc.android.gz_guide.activity.UserStrageryActivity;
 import com.lhc.android.gz_guide.activity.WebViewActivity;
+import com.lhc.android.gz_guide.model.RecommendAd;
 
 /**
  * Created by Administrator on 2017/3/20.
@@ -63,9 +64,9 @@ public class NavigationUtil {
         context.startActivity(intent);
     }
 
-    public static void navigateToSpotDetailActivity(Context context,int spotId){
+    public static void navigateToSpotDetailActivity(Context context, RecommendAd ad){
         Intent intent = new Intent(context, SpotDetailActivity.class);
-        intent.putExtra(SpotDetailActivity.SPOT_ID,spotId);
+        intent.putExtra(SpotDetailActivity.KEY_AD_DATA,ad);
         context.startActivity(intent);
     }
 
@@ -75,7 +76,7 @@ public class NavigationUtil {
     }
 
 
-    public static void navigateToAboutEatActivity(Context context){
+    public static void navigateToAboutTastyActivity(Context context){
         Intent intent = new Intent(context, AboutTastyActivity.class);
         context.startActivity(intent);
     }
@@ -91,7 +92,7 @@ public class NavigationUtil {
         context.startActivity(intent);
     }
 
-    public static void navigateToAboutStrageryActivity(Context  context){
+    public static void navigateToAboutStrategyActivity(Context  context){
         Intent intent = new Intent(context, AboutStrategyActivity.class);
         context.startActivity(intent);
     }
@@ -194,6 +195,14 @@ public class NavigationUtil {
         intent.putExtra(WebViewActivity.CONTENT_LINK,link);
         context.startActivity(intent);
     }
+
+    public static void navigateToWebViewActivity(Context context,String link,String title){
+        Intent intent = new Intent(context, WebViewActivity.class);
+        intent.putExtra(WebViewActivity.CONTENT_LINK,link);
+        intent.putExtra(WebViewActivity.TITLE,title);
+        context.startActivity(intent);
+    }
+
 
     public static void navigateToGenaralSetttingActivity(Context context){
         Intent intent = new Intent(context, GeneralSettingActivity.class);

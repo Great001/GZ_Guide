@@ -19,20 +19,14 @@ public class RecommendGood {
     private String rating;
     private boolean isPhiase;
 
+    private String type;
+
     private String contentLink;
 
     public RecommendGood(){
         super();
     }
 
-    public RecommendGood(String desc, int imgRes, String imgUrl, boolean isPhiase, String rating, String title) {
-        this.desc = desc;
-        this.imgRes = imgRes;
-        this.imgUrl = imgUrl;
-        this.isPhiase = isPhiase;
-        this.rating = rating;
-        this.title = title;
-    }
 
     public String getDesc() {
         return desc;
@@ -82,8 +76,18 @@ public class RecommendGood {
         this.imgRes = imgRes;
     }
 
+
+
     public String getContentLink() {
         return contentLink;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setContentLink(String contentLink) {
@@ -104,6 +108,7 @@ public class RecommendGood {
                 good.setRating(json.optString("rating"));
                 good.setImgUrl(json.optString("imgUrl"));
                 good.setContentLink(json.optString("contentLink"));
+                good.setType(json.optString("type"));
                 goods.add(good);
             }
 

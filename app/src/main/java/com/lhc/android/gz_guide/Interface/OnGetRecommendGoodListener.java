@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/4/13.
  */
-public interface OnGetGoodsListener{
+public interface OnGetRecommendGoodListener {
     void onGetGoods(List<RecommendGood> goods);
 
     void onGetFailed();

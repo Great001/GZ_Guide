@@ -34,7 +34,7 @@ public class AboutLocalGuiderActivity extends BaseActivity implements OnGetGuide
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NavigationUtil.navigateToLocalGuideDetailActivity(AboutLocalGuiderActivity.this);
+//                NavigationUtil.navigateToLocalGuideDetailActivity(AboutLocalGuiderActivity.this);
             }
         });
 

@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
-
+     android:padding="10dp">
         <ImageView
             android:id="@+id/iv_recommend_goods_pic"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/lv_item_img_size"
+            android:layout_height="@dimen/lv_item_img_size"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
@@ -21,25 +15,35 @@
 
         <TextView
             android:id="@+id/tv_recommend_goods_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="110dp"
             android:layout_marginTop="5dp"
+            android:maxLength="10"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="广州塔"
             android:textColor="@color/lv_item_title"
             android:textSize="@dimen/lv_item_title_size" />
 
+    <TextView
+        android:id="@+id/tv_recommend_goods_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_recommend_goods_title"
+        android:layout_toRightOf="@id/tv_recommend_goods_title"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:textSize="8sp"
+        android:background="@drawable/bg_tv_stroke_no_corner"/>
 
-        <com.lhc.android.gz_guide.view.ShareAppendixTextView
+        <TextView
             android:id="@+id/tv_recommend_goods_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_recommend_goods_title"
             android:layout_marginRight="110dp"
-            android:maxLength="200"
-            android:text="广州塔真是一个好地方啊，好闪好水好风光，哈哈哈哈哈哈"
+            android:maxLines="3"
+            android:layout_marginTop="10dp"
             android:ellipsize="end"/>
 
         <RatingBar
@@ -75,4 +79,3 @@
             android:padding="5dp"
             android:src="@drawable/comment_grey_icon" />
     </RelativeLayout>
-</LinearLayout>

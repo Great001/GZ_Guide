@@ -75,7 +75,7 @@ public class HotelsAdapter extends BaseAdapter {
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageDialogFragment.newInstance(hotel.getImgResId()).show(((AppCompatActivity)context).getSupportFragmentManager(),"hotel");
+                ImageDialogFragment.newInstance(hotel.getImgUrl()).show(((AppCompatActivity)context).getSupportFragmentManager(),"hotel");
             }
         });
         return convertView;

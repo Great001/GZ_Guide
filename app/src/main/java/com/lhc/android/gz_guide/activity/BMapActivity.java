@@ -32,6 +32,7 @@ import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.overlayutil.WalkingRouteOverlay;
+import com.lhc.android.gz_guide.util.ToastUtil;
 import com.lhc.android.gz_guide.view.FloatingButton;
 
 public class BMapActivity extends BaseActivity implements FloatingButton.OnButtonClickListener, View.OnClickListener {
@@ -177,11 +178,13 @@ public class BMapActivity extends BaseActivity implements FloatingButton.OnButto
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_bus:
+                ToastUtil.show(this,R.string.recently_not_support_this);
                 break;
             case R.id.btn_walk:
                 showWalkRoute();
                 break;
             case R.id.btn_drive:
+                ToastUtil.show(this,R.string.recently_not_support_this);
                 break;
             case R.id.tv_traffic:
                 if (isTraffic) {

@@ -24,8 +24,6 @@ import com.lhc.android.gz_guide.util.NavigationUtil;
 import com.lhc.android.gz_guide.util.ToastUtil;
 import com.lhc.android.gz_guide.view.CircleImageView;
 
-import org.json.JSONObject;
-
 import java.io.File;
 
 public class UserProfileFragment extends Fragment implements View.OnClickListener {
@@ -180,8 +178,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         ivUserSex.setVisibility(View.GONE);
         ivUserAvatar.setClickable(false);
         tvLogin.setVisibility(View.VISIBLE);
-        ((MainActivity)getActivity()).setLoginState(false);
-        UserModel.setLoginState(getContext(),false);
+        UserModel.getInstance().setLoginStatus(false);
+        UserModel.getInstance().saveLoginState(getContext(),false);
     }
 
     public void onUserLogin() {

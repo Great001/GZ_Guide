@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <ImageSwitcher
                 android:id="@+id/is_spot_detail"
                 android:layout_width="match_parent"
@@ -23,15 +24,12 @@
                 android:id="@+id/tv_spot_brief_intro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:textSize="16sp"
-                android:text="简介：一塔倾城，新广州、新地标。广州塔是一座集旅游观光、
-餐饮、文化娱乐和环保科普教育等多功能于一体，具有丰富文化内涵的大型景观建筑,
- 矗立在广州城市新中轴线与珠江景观线的交汇处，与海心沙亚运公园和珠江新城隔江相望，
-是广州新的制高点。其塔体高450米，天线桅杆高150米，以总高度600米占据中国高塔的地位，
-同时拥有“一塔倾城”、“新广州、新地标”等美誉。"
+                android:text="简介"
                 android:gravity="center_vertical"
-                android:paddingLeft="5dp"/>
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
 
             <View
                 android:layout_width="match_parent"
@@ -42,9 +40,9 @@
             <TextView
                 android:id="@+id/tv_spot_location"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="50dp"
                 android:singleLine="true"
-                android:text="广东省广州市海珠区阅江西路222号"
+                android:text=""
                 android:drawableLeft="@drawable/location"
                 android:drawablePadding="10dp"
                 android:drawableRight="@drawable/arrow_right"
@@ -65,24 +63,36 @@
             </com.baidu.mapapi.map.MapView>
 
             <TextView
-                android:id="@+id/tv_spot_according"
+                android:id="@+id/tv_spot_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:textSize="14sp"
-                android:text="地址：广东省广州市海珠区阅江西路222号
-开放时间：9:30-22:30(广州塔营业时间9:30-22:30，22:00停止售票。
-塔内游乐项目摩天轮和极速云霄营业时间另算，以景区公告为准。)
+                android:text="门票："
+                android:gravity="center_vertical"/>
 
-门票信息：100RMB/人
+            <TextView
+                android:id="@+id/tv_spot_openTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="14sp"
+                android:text="开放时间："
+                android:gravity="center_vertical"/>
 
-如何到达：
-自驾车：过广州大桥到河南，客村立交顺转盘左转，下来后沿第一个可以左转的路口左转，已经到附近了。
-公交车：1、乘262路、468路、旅游观光1线至广州塔西站；
-	2、乘旅游观光1线至广州塔东站。
-轨道交通：乘坐地铁3号线、APM至广州塔站下车，步行即可到达。
-"
+            <TextView
+                android:id="@+id/tv_spot_route"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="14sp"
+                android:text="如何到达："
                 android:gravity="center_vertical"/>
 
             <View
@@ -108,11 +118,12 @@
 
 
                 <TextView
+                    android:id="@+id/tv_nearby_tasty"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/eat"
+                    android:text="@string/tasty"
                     android:drawableLeft="@drawable/eat_small"
                     android:paddingLeft="5dp"/>
 
@@ -123,6 +134,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_nearby_hotel"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -138,11 +150,12 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_nearby_fun"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/play"
+                    android:text="@string/fun"
                     android:drawableLeft="@drawable/play_small"
                     android:paddingLeft="5dp"/>
             </LinearLayout>
@@ -156,13 +169,24 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="哈地方地阿芳代发代发发辅导费哈对方的"/>
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="用户评论"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="暂无用户评论"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
 
             <ListView
                 android:id="@+id/lv_comment_about_spot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -36,7 +36,9 @@ public class AboutTastyActivity extends BaseActivity implements OnGetTastyFoodsL
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NavigationUtil.navigateToTastyDetailActivity(AboutTastyActivity.this);
+                String contentLink = foodList.get(position).getContentLink();
+                String title = foodList.get(position).getName();
+                NavigationUtil.navigateToWebViewActivity(AboutTastyActivity.this,contentLink,title);
             }
         });
 
@@ -52,7 +54,7 @@ public class AboutTastyActivity extends BaseActivity implements OnGetTastyFoodsL
 
     @Override
     public int getTitleRes() {
-        return R.string.eat;
+        return R.string.tasty;
     }
 
 

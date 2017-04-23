@@ -5,13 +5,14 @@ import android.content.Context;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.lhc.android.gz_guide.Interface.OnGetFunsListener;
-import com.lhc.android.gz_guide.Interface.OnGetGoodsListener;
+import com.lhc.android.gz_guide.Interface.OnGetRecommendGoodListener;
 import com.lhc.android.gz_guide.Interface.OnGetHotelsListener;
-import com.lhc.android.gz_guide.Interface.OnGetPagerDataListener;
+import com.lhc.android.gz_guide.Interface.OnGetPagerAdDataListener;
 import com.lhc.android.gz_guide.Interface.OnGetStrategiesListener;
 import com.lhc.android.gz_guide.Interface.OnGetTastyFoodsListener;
-import com.lhc.android.gz_guide.ReftHttpClient;
+import com.lhc.android.gz_guide.RestHttpClient;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -23,26 +24,31 @@ import java.util.List;
 public class RecommendModel {
 
     public static final String URL_GET_GOODS = "https://api.bmob.cn/1/classes/RecommendGood";
-    public static final String URL_GET_PAGER_DATA = "https://api.bmob.cn/1/classes/RecommendPagerData";
+    public static final String URL_GET_PAGER_DATA = "https://api.bmob.cn/1/classes/RecommendAd";
     public static final String URL_GET_HOTELS = "https://api.bmob.cn/1/classes/hotel";
     public static final String URL_GET_TASTIES = "https://api.bmob.cn/1/classes/tasty";
     public static final String URL_GET_SPOTS = "https://api.bmob.cn/1/classes/spot";
     public static final String URL_GET_STARTEGIES = "https://api.bmob.cn/1/classes/strategy";
 
+    public static final String URL_ADD_PHIASE = "https://api.bmob.cn/1/classes/RecommendGood/rating";
+
     private List<RecommendGood> goodList;
-    private List<RecommendPagerData> pagerDataList;
+    private List<RecommendAd> pagerDataList;
     private List<Hotel> hotelList;
     private List<TastyFood> tastyFoodList;
     private List<Strategy> strageryList;
     private List<Spot> spotList;
 
-    private List<OnGetGoodsListener> getGoodsListeners = new ArrayList<>();
-    private OnGetPagerDataListener onGetPagerDataListener;
+    private List<OnGetRecommendGoodListener> getGoodsListeners = new ArrayList<>();
+    private OnGetPagerAdDataListener onGetPagerDataListener;
 
     private OnGetFunsListener onGetFunsListener;
     private OnGetHotelsListener onGetHotelsListener;
     private OnGetStrategiesListener onGetStrateriesListener;
     private OnGetTastyFoodsListener onGetTastyFoodsListener;
+
+    private static final int updateTimeLimit = 10 * 60 * 1000;  //10分钟
+    private long lastGoodsUpdateTime = 0;
 
 
     private volatile static RecommendModel instance;
@@ -57,8 +63,8 @@ public class RecommendModel {
     }
 
     public void getRecommendGoods(Context context) {
-        if (goodList != null) {
-            for (OnGetGoodsListener listener : getGoodsListeners) {
+        if (goodList != null && (System.currentTimeMillis() - lastGoodsUpdateTime < updateTimeLimit)) {
+            for (OnGetRecommendGoodListener listener : getGoodsListeners) {
                 if (listener != null) {
                     listener.onGetGoods(goodList);
                 }
@@ -69,11 +75,12 @@ public class RecommendModel {
     }
 
     public void requestRecommendGoods(Context context) {
-        ReftHttpClient.getInstance(context).get(URL_GET_GOODS, new Response.Listener<JSONObject>() {
+        RestHttpClient.getInstance(context).get(URL_GET_GOODS, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
+                lastGoodsUpdateTime = System.currentTimeMillis();
                 goodList = RecommendGood.getRecommendGoods(jsonObject);
-                for (OnGetGoodsListener listener : getGoodsListeners) {
+                for (OnGetRecommendGoodListener listener : getGoodsListeners) {
                     if (listener != null) {
                         listener.onGetGoods(goodList);
                     }
@@ -84,7 +91,7 @@ public class RecommendModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                for (OnGetGoodsListener listener : getGoodsListeners) {
+                for (OnGetRecommendGoodListener listener : getGoodsListeners) {
                     if (listener != null) {
                         listener.onGetFailed();
                     }
@@ -96,14 +103,14 @@ public class RecommendModel {
 
     public void getRecommendPagerData(Context context) {
         if (pagerDataList != null) {
-            onGetPagerDataListener.onGetPagerData(pagerDataList);
+            onGetPagerDataListener.onGetPagerAdData(pagerDataList);
         } else {
-            ReftHttpClient.getInstance(context).get(URL_GET_PAGER_DATA, new Response.Listener<JSONObject>() {
+            RestHttpClient.getInstance(context).get(URL_GET_PAGER_DATA, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject jsonObject) {
                     if (onGetPagerDataListener != null) {
-                        pagerDataList = RecommendPagerData.getRecommendPageDataList(jsonObject);
-                        onGetPagerDataListener.onGetPagerData(pagerDataList);
+                        pagerDataList = RecommendAd.getRecommendAdList(jsonObject);
+                        onGetPagerDataListener.onGetPagerAdData(pagerDataList);
                     }
                 }
             }, new Response.ErrorListener() {
@@ -130,7 +137,7 @@ public class RecommendModel {
     }
 
     public void requestRecommendHotels(Context context) {
-        ReftHttpClient.getInstance(context).get(URL_GET_HOTELS, new Response.Listener<JSONObject>() {
+        RestHttpClient.getInstance(context).get(URL_GET_HOTELS, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 hotelList = Hotel.getHotelList(jsonObject);
@@ -157,7 +164,7 @@ public class RecommendModel {
     }
 
     public void requestRecommendSpot(Context context){
-        ReftHttpClient.getInstance(context).get(URL_GET_SPOTS, new Response.Listener<JSONObject>() {
+        RestHttpClient.getInstance(context).get(URL_GET_SPOTS, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 spotList = Spot.getSpotList(jsonObject);
@@ -184,7 +191,7 @@ public class RecommendModel {
 
 
     public void requestRecommendStrategies(Context context) {
-        ReftHttpClient.getInstance(context).get(URL_GET_STARTEGIES, new Response.Listener<JSONObject>() {
+        RestHttpClient.getInstance(context).get(URL_GET_STARTEGIES, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 strageryList = Strategy.getStrategyList(jsonObject);
@@ -212,7 +219,7 @@ public class RecommendModel {
     }
 
     public void requestRecommendTasties(Context context) {
-        ReftHttpClient.getInstance(context).get(URL_GET_TASTIES, new Response.Listener<JSONObject>() {
+        RestHttpClient.getInstance(context).get(URL_GET_TASTIES, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
 
@@ -225,15 +232,36 @@ public class RecommendModel {
 
             }
         });
+    }
 
+    public void addGoodPhiase(Context context,String rating){
+        JSONObject json = new JSONObject();
+        String sessionToken = UserModel.getInstance().getUserProperty(context, "sessionToken");
+        try {
+            json.put("rating",rating);
+            RestHttpClient.getInstance(context).put(sessionToken, URL_ADD_PHIASE, json, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject jsonObject) {
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+
+                }
+            });
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 
 
-    public void addOnGetGoodsListener(OnGetGoodsListener listener) {
+
+    public void addOnGetGoodsListener(OnGetRecommendGoodListener listener) {
         getGoodsListeners.add(listener);
     }
 
-    public void setOnGetPagerDataListener(OnGetPagerDataListener listener) {
+    public void setOnGetPagerDataListener(OnGetPagerAdDataListener listener) {
         onGetPagerDataListener = listener;
     }
 

@@ -6,7 +6,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.lhc.android.gz_guide.Interface.OnGetGuidesListener;
 import com.lhc.android.gz_guide.Interface.OnGetPartnersListener;
-import com.lhc.android.gz_guide.ReftHttpClient;
+import com.lhc.android.gz_guide.RestHttpClient;
 
 import org.json.JSONObject;
 
@@ -50,7 +50,7 @@ public class LocalModel {
     }
 
     public void requestLocalGuides(Context context){
-        ReftHttpClient.getInstance(context).get(URL_GET_GUIDE, new Response.Listener<JSONObject>() {
+        RestHttpClient.getInstance(context).get(URL_GET_GUIDE, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
 
@@ -79,7 +79,7 @@ public class LocalModel {
     }
 
     public void requestLocalPartners(Context context){
-        ReftHttpClient.getInstance(context).get(URL_GET_PARTNER, new Response.Listener<JSONObject>() {
+        RestHttpClient.getInstance(context).get(URL_GET_PARTNER, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
 

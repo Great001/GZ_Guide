@@ -12,7 +12,9 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
  * Created by Administrator on 2017/3/28.
  */
 public class GeoCodeUtil {
+
     private static volatile GeoCoder geoCoder;
+
     private static LatLng location;
 
     public static void init(String address) {

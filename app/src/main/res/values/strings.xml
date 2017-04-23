@@ -5,6 +5,8 @@
     <string name="main_tab_two">推荐</string>
     <string name="main_tab_three">我</string>
 
+    <string name="login_success">登录成功</string>
+    <string name="login_fail">登录失败</string>
     <string name="exit_remind">再按一次退出</string>
 
     <string name="text_account">账号</string>
@@ -50,8 +52,8 @@
     <string name="address">地址</string>
 
     <string name="hotel">旅馆</string>
-    <string name="eat">美食</string>
-    <string name="play">玩乐</string>
+    <string name="tasty">美食</string>
+    <string name="fun">玩乐</string>
     <string name="traffic">交通</string>
     <string name="stratery">攻略</string>
     <string name="map">地图</string>
@@ -118,6 +120,19 @@
     <string name="refreshing">正在刷新</string>
     <string name="refresh_success">刷新成功</string>
     <string name="refresh_failed">刷新失败</string>
+
+    <string name="gz_subway">广州地铁线路图</string>
+    <string name="recently_not_support_this">暂时不支持</string>
+
+    <string name="please_input_your_suggestion">请输入您的宝贵意见和反馈...</string>
+    <string name="submit_success">提交成功，衷心感谢</string>
+    <string name="bind_success">绑定成功</string>
+
+    <string name="privicy_right_setting">权限设置</string>
+    <string name="is_public">是否公开</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="right_setting_success">权限设置成功</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -9,4 +9,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.lhc.android.gz_guide.activity.AboutTrafficActivity">
 
+    <TextView
+        android:id="@+id/tv_gz_subway"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="@string/gz_subway"
+        android:gravity="center"/>
+
+    <ImageView
+        android:id="@+id/iv_gz_subway"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gz_subway"/>
 </RelativeLayout>

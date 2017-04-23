@@ -9,4 +9,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activity.UserStrageryActivity">
 
+    <TextView
+        android:id="@+id/tv_no_strategy"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="暂未发表或收藏任何攻略"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_go_for_strategy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="浏览攻略"
+        android:layout_below="@id/tv_no_strategy"
+        android:background="@drawable/bg_et_stroke_black"/>
+
 </RelativeLayout>

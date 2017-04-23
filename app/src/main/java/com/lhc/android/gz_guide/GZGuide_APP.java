@@ -26,15 +26,13 @@ public class GZGuide_APP extends Application {
         SDKInitializer.initialize(getApplicationContext());
         //创建Location单例类的实例，实现定位，获取定位结果
         Location.newInstance(getApplicationContext());
-
+        //初始化应用配置
         initConfig();
     }
 
     //应用的初始化配置
     public void initConfig(){
-
-        configLanguage();
-
+        configLanguage();  //语言配置
     }
 
     //配置应用语言
@@ -50,10 +48,10 @@ public class GZGuide_APP extends Application {
             configuration.locale = Locale.getDefault();
         }else{
             switch (language){
-                case "zh":
+                case "zh":       //中文
                     configuration.locale = Locale.SIMPLIFIED_CHINESE;
                     break;
-                case "en":
+                case "en":       //英文
                     configuration.locale = Locale.ENGLISH;
                     break;
                 default:

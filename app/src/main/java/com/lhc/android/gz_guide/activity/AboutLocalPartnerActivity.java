@@ -37,7 +37,7 @@ public class AboutLocalPartnerActivity extends BaseActivity implements OnGetPart
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NavigationUtil.navigateToPersonalDetailActivity(AboutLocalPartnerActivity.this);
+//                NavigationUtil.navigateToPersonalDetailActivity(AboutLocalPartnerActivity.this);
             }
         });
 

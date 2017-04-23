@@ -23,13 +23,13 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/3/24.
  */
-public class RecommendGoodsAdapter extends BaseAdapter {
+public class RecommendGoodAdapter extends BaseAdapter {
 
     private Context context;
     private List<RecommendGood> goods = new ArrayList<>();
     String imgUrl;
 
-    public RecommendGoodsAdapter(Context context) {
+    public RecommendGoodAdapter(Context context) {
         this.context = context;
     }
 
@@ -65,6 +65,7 @@ public class RecommendGoodsAdapter extends BaseAdapter {
         }
         final RecommendGood good = goods.get(position);
         holder.title.setText(good.getTitle());
+        holder.type.setText(good.getType());
         holder.desc.setText(good.getDesc());
         imgUrl = good.getImgUrl();
         Glide.with(context).load(good.getImgUrl()).thumbnail(0.2f).placeholder(R.drawable.loading).centerCrop().into(holder.pic);
@@ -87,6 +88,7 @@ public class RecommendGoodsAdapter extends BaseAdapter {
                 }else{
                     ((ImageView)v).setImageResource(R.drawable.have_give_shumbs_up);
                     good.setPhiase(true);
+//                    Float rating = Float.valueOf(good.getRating()) + 1;
                 }
 
             }
@@ -96,7 +98,8 @@ public class RecommendGoodsAdapter extends BaseAdapter {
 
     class ViewHolder {
         TextView title;
-        ShareAppendixTextView desc;
+        TextView type;
+        TextView desc;
         ImageView pic;
         RatingBar ratingbar;
         ImageView thumbsUp;
@@ -104,7 +107,8 @@ public class RecommendGoodsAdapter extends BaseAdapter {
 
         ViewHolder(View itemView) {
             title = (TextView) itemView.findViewById(R.id.tv_recommend_goods_title);
-            desc = (ShareAppendixTextView) itemView.findViewById(R.id.tv_recommend_goods_desc);
+            type = (TextView) itemView.findViewById(R.id.tv_recommend_goods_type);
+            desc = (TextView) itemView.findViewById(R.id.tv_recommend_goods_desc);
             pic = (ImageView) itemView.findViewById(R.id.iv_recommend_goods_pic);
             ratingbar = (RatingBar) itemView.findViewById(R.id.rb_recommend_goods);
             thumbsUp = (ImageView) itemView.findViewById(R.id.iv_give_thumbs_up);

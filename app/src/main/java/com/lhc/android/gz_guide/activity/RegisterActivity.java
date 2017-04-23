@@ -6,26 +6,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.lhc.android.gz_guide.R;
-import com.lhc.android.gz_guide.ReftHttpClient;
 import com.lhc.android.gz_guide.model.UserModel;
-import com.lhc.android.gz_guide.util.NavigationUtil;
 import com.lhc.android.gz_guide.util.ToastUtil;
 import com.lhc.android.gz_guide.util.ValidChecker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -65,7 +54,7 @@ public class RegisterActivity extends BaseActivity {
                 e.printStackTrace();
             }
 
-            UserModel.register(this, jsonObject, new Response.Listener() {
+            UserModel.getInstance().register(this, jsonObject, new Response.Listener() {
                 @Override
                 public void onResponse(Object o) {
                     ToastUtil.show(RegisterActivity.this, "注册成功");

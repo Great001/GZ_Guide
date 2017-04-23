@@ -35,7 +35,9 @@ public class AboutStrategyActivity extends BaseActivity implements OnGetStrategi
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NavigationUtil.navigateToStrageryDetailActivity(AboutStrategyActivity.this);
+                String contentLink = strageryList.get(position).getContentLink();
+                String title = strageryList.get(position).getTitle();
+                NavigationUtil.navigateToWebViewActivity(AboutStrategyActivity.this,contentLink,title);
             }
         });
 

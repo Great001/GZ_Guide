@@ -5,6 +5,8 @@
     <string name="main_tab_two">recommend</string>
     <string name="main_tab_three">me</string>
 
+    <string name="login_success">login success</string>
+    <string name="login_fail">login fail</string>
     <string name="exit_remind">click one more to exit</string>
 
     <string name="text_account">username</string>
@@ -49,8 +51,8 @@
     <string name="address">address</string>
 
     <string name="hotel">hotel</string>
-    <string name="eat">tasty</string>
-    <string name="play">fun</string>
+    <string name="tasty">tasty</string>
+    <string name="fun">fun</string>
     <string name="traffic">traffic</string>
     <string name="stratery">stratery</string>
     <string name="map">map</string>
@@ -118,7 +120,19 @@
     <string name="refresh_success">refresh success</string>
     <string name="refresh_failed">refresh failed</string>
 
+    <string name="gz_subway">Guangzhou subway lines</string>
+    <string name="recently_not_support_this">recently not support</string>
 
+    <string name="please_input_your_suggestion">please input your important suggestion</string>
+    <string name="submit_success">submit success,great thanks</string>
+
+    <string name="bind_success">bind success</string>
+
+    <string name="privicy_right_setting">privicy right setting</string>
+    <string name="is_public">is public your profile</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="right_setting_success">right setting success</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">Main2Activity</string>

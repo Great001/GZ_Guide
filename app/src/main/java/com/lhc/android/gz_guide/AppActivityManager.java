@@ -2,6 +2,7 @@ package com.lhc.android.gz_guide;
 
 import android.app.Activity;
 
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.Stack;
 
@@ -32,18 +33,20 @@ public class AppActivityManager {
     }
 
     public void push(Activity activity) {
-        WeakReference<Activity> ref = new WeakReference<Activity>(activity);
-        activityStack.push(ref);
+        if(activity != null) {
+            WeakReference<Activity> ref = new WeakReference<Activity>(activity);
+            activityStack.push(ref);
+        }
     }
 
     public void pop(Activity activity) {
-
-        for (WeakReference<Activity> ref : activityStack) {
+        if(activity != null) {
             WeakReference<Activity> target = findActivity(activity);
             if (target != null) {
-                activityStack.remove(ref);
+                activityStack.remove(target);
             }
         }
+
     }
 
 

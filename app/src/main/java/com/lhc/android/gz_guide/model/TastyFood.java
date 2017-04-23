@@ -18,6 +18,7 @@ public class TastyFood {
     private String imgUrl;
     private String desc;
     private String rating;
+    private String contentLink;
 
     public String getDesc() {
         return desc;
@@ -67,6 +68,13 @@ public class TastyFood {
         this.rating = rating;
     }
 
+    public String getContentLink() {
+        return contentLink;
+    }
+
+    public void setContentLink(String contentLink) {
+        this.contentLink = contentLink;
+    }
 
     public static List<TastyFood> getTastyList(JSONObject json){
         List<TastyFood> list = new ArrayList<>();
@@ -82,6 +90,7 @@ public class TastyFood {
                     data.setRating(jsonObject.optString("rating"));
                     data.setImgUrl(jsonObject.optString("imgUrl"));
                     data.setPrice(jsonObject.optString("price"));
+                    data.setContentLink(jsonObject.optString("contentLink"));
                     list.add(data);
                 }
 

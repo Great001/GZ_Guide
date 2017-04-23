@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_history_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="110dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:textSize="@dimen/lv_item_title_size"
+        android:text="黄花岗起义"/>
+
+
+    <TextView
+        android:id="@+id/tv_history_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_history_title"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="110dp"
+        android:gravity="center_vertical"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:text="黄花岗起义的时间经过"/>
+
+
+    <ImageView
+        android:id="@+id/iv_history_img"
+        android:layout_width="@dimen/lv_item_img_size"
+        android:layout_height="@dimen/lv_item_img_size"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"/>
+
+</RelativeLayout>
