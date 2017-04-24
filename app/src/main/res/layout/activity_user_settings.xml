@@ -48,6 +48,20 @@
 
     <View
         android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/gray_divider" />
+
+    <TextView
+        android:id="@+id/tv_prefer_settings"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_item_height"
+        android:gravity="center_vertical"
+        android:text="@string/prefer"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"/>
+
+    <View
+        android:layout_width="match_parent"
         android:layout_height="20dp"
         android:background="@color/gray_divider" />
 

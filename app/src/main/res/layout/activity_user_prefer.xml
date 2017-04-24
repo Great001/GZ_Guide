@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lhc.android.gz_guide.activity.UserPreferActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_prefer_zome"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/prefer_zome"
+        android:gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_prefer_zome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:layout_marginLeft="10dp"
+            android:text="不限"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/gray_divider"/>
+
+    <LinearLayout
+        android:id="@+id/ll_prefer_fun"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/prefer_fun"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_prefer_fun"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:layout_marginLeft="10dp"
+            android:text="不限"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/gray_divider"/>
+
+    <LinearLayout
+        android:id="@+id/ll_prefer_hotel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/prefer_hotel"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_prefer_hotel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:layout_marginLeft="10dp"
+            android:text="不限"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/gray_divider"/>
+
+    <LinearLayout
+        android:id="@+id/ll_prefer_tasty"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/prefer_tasty"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_prefer_tasty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:layout_marginLeft="10dp"
+            android:text="不限"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/gray_divider"/>
+
+    <LinearLayout
+        android:id="@+id/ll_prefer_traffic"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/prefer_traffic"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_prefer_traffic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:layout_marginLeft="10dp"
+            android:text="不限"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/gray_divider"/>
+
+</LinearLayout>

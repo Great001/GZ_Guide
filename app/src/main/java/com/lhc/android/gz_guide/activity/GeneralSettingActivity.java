@@ -18,7 +18,7 @@ import com.lhc.android.gz_guide.util.ToastUtil;
 
 import java.util.Locale;
 
-public class GeneralSettingActivity extends BaseActivity implements View.OnClickListener{
+public class GeneralSettingActivity extends BaseActivity implements View.OnClickListener {
 
     private LinearLayout mLlLanguage;
     private TextView mTvLanSelected;
@@ -26,6 +26,8 @@ public class GeneralSettingActivity extends BaseActivity implements View.OnClick
     private TextView mTvFontSize;
     private TextView mTvFlow;
     private TextView mTvCacheClear;
+
+    private int selectLanguage = 0;
 
 
     @Override
@@ -41,19 +43,21 @@ public class GeneralSettingActivity extends BaseActivity implements View.OnClick
         return R.string.general_setting;
     }
 
-    public void initView(){
+    public void initView() {
         mLlLanguage = (LinearLayout) findViewById(R.id.ll_language_setting);
         mTvLanSelected = (TextView) findViewById(R.id.tv_language_selected);
         mTvCacheClear = (TextView) findViewById(R.id.tv_cache_clear);
         mTvFlow = (TextView) findViewById(R.id.tv_flow_setting);
         mTvFontSize = (TextView) findViewById(R.id.tv_font_size_setting);
 
-        SharedPreferences sp = getSharedPreferences(GZGuide_APP.SP_APP_CONFIG,MODE_PRIVATE);
-        String language = sp.getString(GZGuide_APP.KEY_LANGUAGE,"NULL");
-        if("zh".equals(language)){
+        SharedPreferences sp = getSharedPreferences(GZGuide_APP.SP_APP_CONFIG, MODE_PRIVATE);
+        String language = sp.getString(GZGuide_APP.KEY_LANGUAGE, "NULL");
+        if ("zh".equals(language)) {
             mTvLanSelected.setText(R.string.selected_language_zh);
-        }else if("en".equals(language)){
+            selectLanguage = 0;
+        } else if ("en".equals(language)) {
             mTvLanSelected.setText(R.string.selected_language_en);
+            selectLanguage = 1;
         }
         mLlLanguage.setOnClickListener(this);
         mTvFlow.setOnClickListener(this);
@@ -63,18 +67,18 @@ public class GeneralSettingActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_language_setting:
                 showLanguageChoices();
                 break;
             case R.id.tv_font_size_setting:
-                ToastUtil.show(this,R.string.font_size_not_need_change);
+                ToastUtil.show(this, R.string.font_size_not_need_change);
                 break;
             case R.id.tv_cache_clear:
-                ToastUtil.show(this,R.string.cache_clear_finish);
+                ToastUtil.show(this, R.string.cache_clear_finish);
                 break;
             case R.id.tv_flow_setting:
-                ToastUtil.show(this,R.string.current_flow);
+                ToastUtil.show(this, R.string.current_flow);
                 break;
             default:
                 break;
@@ -83,12 +87,12 @@ public class GeneralSettingActivity extends BaseActivity implements View.OnClick
     }
 
     public void showLanguageChoices() {
-        String[] languages = {getResources().getString(R.string.selected_language_zh),getResources().getString(R.string.selected_language_en)};
+        String[] languages = {getResources().getString(R.string.selected_language_zh), getResources().getString(R.string.selected_language_en)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setSingleChoiceItems(languages, 0, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(languages, selectLanguage, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch(which){
+                switch (which) {
                     case 0:
                         changeLanguage(Locale.SIMPLIFIED_CHINESE);
                         mTvLanSelected.setText(R.string.selected_language_zh);
@@ -110,26 +114,26 @@ public class GeneralSettingActivity extends BaseActivity implements View.OnClick
 
 
     //应用内语言切换
-    public void changeLanguage(Locale locale){
-        Resources  resources = getResources();
+    public void changeLanguage(Locale locale) {
+        Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();
         config.locale = locale;
-        resources.updateConfiguration(config,dm);
+        resources.updateConfiguration(config, dm);
 
         saveLanguageConfig(locale);
     }
 
     //保存语言设置
-    public void saveLanguageConfig(Locale locale){
+    public void saveLanguageConfig(Locale locale) {
         String language;
-        if(locale.equals(Locale.SIMPLIFIED_CHINESE)){
+        if (locale.equals(Locale.SIMPLIFIED_CHINESE)) {
             language = "zh";
-        }else{
-           language = "en";
+        } else {
+            language = "en";
         }
-        SharedPreferences sp = getSharedPreferences(GZGuide_APP.SP_APP_CONFIG,MODE_PRIVATE);
-        sp.edit().putString(GZGuide_APP.KEY_LANGUAGE,language).commit();
+        SharedPreferences sp = getSharedPreferences(GZGuide_APP.SP_APP_CONFIG, MODE_PRIVATE);
+        sp.edit().putString(GZGuide_APP.KEY_LANGUAGE, language).commit();
     }
 
 }

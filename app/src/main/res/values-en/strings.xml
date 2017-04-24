@@ -107,6 +107,40 @@
     <string name="bind_email">Bind Email</string>
     <string name="change_password">Change Password</string>
 
+    <string name="prefer_setting">prefer setting</string>
+    <string name="prefer">prefer</string>
+    <string name="prefer_zome">prefer zome</string>
+    <string name="prefer_hotel">prefer hotel</string>
+    <string name="prefer_fun">prefer fun</string>
+    <string name="prefer_tasty">prefer tasty</string>
+    <string name="prefer_traffic">prefer traffic</string>
+
+    <string name="not_limit">all</string>
+    <string name="tianhe">Tianhe</string>
+    <string name="yuexiu">Yuehe</string>
+    <string name="liwan">Liwan</string>
+    <string name="haizhu">Haizhu</string>
+    <string name="baiyun">Baiyun</string>
+    <string name="panyu">Panyu</string>
+    <string name="conghua">Conghua</string>
+    <string name="luogang">Luogang</string>
+
+    <string name="type_economic">econimic</string>
+    <string name="type_splendid">splendid</string>
+
+    <string name="type_historical">historical</string>
+    <string name="type_modern">modern</string>
+
+    <string name="type_walk">walk</string>
+    <string name="type_subway">subway</string>
+    <string name="type_bike">bike</string>
+    <string name="type_bus">bus</string>
+    <string name="type_drive">drive</string>
+
+    <string name="type_gz">gd tasty</string>
+    <string name="type_other">other tasty</string>
+
+
     <string name="about_app">About App</string>
     <string name="user_report">User Report</string>
 

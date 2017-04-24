@@ -33,6 +33,7 @@ import com.lhc.android.gz_guide.activity.TastyDetailActivity;
 import com.lhc.android.gz_guide.activity.UserDiscoverActivity;
 import com.lhc.android.gz_guide.activity.UserFriendActivity;
 import com.lhc.android.gz_guide.activity.UserInfoActivity;
+import com.lhc.android.gz_guide.activity.UserPreferActivity;
 import com.lhc.android.gz_guide.activity.UserReportActivity;
 import com.lhc.android.gz_guide.activity.UserSettingActivity;
 import com.lhc.android.gz_guide.activity.UserStrageryActivity;
@@ -228,4 +229,10 @@ public class NavigationUtil {
         Intent intent = new Intent(context, UserReportActivity.class);
         context.startActivity(intent);
     }
+
+    public static void navigateToUserPreferSettingActivity(Context context){
+        Intent intent = new Intent(context,UserPreferActivity.class);
+        context.startActivity(intent);
+    }
+
 }

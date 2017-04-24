@@ -72,7 +72,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     public void onStart() {
         super.onStart();
         loadUserInfo();//加载用户信息,放在此处的目的是及时更新
-        if(UserModel.getLoginState(getContext())){
+        if(UserModel.getInstance().getLoginStatus()){
             onUserLogin();
         }
     }
@@ -132,7 +132,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                 onAvatarClick();
                 break;
             case R.id.rl_personal_info:
-                if(UserModel.getLoginState(getContext())) {
+                if(UserModel.getInstance().getLoginState(getContext())) {
                     NavigationUtil.navagateToUserInfoActivity(getContext());
                 }
                 break;

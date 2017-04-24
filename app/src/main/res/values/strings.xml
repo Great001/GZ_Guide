@@ -108,6 +108,39 @@
     <string name="bind_email">绑定邮箱</string>
     <string name="change_password">修改密码</string>
 
+    <string name="prefer_setting">偏好设置</string>
+    <string name="prefer">偏好</string>
+    <string name="prefer_zome">偏好地区</string>
+    <string name="prefer_hotel">偏好旅馆</string>
+    <string name="prefer_fun">偏好玩乐</string>
+    <string name="prefer_tasty">偏好美食</string>
+    <string name="prefer_traffic">偏好交通</string>
+
+    <string name="not_limit">不限</string>
+    <string name="tianhe">天河区</string>
+    <string name="yuexiu">越秀区</string>
+    <string name="liwan">荔湾区</string>
+    <string name="haizhu">海珠区</string>
+    <string name="baiyun">白云区</string>
+    <string name="panyu">番禺区</string>
+    <string name="conghua">从化区</string>
+    <string name="luogang">萝岗区</string>
+
+    <string name="type_economic">经济型</string>
+    <string name="type_splendid">豪华型</string>
+
+    <string name="type_historical">历史古迹</string>
+    <string name="type_modern">现代化</string>
+
+    <string name="type_walk">步行</string>
+    <string name="type_subway">地铁</string>
+    <string name="type_bike">骑行</string>
+    <string name="type_bus">公交</string>
+    <string name="type_drive">自驾</string>
+
+    <string name="type_gz">粤口味</string>
+    <string name="type_other">其他</string>
+
     <string name="about_app">关于应用</string>
     <string name="user_report">用户反馈</string>
 

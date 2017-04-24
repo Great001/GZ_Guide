@@ -1,16 +1,11 @@
 package com.lhc.android.gz_guide.activity;
 
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
 
 import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.util.NavigationUtil;
-
-import java.util.Locale;
 
 /**
  * Created by Administrator on 2017/3/28.
@@ -21,6 +16,7 @@ public class UserSettingActivity extends BaseActivity implements View.OnClickLis
     private TextView mTvGeneral;
     private TextView mTvPrivicy;
     private TextView mTvSecurity;
+    private TextView mTvPrefer;
 
     private TextView mTvAboutApp;
     private TextView mTvUserReport;
@@ -44,12 +40,14 @@ public class UserSettingActivity extends BaseActivity implements View.OnClickLis
         mTvGeneral = (TextView) findViewById(R.id.tv_general_settings);
         mTvPrivicy = (TextView) findViewById(R.id.tv_privicy_settings);
         mTvSecurity = (TextView) findViewById(R.id.tv_security_settings);
+        mTvPrefer = (TextView) findViewById(R.id.tv_prefer_settings);
         mTvUserReport = (TextView) findViewById(R.id.tv_user_report);
 
         mTvUserReport.setOnClickListener(this);
         mTvAboutApp.setOnClickListener(this);
         mTvGeneral.setOnClickListener(this);
         mTvSecurity.setOnClickListener(this);
+        mTvPrefer.setOnClickListener(this);
         mTvPrivicy.setOnClickListener(this);
     }
 
@@ -65,6 +63,9 @@ public class UserSettingActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.tv_security_settings:
                 NavigationUtil.navigateToSecureSettingActivity(this);
+                break;
+            case R.id.tv_prefer_settings:
+                NavigationUtil.navigateToUserPreferSettingActivity(this);
                 break;
             case R.id.tv_about_app:
                 NavigationUtil.navigateToAboutAppActivity(this);

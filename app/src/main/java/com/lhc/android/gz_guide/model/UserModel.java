@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.lhc.android.gz_guide.R;
 import com.lhc.android.gz_guide.RestHttpClient;
+import com.lhc.android.gz_guide.util.ToastUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,6 +79,7 @@ public class UserModel {
             editor.putString("email", jsonObject.optString("email"));
             editor.putString("mobilePhoneNumber", jsonObject.optString("mobilePhoneNumber"));
             editor.putString("address", jsonObject.optString("address"));
+            editor.putBoolean("isPublic",jsonObject.optBoolean("isPublic"));
             editor.putBoolean("loginstate",true);
             editor.commit();
         }
@@ -101,6 +105,7 @@ public class UserModel {
             jsonObject.put("intergral", sp.getString("intergral", "0"));
             jsonObject.put("address", sp.getString("address", "广州"));
             jsonObject.put("signature", sp.getString("signature", "海阔凭鱼跃，天高任鸟飞"));
+            jsonObject.put("isPublic",sp.getBoolean("isPublic",true));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -109,15 +114,62 @@ public class UserModel {
     }
 
 
+
     public String getUserProperty(Context context, String key) {
         SharedPreferences sp = context.getSharedPreferences(SP_USER_PROFILE, Context.MODE_PRIVATE);
         return sp.getString(key, null);
     }
 
-    public boolean updateUserProperty(Context context, String key, String value) {
+    public boolean updateUserProperty(final Context context, String key, String value) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(key,value);
+            update(context, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject jsonObject) {
+                    ToastUtil.show(context,R.string.submit_success);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+
+                }
+            });
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
         SharedPreferences sp = context.getSharedPreferences(SP_USER_PROFILE, Context.MODE_PRIVATE);
         return sp.edit().putString(key, value).commit();
     }
+
+    public boolean updateIsPublic(final Context context, boolean isPublic){
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("isPublic",isPublic);
+            update(context, jsonBody, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject jsonObject) {
+                    ToastUtil.show(context,context.getString(R.string.right_setting_success));
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+
+                }
+            });
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        SharedPreferences sp = context.getSharedPreferences(SP_USER_PROFILE,Context.MODE_PRIVATE);
+        return sp.edit().putBoolean("isPublic",isPublic).commit();
+    }
+
+    public boolean getIsPublic(Context context){
+        SharedPreferences sp = context.getSharedPreferences(SP_USER_PROFILE,Context.MODE_PRIVATE);
+        return sp.getBoolean("isPublic",true);
+    }
+
 
     public boolean getLoginStatus(){
         return loginStatus;
@@ -133,7 +185,7 @@ public class UserModel {
         sp.edit().putBoolean("loginstate", state).commit();
     }
 
-    public static boolean getLoginState(Context context) {
+    public  boolean getLoginState(Context context) {
         SharedPreferences sp = context.getSharedPreferences(SP_USER_PROFILE, Context.MODE_PRIVATE);
         return sp.getBoolean("loginstate", false);
     }
